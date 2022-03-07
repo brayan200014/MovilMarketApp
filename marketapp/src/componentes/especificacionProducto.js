@@ -59,7 +59,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
     height:'100%',
-    marginTop: '5%'
   },
   containerProducto: {
       flex: 1,
@@ -78,9 +77,9 @@ const styles = StyleSheet.create({
     marginTop: '2%'
   },
   containerImagen: {
-      margin:10, 
+      margin:5, 
       width:300,
-      height:300    
+      height:250   
   },
   containerInformacion: {
     flex: 1,
@@ -146,7 +145,7 @@ botonAgregar: {
   backgroundColor: '#3EA5DB',
   flex: 1,
   width: '40%',
-  marginBottom: '15%',
+  marginBottom: '16%',
   borderRadius: 30,
   alignItems: 'center'
 },
