@@ -18,7 +18,9 @@ const Tabs= ()=>{
                     backgroundColor: '#3EA5DB',
                     borderTopRightRadius: 40,
                     borderTopLeftRadius: 40,
-                    height: 40,
+                    height: 60,
+                    alignItems: "center",
+                    paddingBottom: 5
             },
             tabBarShowLabel: false,
             tabBarActiveTintColor: '#F7D35C',

@@ -69,12 +69,12 @@ const styles = StyleSheet.create({
   },
   containerBack: {
     width: '100%',
-    height: '10%', 
+    height: '15%', 
     alignItems: 'flex-start',
     backgroundColor: '#3EA5DB',
-    marginLeft: '8%',
+    marginLeft: '10%',
     marginRight: '4%',
-    marginTop: '2%'
+    marginTop: '12%'
   },
   containerImagen: {
       margin:5, 
@@ -145,7 +145,7 @@ botonAgregar: {
   backgroundColor: '#3EA5DB',
   flex: 1,
   width: '40%',
-  marginBottom: '16%',
+  marginBottom: '25%',
   borderRadius: 30,
   alignItems: 'center'
 },
