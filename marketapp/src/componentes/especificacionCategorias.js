@@ -11,6 +11,10 @@ export default function DetailsScreen({ navigation }) {
 
            <View style={styles.containerTitulo}>
              <View style={styles.containerBack}>
+             <Image 
+                    style={styles.imagenusuario}
+                    source={require('./img/usuario.png')}
+                 ></Image>
               <Text style={styles.textCarrito}>Hola Gabriela,</Text>
               <Text style={styles.textCarrito}>Bienvenida</Text>
             </View>
@@ -194,6 +198,11 @@ imagen: {
     margin: 3,
     width: 70,
     height: 70
+},
+imagenusuario: {
+  margin: 3,
+  width: 50,
+  height: 50
 },
 entradas:{
   flex:1,
