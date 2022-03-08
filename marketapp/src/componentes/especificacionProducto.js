@@ -1,37 +1,92 @@
 import { StatusBar } from 'expo-status-bar';
+import { useState } from 'react';
 import { StyleSheet, Text, View, Image, Button, Alert, Pressable} from 'react-native';
 import { AntDesign } from '@expo/vector-icons'; 
+import { NavigationContainer } from '@react-navigation/native';
 
-export default function App() {
+export default function App({navigation}) {
+  const [nombreProducto, setNombreProducto]= useState('hola');
+  const [descripcionProducto, setDescripcion]= useState('hola');
+  const [IdProducto, setIdProducto]= useState(null);
+  const encondedValue= encodeURIComponent(IdProducto);
+  const [cantidad, setCantidad]= useState(1);
+
+  const addCantidad= async () => {
+      let add=cantidad+1;
+      setCantidad(add);
+  }
+
+  const lessCantidad= async () => {
+    let add=cantidad-1;
+
+    if(!add==0) {
+      setCantidad(add);
+    }
+}
+  
+  const consultarProducto= async ()=>{
+     if(!nombreProducto || !descripcionProducto) {
+        console.log("Datos vacios del productos");
+     }
+     else 
+     {
+       try {
+         const solicitud= await fetch(
+           'http://192.168.0.8:6001/api/productos/listarProducto?id=2',
+           {
+             method: 'GET',
+             headers: {
+               Accept: 'application/json', 
+               'Content-Type': 'application/json'
+             }
+           }
+         )
+
+         const respuesta= await solicitud.json();
+         const data= respuesta.data;
+         setDescripcion(data.DescripcionProducto);
+         setNombreProducto(data.NombreProducto);
+         setIdProducto(data.IdProducto);
+         console.log(respuesta);
+         
+       } catch (error) {
+        
+        console.log(error);
+       }
+     }
+  }
+
   const imprimir= () => {
      console.log("Ho0pl");
   }
+
+
   return (
     <View style={styles.container}>
      <View style={styles.containerProducto}>
          <View style={styles.containerBack} >
-           <Pressable onPress={()=> imprimir()} >
+           <Pressable onPress={()=> navigation.navigate('Prueba')} >
                 <AntDesign name="arrowleft" size={24} color="white" />
             </Pressable>
            </View>
-          <Image 
-          style={styles.containerImagen}
-          source={require('./banana.png')
-          } ></Image>
+           <Image 
+                    style={styles.containerImagen}
+                    source={{uri: 'http://192.168.0.8:6001/api/archivos/consultar?id='+encondedValue}}
+                 ></Image>
       </View>
       <View style= {styles.containerInformacion}>
         <View style={styles.containerNombreProducto}> 
-          <Text style= {styles.nombreProducto}>Bananas</Text>
-          <Text style= {styles.informacionProducto}>Frescas bananas exportadas del pais de Honduras. Esta es una fruta muy rica en potasio. </Text>
+          <Text style= {styles.nombreProducto}>{nombreProducto}</Text>
+          <Text style= {styles.informacionProducto}>{descripcionProducto}</Text>
         </View>
        
         <View style={styles.containerCantidad}>
           <View style={styles.containerCantidadElegida}>
-              <Pressable onPress={()=> imprimir()}>
+              <Pressable onPress={()=> addCantidad()}>
                  <AntDesign name="pluscircleo" size={30} color="black" />
               </Pressable>
-              <Text style={styles.numeroCantidad}>1</Text>
-              <Pressable onPress={()=> imprimir()}>
+              <Text style={styles.numeroCantidad}>{cantidad}</Text>
+              <Pressable onPress={()=> lessCantidad()}>
                  <AntDesign name="minuscircleo" size={30} color="black" />
               </Pressable>
             </View>
@@ -40,7 +95,7 @@ export default function App() {
             </View>
         </View>
         <View style={styles.containerBotonAgregar}>
-        <Pressable style={styles.botonAgregar} onPress={() => imprimir()}>
+        <Pressable style={styles.botonAgregar} onPress={() => consultarProducto()}>
                 <View style={styles.containerTextoAgregar}>
                   <Text style={styles.textAgregar}>Agregar</Text>
                   <AntDesign name="shoppingcart" size={30} color="white" />
@@ -77,8 +132,8 @@ const styles = StyleSheet.create({
     marginTop: '12%'
   },
   containerImagen: {
-      margin:5, 
-      width:300,
+      margin:0, 
+      width:250,
       height:250   
   },
   containerInformacion: {
@@ -145,9 +200,10 @@ botonAgregar: {
   backgroundColor: '#3EA5DB',
   flex: 1,
   width: '40%',
-  marginBottom: '25%',
+  marginBottom: '20%',
   borderRadius: 30,
-  alignItems: 'center'
+  alignItems: 'center',
+  
 },
 containerTextoAgregar:{
   flex:1,

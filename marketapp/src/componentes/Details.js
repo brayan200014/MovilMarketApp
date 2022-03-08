@@ -1,11 +1,32 @@
 import * as React from 'react';
 import { View, Text, StyleSheet, Pressable, Image } from 'react-native';
 import { AntDesign } from '@expo/vector-icons'; 
+import { useState } from 'react';
 
 export default function DetailsScreen({ navigation }) {
     const imprimir= () => {
         console.log("Press")
     }
+
+    const [nombreProducto, setNombreProducto]= useState('hola');
+    const [descripcionProducto, setDescripcion]= useState('hola');
+    const [IdProducto, setIdProducto]= useState(null);
+    const encondedValue= encodeURIComponent(IdProducto);
+    const [cantidad, setCantidad]= useState(0);
+  
+    const addCantidad= async () => {
+        let add=cantidad+1;
+        setCantidad(add);
+    }
+  
+    const lessCantidad= async () => {
+      let add=cantidad-1;
+  
+      if(!add==0) {
+        setCantidad(add);
+      }
+  }
+    
     return (
         <View style={styles.containerPrincipal} >
            <View style={styles.containerTitulo}>
@@ -21,18 +42,18 @@ export default function DetailsScreen({ navigation }) {
                <View style={styles.containerImagen}>
                     <Image 
                     style={styles.imagen}
-                    source={require('./banana.png')}
+                    source={{uri: 'http://192.168.0.8:6001/api/archivos/consultar?id=1'}}
                  ></Image>
                </View>
                <View style={styles.containerInfo}>
                <Text style={styles.textProducto}>Bananas</Text>
                <Text style={styles.textPrecio}>L 15.00</Text>
                <View style={styles.containerCantidadElegida}>
-                    <Pressable onPress={()=> imprimir()}>
+                    <Pressable onPress={()=> addCantidad()}>
                         <AntDesign name="pluscircleo" size={24} color="black" />
                     </Pressable>
                     <Text style={styles.textCantidad}>1</Text>
-                    <Pressable onPress={()=> imprimir()}>
+                    <Pressable onPress={()=> lessCantidad()}>
                         <AntDesign name="minuscircleo" size={24} color="black" />
                     </Pressable>
                     <Pressable onPress={()=> imprimir()}>
@@ -45,20 +66,20 @@ export default function DetailsScreen({ navigation }) {
            <View style={styles.containerProducto}>
                <View style={styles.containerFilaPro}>
                <View style={styles.containerImagen}>
-                    <Image 
+               <Image 
                     style={styles.imagen}
-                    source={require('./banana.png')}
+                    source={{uri: 'http://192.168.0.8:6001/api/archivos/consultar?id=2'}}
                  ></Image>
                </View>
                <View style={styles.containerInfo}>
                <Text style={styles.textProducto}>Bananas</Text>
                <Text style={styles.textPrecio}>L 15.00</Text>
                <View style={styles.containerCantidadElegida}>
-                    <Pressable onPress={()=> imprimir()}>
+                    <Pressable onPress={()=> addCantidad()}>
                         <AntDesign name="pluscircleo" size={24} color="black" />
                     </Pressable>
                     <Text style={styles.textCantidad}>1</Text>
-                    <Pressable onPress={()=> imprimir()}>
+                    <Pressable onPress={()=> lessCantidad()}>
                         <AntDesign name="minuscircleo" size={24} color="black" />
                     </Pressable>
                     <Pressable onPress={()=> imprimir()}>
@@ -71,20 +92,20 @@ export default function DetailsScreen({ navigation }) {
            <View style={styles.containerProducto}>
                <View style={styles.containerFilaPro}>
                <View style={styles.containerImagen}>
-                    <Image 
+               <Image 
                     style={styles.imagen}
-                    source={require('./banana.png')}
+                    source={{uri: 'http://192.168.0.8:6001/api/archivos/consultar?id=3'}}
                  ></Image>
                </View>
                <View style={styles.containerInfo}>
                <Text style={styles.textProducto}>Bananas</Text>
                <Text style={styles.textPrecio}>L 15.00</Text>
                <View style={styles.containerCantidadElegida}>
-                    <Pressable onPress={()=> imprimir()}>
+                    <Pressable onPress={()=> addCantidad()}>
                         <AntDesign name="pluscircleo" size={24} color="black" />
                     </Pressable>
-                    <Text style={styles.textCantidad}>1</Text>
-                    <Pressable onPress={()=> imprimir()}>
+                    <Text style={styles.textCantidad}>{cantidad}</Text>
+                    <Pressable onPress={()=> lessCantidad()}>
                         <AntDesign name="minuscircleo" size={24} color="black" />
                     </Pressable>
                     <Pressable onPress={()=> imprimir()}>
@@ -99,7 +120,7 @@ export default function DetailsScreen({ navigation }) {
                         <Text style={styles.textSubtotal}>Subtotal: L45.00</Text>
                     </View>
                 <View style={styles.containerBotonPagar}>
-                    <Pressable style={styles.botonPagar} onPress={()=> imprimir()}>
+                    <Pressable style={styles.botonPagar} onPress={()=> navigation.navigate("Pay")}>
                         <Text style={styles.textPagar}> Pagar</Text>
                     </Pressable>
                 </View>
@@ -168,8 +189,8 @@ containerImagen: {
 },
 imagen: {
     margin: 3,
-    width: 70,
-    height: 70
+    width: 90,
+    height: 90
 },
 containerInfo: {
     flex:1, 

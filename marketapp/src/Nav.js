@@ -3,9 +3,17 @@ import DetailsScreen from "./componentes/Details";
 import SettingsScreen from "./componentes/Settings";
 import { StyleSheet, View, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; 
-import DesProductos from './componentes/especificacionProducto'
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Especificacion from "./componentes/especificacionProducto";
+import Prueba from "./componentes/prueba";
+
+
+
 
 const Tab= createBottomTabNavigator();
+const HomeStack= createNativeStackNavigator();
+const PayStack= createNativeStackNavigator();
+
 
 const Tabs= ()=>{
     return (
@@ -32,15 +40,17 @@ const Tabs= ()=>{
            
                 
         >
-            <Tab.Screen name="Home" component={DesProductos} 
+            <Tab.Screen name="Home" component={Especificacion}
             options={
                 {
                    tabBarIcon: ({color, size}) => (
                     <Ionicons name="home" size={size} color={color} />  
                    ),
                 }
-            } />
-            <Tab.Screen name="Details" component={DetailsScreen} 
+            
+            }> 
+            </Tab.Screen>
+            <Tab.Screen name="Details" component={DetailsScreen}
              options={
                 {
                    tabBarIcon: ({color, size}) => (
@@ -48,7 +58,8 @@ const Tabs= ()=>{
                    ),
                 }
             }
-            />
+            > 
+                </Tab.Screen>
             <Tab.Screen name="Settings" component={SettingsScreen}  options={
                 {
                    tabBarIcon: ({color, size}) => (
