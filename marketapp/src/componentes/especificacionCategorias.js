@@ -165,7 +165,7 @@ containerBack: {
     backgroundColor: '#3EA5DB',
     alignItems: 'flex-start',
     flexDirection: 'row',
-    height: 80,
+    height: 50,
     width: '100%',
     borderBottomEndRadius: 0,
     borderBottomStartRadius: 0,
@@ -175,7 +175,8 @@ containerBack: {
 containerProducto: {
     flex: 1, 
     marginLeft: '4%',
-    marginRight: '4%'
+    marginRight: '4%',
+    padding: -1
 },
 containerFilaPro: {
     flex:1,
@@ -183,8 +184,6 @@ containerFilaPro: {
     alignItems: 'center', 
     flexDirection: 'row',
     backgroundColor: '#fff',
-    marginTop: '0%'
-
 },
 containerImagen: {
     flex:1, 
@@ -193,6 +192,7 @@ containerImagen: {
     justifyContent: 'center',
     borderRadius: 30,
     height: '80%',
+    margin:10
 },
 imagen: {
     margin: 3,
