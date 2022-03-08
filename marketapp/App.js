@@ -1,5 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import Pantalla from './src/componentes/especificacionCategorias.js';
+import Nav from './src/Nav.js'
 
 export default function App() {
   return (
