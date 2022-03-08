@@ -2,11 +2,10 @@ import { StatusBar } from 'expo-status-bar';
 import React, {useState, useEffect} from 'react';
 import { ActivityIndicator, StyleSheet, Text, TextInput, View, Alert, ImageBackground, Dimensions,Image } from 'react-native';
 import AsyncStorage  from '@react-native-async-storage/async-storage';
-
-//Importanto fuentes
 import * as Font from 'expo-font';
 
-//Para las fuentes
+
+/*//Para las fuentes
 const customFonts = {
   'CircularStdBold': require('./assets/fonts/CircularStdBold.ttf'),
   'Nunito-Bold': require('./assets/fonts/Nunito-Bold.ttf'),
@@ -15,7 +14,7 @@ const customFonts = {
 };
 
 
-/*Importando Pantallas
+Importando Pantallas
 import Onboarding from './src/screen/Onboarding';
 import Login from './src/screen/Login';
 import ForgetPassword from './src/screen/ForgetPassword';
@@ -71,7 +70,7 @@ export default function App() {
                 console.log(token);
                 await AsyncStorage.setItem('Token',token);
               }
-              Alert.alert("Atención", "Petición procesada");
+              Alert.alert("Bienvenido(a)", "Petición procesada");
           } catch(error) {
               console.log(error);
           }
@@ -105,7 +104,7 @@ export default function App() {
                 onChangeText={newText => setCorreo(newText)}
               placeholder="Escriba su correo electrónico">
             </TextInput>
-            <View style={{paddingTop: 18}}></View>
+            <View style={{paddingTop: 20, paddingBottom: 10}}></View>
             <TextInput
                 onChangeText={newText => setContrasena(newText)}
               placeholder="Escriba su contraseña">
@@ -147,6 +146,13 @@ export default function App() {
   const styles = StyleSheet.create({
     container:{
         flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        width: width -60,
+        height: 45,
+        backgroundColor: '#FFFFFF',
+        borderRadius: 8,
     },
     darkLayer:{
         position: 'absolute',
@@ -169,7 +175,7 @@ export default function App() {
     },
     titleText:{
         color: '#FFFFFF',
-        fontFamily: 'Nunito-ExtraBold',
+        //fontFamily: 'Nunito-ExtraBold',
         fontSize:22
     },
     tip:{
@@ -180,20 +186,22 @@ export default function App() {
     },
     tipText:{
         color: '#FFFFFF',
-        fontFamily: 'Nunito-SemiBold',
+        //fontFamily: 'Nunito-SemiBold',
         fontSize: 17
     },
     input: {
         marginTop: 24,
+        marginLeft: 30,
+        marginRight:30,
         justifyContent: 'center',
         alignSelf: 'center',
         backgroundColor: '#FFFFFF',
         borderColor: '#FFFFFF',
         color: '#727C8E',
-        fontFamily: 'Nunito-SemiBold',
+        //fontFamily: 'Nunito-SemiBold',
         fontWeight: '500',
         fontSize: 12,
-        paddingLeft: 15
+        paddingLeft: 30
       
     },
     remember:{
@@ -207,12 +215,12 @@ export default function App() {
     },
     rememberText:{
         color: '#FFFFFF',
-        fontFamily: 'Nunito-SemiBold',
+        //fontFamily: 'Nunito-SemiBold',
         fontSize: 12
     },
     forgotText:{
         color: '#FFFFFF',
-        fontFamily: 'Nunito-SemiBold',
+        //fontFamily: 'Nunito-SemiBold',
         fontSize: 12
     },
     signup:{
@@ -222,7 +230,7 @@ export default function App() {
     },
     signupText: {
         color: '#2A67CA',
-        fontFamily: 'Nunito-SemiBold',
+        //fontFamily: 'Nunito-SemiBold',
         fontSize: 12
     },
     terms:{
@@ -234,7 +242,7 @@ export default function App() {
     },
     termsText:{
         color: '#FFFFFF',
-        fontFamily: 'Nunito-SemiBold',
+        //fontFamily: 'Nunito-SemiBold',
         fontSize: 10,
         textAlign: 'center'
     }
