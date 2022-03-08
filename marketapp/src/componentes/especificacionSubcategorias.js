@@ -95,9 +95,6 @@ export default function DetailsScreen({ navigation }) {
             </View>
           </View>
         </View>
-        <View style={styles.contenedorpie}>
-           <Text style={styles.textCarrito}>Pie de pagina</Text>
-           </View>
       </View>
     );
 }
@@ -187,17 +184,6 @@ textPrecio: {
 textpeso: {
     fontSize: 12,
     color: '#000',
-},
-contenedorpie:{
-  backgroundColor: '#3EA5DB',
-  alignItems: 'flex-start',
-  flexDirection: 'row',
-  height: 50,
-  width: '100%',
-  borderBottomEndRadius: 0,
-  borderBottomStartRadius: 0,
-  borderRadius: 20,
-  marginTop: '0%'
 },
 containerCantidadElegida: {
     flex: 1, 

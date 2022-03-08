@@ -99,9 +99,6 @@ export default function DetailsScreen({ navigation }) {
                </View>
                </View>
            </View>
-           <View style={styles.contenedorpie}>
-           <Text style={styles.textCarrito}>Pie de pagina</Text>
-           </View>
         </View>
     );
 }
@@ -161,17 +158,6 @@ containerBack: {
     marginTop: '0%'
   },
 
-  contenedorpie:{
-    backgroundColor: '#3EA5DB',
-    alignItems: 'flex-start',
-    flexDirection: 'row',
-    height: 50,
-    width: '100%',
-    borderBottomEndRadius: 0,
-    borderBottomStartRadius: 0,
-    borderRadius: 20,
-    marginTop: '0%'
-  },
 containerProducto: {
     flex: 1, 
     marginLeft: '4%',
