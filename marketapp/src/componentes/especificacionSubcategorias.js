@@ -156,7 +156,8 @@ containerImagen: {
     backgroundColor: '#B3E5FC',
     justifyContent: 'center',
     borderRadius: 30,
-    height: '80%'
+    height: '80%',
+    margin: 10
 },
 imagen: {
     margin: 0,
