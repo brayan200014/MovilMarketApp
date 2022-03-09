@@ -58,16 +58,16 @@ class Facturar extends Component {
                     <View style={styles.contenedorResumenPagar}>
                         <View>
                             <Text style={styles.textoResumenPagar}>
-                                Subtotal ............................. L.  80.50
+                                Subtotal ................. L.  80.50
                             </Text>
                             <Text style={styles.textoResumenPagar}>
-                                Delivery ............................. L.   50.00
+                                Delivery ................. L.   50.00
                             </Text>
                             <Text style={styles.textoResumenPagar}>
-                                ISV ...................................... L.   27.50
+                                ISV ......................... L.   27.50
                             </Text>
                             <Text style={styles.textoResumenPagar}>
-                                Total ................................... L. 158.50
+                                Total ....................... L. 158.50
                             </Text>
                         </View>
                     </View>
@@ -109,7 +109,7 @@ class Facturar extends Component {
                 <View style={styles.contenedorCombo}>
                     <View style={styles.elementoCombo}>
                         <SelectDropdown
-                            data={["Efectivo", "tarjeta"]}
+                            data={["Efectivo", "Tarjeta"]}
                             onSelect={(selectedItem, index) =>{
                                 console.log(selectedItem, index)
                             }}
@@ -118,9 +118,9 @@ class Facturar extends Component {
                             }}
                             rowTextForSelection = {(item, index) =>{
                                 return item
-                            }}
+                            }} 
                         />
-                        <Text style={styles.textoCombo}>
+                        <Text style={styles.textoCombo} >
                             L. 158.50
                         </Text>
                     </View>
@@ -150,10 +150,10 @@ const styles = StyleSheet.create({
       backgroundColor: '#3EA5DB',
       alignItems: 'flex-start',
       width: '100%',
-      height: 80,
+      height: 0,
       borderBottomLeftRadius: 20,
       borderBottomRightRadius: 20,
-      marginTop: '-5%'
+      marginTop: '-3%'
     },
     elementosEncabezado:{
         alignItems: "flex-start",
@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
         height: 80,
         borderBottomLeftRadius: 20,
         borderBottomRightRadius: 20,
-        marginTop: '9%'
+        marginTop: '0%'
     },
     elementosRadioButton:{
         alignItems: "flex-start",
@@ -199,20 +199,21 @@ const styles = StyleSheet.create({
     },
     radioButtons:{
         alignItems: 'center',
-        marginLeft: "35%"
+        marginLeft: "30%"
     },
     contenedorResumenPagar: {
         flexDirection: 'row',
         backgroundColor: '#FAF0E8',
-        alignItems: 'flex-start',
+        alignItems: 'center',
+        justifyContent: 'center',
         width: '90%',
-        height: 150,
+        height: 130,
         borderRadius: 30,
-        marginTop: '-2%',
+        marginTop: '-10%',
         padding: '4%'   
     },
     textoResumenPagar:{
-        fontSize: 27,
+        fontSize: 20,
         color: '#000',
         
     },
@@ -221,13 +222,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#FAF0E8',
         alignItems: 'flex-start',
         width: '90%',
-        height: 150,
+        height: 100,
         borderRadius: 30,
         marginTop: '1%',
         padding: '4%'   
     },
     textoDireccion:{
-        fontSize: 27,
+        fontSize: 18,
         color: '#000',
         textAlign: 'justify'
         
@@ -237,7 +238,7 @@ const styles = StyleSheet.create({
 
     },
     textoTituloSecundario:{
-        fontSize: 27,
+        fontSize: 22,
         color: '#3EA5DB',
     },
     contenedorInstrucciones:{
@@ -245,23 +246,23 @@ const styles = StyleSheet.create({
         backgroundColor: '#FAF0E8',
         alignItems: 'flex-start',
         width: '90%',
-        height: 150,
+        height: 100,
         borderRadius: 30,
         marginTop: '1%',
         padding: '4%'  
     },
     textoCombo:{
         marginLeft: "15%",
-        fontSize: 27
+        fontSize: 22
     },
     contenedorCombo:{
         flexDirection: 'row',
         alignItems: 'flex-start',
         width: '100%',
-        height: 80,
+        height: 90,
         borderBottomLeftRadius: 20,
         borderBottomRightRadius: 20,
-        marginTop: '0%'
+        marginTop: '-5%'
     },
     elementoCombo:{
         alignItems: "flex-start",
@@ -274,7 +275,7 @@ const styles = StyleSheet.create({
         color: "#fff",
     },
     textoPagar:{
-        fontSize: 30,
+        fontSize: 22,
         color: '#fff',
         marginTop: "20%",
         padding: 20,
@@ -282,7 +283,7 @@ const styles = StyleSheet.create({
     },
     ContenedorBotonPagar: { 
       backgroundColor: '#3EA5DB',
-      width: '120%',
+      width: '160%',
       height: 40,
       borderRadius: 10,
       marginTop: '5%'

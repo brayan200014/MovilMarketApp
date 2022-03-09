@@ -25,7 +25,7 @@ import  Email from './src/screen/Email';*/
 const {width, height} = Dimensions.get('window');
 
 //import Input from './src/componentes/Input';
-import Button from './src/componentes/Button';
+import Button from '../componentes/Button';
 
 const title = '¡Bienvenido(a) de Vuelta!';
 const tip = 'Debe Iniciar Sesión para continuar';
@@ -33,7 +33,7 @@ const signup = 'Nuevo Usuario? Registrate';
 const terms = 'Para registrarse, debe indicar que esta de acuerdo con los términos';
 
 
-export default function App() {
+export default function App({navigation}) {
 
   const [Correo, setCorreo]= useState(null);
   const [Contrasena, setContrasena]= useState(null);
@@ -48,7 +48,7 @@ export default function App() {
       { 
         try {
               const respuesta= await fetch(
-                'http://192.168.1.3:6001/api/autenticacion/iniciosesion',
+                'http://192.168.0.8:6001/api/autenticacion/iniciosesion',
                 {
                     method: 'POST',
                     headers: {
@@ -70,7 +70,8 @@ export default function App() {
                 console.log(token);
                 await AsyncStorage.setItem('Token',token);
               }
-              Alert.alert("Bienvenido(a)", "Petición procesada");
+              Alert.alert("Bienvenido(a)", "Escoge tus Productos");
+              navigation.navigate('Root');
           } catch(error) {
               console.log(error);
           }
@@ -88,10 +89,10 @@ export default function App() {
   }
   return (
         <View style={styles.container}>
-            <ImageBackground source={require('./assets/image/background7.png')} style={{width: width, height: height}}>
+            <ImageBackground source={require('../../assets/image/background7.png')} style={{width: width, height: height}}>
                 <View style={styles.darkLayer}></View>
                 <View style={styles.logo}>
-                    <Image source={require('./assets/image/logoMarket.png')}/>
+                    <Image source={require('../../assets/image/logoMarket.png')}/>
                 </View>
                 <View style={styles.title}>
                     <Text style={styles.titleText}>{title}</Text>
@@ -99,13 +100,14 @@ export default function App() {
                 <View style={styles.tip}>
                     <Text style={styles.tipText}>{tip}</Text>
                 </View>
-                <View style={[styles.input]}>
-            <TextInput 
+                <View style={styles.input}>
+            <TextInput style={styles.inputCorreo}
                 onChangeText={newText => setCorreo(newText)}
               placeholder="Escriba su correo electrónico">
             </TextInput>
-            <View style={{paddingTop: 20, paddingBottom: 10}}></View>
-            <TextInput
+
+            <TextInput style={styles.inputContra} passwordRules=""
+              secureTextEntry={true}
                 onChangeText={newText => setContrasena(newText)}
               placeholder="Escriba su contraseña">
             </TextInput>
@@ -193,16 +195,15 @@ export default function App() {
         marginTop: 24,
         marginLeft: 30,
         marginRight:30,
-        justifyContent: 'center',
+        justifyContent: 'space-evenly',
         alignSelf: 'center',
-        backgroundColor: '#FFFFFF',
         borderColor: '#FFFFFF',
         color: '#727C8E',
         //fontFamily: 'Nunito-SemiBold',
         fontWeight: '500',
         fontSize: 12,
-        paddingLeft: 30
-      
+        paddingLeft: 0,
+        height: 80
     },
     remember:{
         marginTop: 10,
@@ -245,5 +246,20 @@ export default function App() {
         //fontFamily: 'Nunito-SemiBold',
         fontSize: 10,
         textAlign: 'center'
+    },
+    inputCorreo: {
+        backgroundColor: '#fff', 
+        height: 40, 
+        paddingLeft:20, 
+        paddingRight:20, 
+        borderRadius:15,
+    },
+    inputContra: {
+        backgroundColor: '#fff', 
+        height: 40, 
+        paddingLeft:20, 
+        paddingRight:20, 
+        marginTop: 7, 
+        borderRadius: 15
     }
 });

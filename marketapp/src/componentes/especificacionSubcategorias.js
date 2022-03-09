@@ -1,31 +1,32 @@
 import * as React from 'react';
 import { View, Text, StyleSheet, Pressable, Image, TextInput } from 'react-native';
 import { AntDesign } from '@expo/vector-icons'; 
-
-export default function DetailsScreen({ navigation }) {
-    const imprimir= () => {
-        console.log("Press")
-    }
-    return (
-      <View style={styles.containerPrincipal} >
-        <View style={styles.containerTitulo}>
+/*<View style={styles.containerTitulo}>
           <View style={styles.containerBack}>
             <Pressable onPress={() => {imprimir()}} >
               <AntDesign name="arrowleft" size={24} color="white" />
             </Pressable>
             <Text style={styles.textinicio}>Bebidas y Jugos</Text>
           </View>
-        </View>
+        </View>*/ 
+export default function DetailsScreen({ navigation }) {
+    const imprimir= () => {
+        console.log("Press")
+    }
+    return (
+      <View style={styles.containerPrincipal} >
+        
 
         <View style={styles.containerProducto}>
           <View style={styles.containerFilaPro}>
             <View style={styles.containerImagen}>
               <Image style={styles.imagen}source={require('./img/bebidas.png')}></Image>
                <View style={styles.containerInfo}>
+               
                <Text style={styles.textProducto}>Agua Goascoran</Text>
                 <Text style={styles.textPrecio}>L 50.00</Text>
               <View style={styles.containerCantidadElegida}>
-                <Pressable onPress={()=> imprimir()}>
+                <Pressable onPress={()=> navigation.navigate('Productos')}>
                   <AntDesign name="pluscircleo" size={24} color="black" /></Pressable>
               </View>
               </View>
@@ -95,9 +96,7 @@ export default function DetailsScreen({ navigation }) {
             </View>
           </View>
         </View>
-        <View style={styles.contenedorpie}>
-           <Text style={styles.textCarrito}>Pie de pagina</Text>
-           </View>
+        <View style={{marginBottom: '30%'}}></View>
       </View>
     );
 }
@@ -108,7 +107,8 @@ const styles= StyleSheet.create({
         height: '100%',
         backgroundColor: '#fff',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginTop: '15%',
     },
 containerTitulo : {
     

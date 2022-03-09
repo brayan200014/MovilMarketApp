@@ -6,9 +6,9 @@ import { Ionicons } from '@expo/vector-icons';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Especificacion from "./componentes/especificacionProducto";
 import Prueba from "./componentes/prueba";
-
-
-
+import EspecificaionCategorias from "./componentes/especificacionCategorias"
+import NavigatorDetails from "./NavigatorDetails";
+import NavigatorProductos from "./NavigatorProductos";
 
 const Tab= createBottomTabNavigator();
 const HomeStack= createNativeStackNavigator();
@@ -40,7 +40,7 @@ const Tabs= ()=>{
            
                 
         >
-            <Tab.Screen name="Home" component={Especificacion}
+            <Tab.Screen name="Home" component={NavigatorProductos}
             options={
                 {
                    tabBarIcon: ({color, size}) => (
@@ -50,7 +50,7 @@ const Tabs= ()=>{
             
             }> 
             </Tab.Screen>
-            <Tab.Screen name="Details" component={DetailsScreen}
+            <Tab.Screen name="Details" component={NavigatorDetails}
              options={
                 {
                    tabBarIcon: ({color, size}) => (

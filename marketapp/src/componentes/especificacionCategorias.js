@@ -11,10 +11,11 @@ export default function DetailsScreen({ navigation }) {
 
            <View style={styles.containerTitulo}>
              <View style={styles.containerBack}>
+              <Pressable onPress={()=> navigation.navigate('Login')}>
              <Image 
                     style={styles.imagenusuario}
                     source={require('./img/usuario.png')}
-                 ></Image>
+                 ></Image></Pressable>
               <Text style={styles.textCarrito}>Hola Gabriela,</Text>
               <Text style={styles.textCarrito}>Bienvenida</Text>
             </View>
@@ -25,9 +26,10 @@ export default function DetailsScreen({ navigation }) {
                 style={styles.entradas}>
               </TextInput>
             </View>
-           <View style={styles.containerProducto}>
+           <View style={styles.containerProducto} >
                <View style={styles.containerFilaPro}>
                <View style={styles.containerImagen}>
+                 
                     <Image 
                     style={styles.imagen}
                     source={require('./img/promos.png')}
@@ -35,6 +37,7 @@ export default function DetailsScreen({ navigation }) {
                  <Text style={styles.textProducto}>Promociones</Text>
                </View>
                <View style={styles.containerImagen}>
+               
                     <Image 
                     style={styles.imagen}
                     source={require('./img/canasta.png')}
@@ -46,10 +49,11 @@ export default function DetailsScreen({ navigation }) {
            <View style={styles.containerProducto}>
            <View style={styles.containerFilaPro}>
                <View style={styles.containerImagen}>
+               <Pressable onPress={() => navigation.navigate('Subcategorias')}>
                     <Image 
                     style={styles.imagen}
                     source={require('./img/bebidas.png')}
-                 ></Image>
+                 ></Image></Pressable>
                  <Text style={styles.textProducto}>Juego y bebidas</Text>
                </View>
                <View style={styles.containerImagen}>
@@ -100,7 +104,7 @@ export default function DetailsScreen({ navigation }) {
                </View>
            </View>
            <View style={styles.contenedorpie}>
-           <Text style={styles.textCarrito}>Pie de pagina</Text>
+           
            </View>
         </View>
     );
@@ -162,7 +166,7 @@ containerBack: {
   },
 
   contenedorpie:{
-    backgroundColor: '#3EA5DB',
+    backgroundColor: '#fff',
     alignItems: 'flex-start',
     flexDirection: 'row',
     height: 50,

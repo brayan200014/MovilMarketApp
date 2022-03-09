@@ -64,11 +64,7 @@ export default function App({navigation}) {
   return (
     <View style={styles.container}>
      <View style={styles.containerProducto}>
-         <View style={styles.containerBack} >
-           <Pressable onPress={()=> navigation.navigate('Prueba')} >
-                <AntDesign name="arrowleft" size={24} color="white" />
-            </Pressable>
-           </View>
+        
            <Image 
                     style={styles.containerImagen}
                     source={{uri: 'http://192.168.0.8:6001/api/archivos/consultar?id='+encondedValue}}
@@ -132,7 +128,7 @@ const styles = StyleSheet.create({
     marginTop: '12%'
   },
   containerImagen: {
-      margin:0, 
+      marginTop: '20%', 
       width:250,
       height:250   
   },

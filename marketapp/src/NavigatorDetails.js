@@ -9,6 +9,7 @@ import Especificacion from "./componentes/especificacionProducto";
 import Prueba from "./componentes/prueba";
 import OnBoarding from "./screen/Onboarding";
 import Login from "./screen/LoginIn"
+import Facturar from "./Pantallas/Facturar";
 
 
 
@@ -21,9 +22,23 @@ const Navigation= () => {
    
    return (
     <HomeStack.Navigator>
-      <HomeStack.Screen name="Inicio" component={OnBoarding}  options={{headerShown:false}} />
-      <HomeStack.Screen  name="Login" component={Login} options={{headerTransparent: true, headerTintColor:'#fff', headerBackTitle: 'Regresar'}} />
-      <HomeStack.Screen  name="Root" component={Root} options={{headerShown:false}} />
+      <HomeStack.Screen  name="RootDetail" component={DetailsScreen} 
+      options={{headerTransparent: true, 
+        headerTintColor:'#fff',
+         headerTitle:'Carrito', 
+         headerStyle:{
+           backgroundColor: '#3EA5DB',
+           
+           }}} />
+      <HomeStack.Screen  name="Factura" component={Facturar} 
+      options={{headerTransparent: true, 
+      headerTintColor:'#fff', 
+      headerBackTitle: 'Carrito',
+       headerTitle:'Pagar', 
+       headerStyle:{
+         backgroundColor: '#3EA5DB',
+         
+         }}} />
     </HomeStack.Navigator>  
    )
 }

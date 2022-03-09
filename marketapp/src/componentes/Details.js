@@ -4,6 +4,16 @@ import { AntDesign } from '@expo/vector-icons';
 import { useState } from 'react';
 
 export default function DetailsScreen({ navigation }) {
+
+
+    /* <View style={styles.containerTitulo}>
+             <View style={styles.containerBack}>
+               <Pressable onPress={() => {imprimir()}} >
+                <AntDesign name="arrowleft" size={24} color="white" />
+              </Pressable>
+              <Text style={styles.textCarrito}>Mi Carrito</Text>
+              </View>
+           </View>*/ 
     const imprimir= () => {
         console.log("Press")
     }
@@ -29,14 +39,7 @@ export default function DetailsScreen({ navigation }) {
     
     return (
         <View style={styles.containerPrincipal} >
-           <View style={styles.containerTitulo}>
-             <View style={styles.containerBack}>
-               <Pressable onPress={() => {imprimir()}} >
-                <AntDesign name="arrowleft" size={24} color="white" />
-              </Pressable>
-              <Text style={styles.textCarrito}>Mi Carrito</Text>
-              </View>
-           </View>
+          
            <View style={styles.containerProducto}>
                <View style={styles.containerFilaPro}>
                <View style={styles.containerImagen}>
@@ -120,7 +123,7 @@ export default function DetailsScreen({ navigation }) {
                         <Text style={styles.textSubtotal}>Subtotal: L45.00</Text>
                     </View>
                 <View style={styles.containerBotonPagar}>
-                    <Pressable style={styles.botonPagar} onPress={()=> navigation.navigate("Pay")}>
+                    <Pressable style={styles.botonPagar} onPress={()=> navigation.navigate("Factura")}>
                         <Text style={styles.textPagar}> Pagar</Text>
                     </Pressable>
                 </View>
@@ -133,6 +136,7 @@ const styles= StyleSheet.create({
     containerPrincipal: {
         width: '100%',
         height: '95%',
+        marginTop:'15%',
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center'

@@ -17,7 +17,7 @@ export class Onboarding extends Component {
                 {id: 4, image: require('../../assets/image/background7.png')},
                 {id: 5, image: require('../../assets/image/background3.png')},
                 {id: 6, image: require('../../assets/image/background2.jpg')}
-
+            
             ]
         };
     }
@@ -49,7 +49,7 @@ _btnClick = () => {
             <Text style={styles.text}>1801 El Mejor Supermercado del Mundo.</Text>
         </View>
         <View style={styles.button}>
-            <Button text={'Inicio de Sesión'} onPress={()=>(this._btnClick())}/>
+            <Button text={'Inicio de Sesión'} onPress={ () => this.props.navigation.navigate('Login')}/>
         </View>
       </View>
     );
