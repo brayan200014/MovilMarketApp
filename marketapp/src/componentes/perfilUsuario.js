@@ -1,140 +1,146 @@
-import React, { Component } from 'react';
+import React from 'react';
+import {View, SafeAreaView, StyleSheet} from 'react-native';
 import {
-  StyleSheet, Text,View,Image,Button ,TouchableOpacity
-} from 'react-native';
+  Avatar,
+  Title,
+  Caption,
+  Text,
+  TouchableRipple,
+} from 'react-native-paper';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+//import Share from 'react-native-share';
 
-export default class App extends Component {
-  render() {
-    return (
-      
-        <View style={styles.container}>
-          <View style={styles.containerTitulo}>
-           </View>
-          <View style={styles.header}>
-          <Text style={styles.textCarrito}>Mi Perfil</Text>
-            </View>
-          <Image style={styles.avatar} source={{uri: 'https://cdn-icons-png.flaticon.com/512/147/147140.png'}}/>
-          <View style={styles.body}>
-          <Text style={styles.name}>nombre del usuario</Text>
-              <Text style={styles.info}>email del usuario</Text>
-              <Text style={styles.description}>Opciones de perfil:</Text>
+const PerfilUsuario = () => {
 
-             <View style={styles.bodyContent}>
-             
-              <TouchableOpacity style={styles.buttones}>
-              <Button title="Editar perfil">editar</Button>
-              </TouchableOpacity>              
-              <TouchableOpacity style={styles.buttones}>
-              <Button title="Metodos de pago"></Button>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.buttones}>
-              <Button title="Informacion"></Button>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.cerrars}>
-              <Button title="Cerrar"></Button>
-              </TouchableOpacity>
-            </View>
+  return (
+    <SafeAreaView style={styles.container}>
+
+      <View style={styles.userInfoSection}>
+        <View style={{flexDirection: 'row', marginTop: 80}}>
+          <View style={{marginLeft: 20}}>
+            <Title style={[styles.title, {
+              marginTop:25,
+              marginBottom: 5,
+            }]}>Nombre Perfil</Title>
+            <Caption style={styles.caption}>nombre usuario</Caption>
+          </View>
         </View>
       </View>
-    );
-  }
-}
 
-const styles = StyleSheet.create({
-  header:{
-    backgroundColor: "#3ea5db",
-    height:200,
-  },
-  buttones:{
-    backgroundColor: "#3ea5db",
-    width:500,
-    height: 60,
-    borderRadius:30,
-    margin:10
-  },
-  avatar: {
-    width: 160,
-    height: 160,
-    borderRadius: 63,
-    borderWidth: 4,
-    borderColor: "white",
-    marginBottom:10,
-    alignSelf:'center',
-    position: 'absolute',
-    marginTop:160
-  },
-  cerrars:{
-    marginTop:60,
-    height:60,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom:30,
-    width:500,
-    backgroundColor: "#cccccc",
-    fontSize: 40,
-    borderRadius:30
-  },
-  name:{
-    fontSize:22,
-    textAlign: 'center',
-    color:"#FFFFFF",
-    fontWeight:'600',
-  },
-  body:{
-    marginTop:20,
-  },
-  bodyContent: {
+      <View style={styles.userInfoSection}>
+        <View style={styles.row}>
+          <Icon name="phone" color="#3EA5DB" size={30}/>
+          <Text style={{color:"#0b0a09", marginLeft: 20,fontSize:15}}>telefono usuario</Text>
+        </View>
+        <View style={styles.row}>
+          <Icon name="email" color="#3EA5DB" size={30}/>
+          <Text style={{color:"#0b0a09", marginLeft: 20, fontSize:15}}>email usuario</Text>
+        </View>
+      </View>
+
+      <View style={styles.infoBoxWrapper}>
+      </View>
+
+      <View style={styles.menuWrapper}>
+      <TouchableRipple onPress={() => {}}>
+          <View style={styles.menuItem}>
+            <Icon name="account-edit" color="#3EA5DB" size={30}/>
+            <Text style={styles.menuItemText}>Editar Perfil</Text>
+          </View>
+        </TouchableRipple>
+        <View style={styles.conteInfo}>
+            <Text style={styles.info}>Edita tu perfil</Text>
+          </View>
+        <TouchableRipple onPress={() => {}}>
+          <View style={styles.menuItem}>
+            <Icon name="information" color="#3EA5DB" size={30}/>
+            <Text style={styles.menuItemText}>Información</Text>
+          </View>
+        </TouchableRipple>
+        <View style={styles.conteInfo}>
+            <Text style={styles.info}>Información sobre aplicación</Text>
+          </View>
+        <TouchableRipple onPress={() => {}}>
+          <View style={styles.menuItem}>
+            <Icon name="credit-card" color="#3EA5DB" size={30}/>
+            <Text style={styles.menuItemText}>Métodos de pago</Text>
+          </View>
+        </TouchableRipple>
+        <View style={styles.conteInfo}>
+            <Text style={styles.info}>Gestiona metodos de pago</Text>
+          </View>
+        <TouchableRipple onPress={() => {}}>
+          <View style={styles.menuItem}>
+            <Icon name="close-box" color="#3EA5DB" size={30}/>
+            <Text style={styles.menuItemText}>Cerrar sesión</Text>
+          </View>
+        </TouchableRipple>
+        <View style={styles.conteInfo}>
+            <Text style={styles.info}>Salir de la APP</Text>
+          </View>
+      </View>
+    </SafeAreaView>
+  );
+
+};
+  export default PerfilUsuario;
+
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+    },
+    userInfoSection: {
+      paddingHorizontal: 30,
+      marginBottom: 25,
+    },
+    title: {
+      fontSize: 22,
+      fontWeight: 'bold',
+    },
+    caption: {
+      fontSize: 14,
+      lineHeight: 14,
+      fontWeight: '500',
+    },
+    row: {
+      flexDirection: 'row',
+      marginBottom: 10,
+    },
+    infoBoxWrapper: {
+      borderTopColor: '#3EA5DB',
+      borderTopWidth: 30,
+      flexDirection: 'row',
+      height: 10,
+    },
+    infoBox: {
+      width: '50%',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    menuWrapper: {
+      marginTop: 10,
+    },
+    menuItem: {
+      flexDirection: 'row',
+      paddingVertical: 10,
+      paddingHorizontal: 30,
+    },
+    info: {
+      paddingHorizontal: 80,
+      color:'#59a0e1'
+    },
+    menuItemText: {
+      color: '#0b0a09',
+      marginLeft: 20,
+      fontWeight: '600',
+      fontSize: 18,
+      lineHeight: 26,
+    },
+    conteInfo:{
+      backgroundColor:'#eeeeee',
+      height:40,
+      //alignItems:'center',
+      justifyContent: 'center',
+    }
+  });
   
-    alignItems: 'center',
-    padding:30,
-  },
-  name:{
-    marginTop:20,
-    textAlign: 'center',
-    fontSize:28,
-    color: "#696969",
-    fontWeight: "600"
-  },
-  info:{
-    fontSize:16,
-    textAlign: 'center',
-    color: "#00BFFF",
-    marginTop:10
-  },
-  description:{
-    fontSize:20,
-    color: "#696969",
-    marginTop:40,
-  },
-  buttonContainer: {
-    fontSize: 20,
-    marginTop:10,
-    height:55,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom:20,
-    width:500,
-    backgroundColor: "#cccccc"
-  },
-  textCarrito:{
-    fontSize: 20,
-    color: '#fff',
-    paddingHorizontal: '40%',
-},
-containerTitulo : {
-  backgroundColor: '#3EA5DB',
-  alignItems: 'flex-start',
-  flexDirection: 'row',
-  height: 80,
-  width: '100%',
-  marginTop: '0%'
-},
-
-});
-
-    
-  
-
-
