@@ -80,6 +80,8 @@ const edicionPerfil = () => {
             returnKeyType='go'
             secureTextEntry
             autoCorrect={false}
+            editable={false} 
+            selectTextOnFocus={false} 
             style={[
               styles.textInput,
               {
