@@ -3,7 +3,7 @@ import { StyleSheet, View, Text} from 'react-native';
 import { Button } from 'react-native-elements';
 import { Input } from 'react-native-elements';
 
-export default () => {
+const edicionPerfil = () => {
 
   return (
     <View>
@@ -37,6 +37,7 @@ export default () => {
    
   );
 };
+export default edicionPerfil;
 
 const styles = StyleSheet.create({
   name:{
