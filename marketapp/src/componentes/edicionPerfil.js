@@ -5,10 +5,10 @@ import Feather from 'react-native-vector-icons/Feather';
 import {useTheme, Title,Caption,} from 'react-native-paper';
 
 
-const edicionPerfil = () => {
+const EdicionPerfil = () => {
   const {colors} = useTheme();
   return (
-    <View style={{marginTop:70}}>
+    <View >
       <View style={styles.seccion}>
       <View> 
       <Text style={styles.name}>Edición de Perfil</Text>
@@ -73,7 +73,7 @@ const edicionPerfil = () => {
           />
         </View>
         <View style={styles.action}>
-          <FontAwesome name="lock" color={colors.text} size={30} />
+          <FontAwesome name="lock" color={colors.text} size={30}/>
           <TextInput
             placeholder="Contraseña:"
             placeholderTextColor="#666666"
@@ -93,17 +93,15 @@ const edicionPerfil = () => {
           <Text style={styles.ButtonPass}>Cambiar contraseña</Text>
         </TouchableOpacity>
         </View>
-    <View style={styles.seccion2}>
-    </View>
     <TouchableOpacity style={styles.commandButton} onPress={() => {}}>
           <Text style={styles.panelButtonTitle}>Guardar cambios</Text>
         </TouchableOpacity>
-      
+
     </View>
    
   );
 };
-export default edicionPerfil;
+export default EdicionPerfil;
 
 const styles = StyleSheet.create({
   name:{
@@ -114,7 +112,7 @@ const styles = StyleSheet.create({
   seccion:{
    margin:10,
     backgroundColor: "#3EA5DB",
-    height:60,
+    height:50,
     borderRadius:30,
     justifyContent:'center',
     marginTop:25
@@ -122,15 +120,19 @@ const styles = StyleSheet.create({
   seccion2:{
     backgroundColor:"#FF6347",
     height:30,
-    marginTop:30
+    marginTop:10
   },
   commandButton: {
     justifyContent:'center',
     padding: 15,
-    borderRadius: 10,
-    backgroundColor: '#3EA5DB',
+    borderRadius: 30,
+    backgroundColor: '#2874A6',
     alignItems: 'center',
-    marginTop: 10,
+    marginTop: 5,
+    marginLeft:20,
+    marginRight:20,
+    borderWidth:2,
+    borderColor:'#FF5733'
   },
   Sbutton: {
     backgroundColor:'#3EA5DB',
@@ -149,7 +151,7 @@ const styles = StyleSheet.create({
   },
 
   panelButtonTitle: {
-    fontSize: 17,
+    fontSize: 15,
     fontWeight: 'bold',
     color: '#FFFFFF',
   },
@@ -162,22 +164,29 @@ const styles = StyleSheet.create({
   },
   action: {
     flexDirection: 'row',
-    marginTop: 30,
+    marginTop: 20,
+    height:50,
     marginBottom: 30,
-    borderBottomWidth: 1,
+    borderBottomWidth:2,
     borderBottomColor: '#f2f2f2',
     paddingBottom: 5,
+    backgroundColor:'#D5D5D5',
+    margin:10,
+    borderRadius:60,
+    padding:10,
+    borderEndWidth:5,
+    borderColor:'#FF5733'
   },
   actionError: {
     flexDirection: 'row',
     marginTop: 10,
-    borderBottomWidth: 2,
+    borderBottomWidth: 3,
     borderBottomColor: '#FF0000',
-    paddingBottom: 5,
+   
   },
   textInput: {
     flex: 1,
-    paddingLeft: 10,
+    paddingLeft: 15,
     color: '#05375a',
   },
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Image, View, Text} from 'react-native';
 
 
-export default class infor extends Component  {
+export default class Infor extends Component  {
 
   render(){
     return(
@@ -25,7 +25,7 @@ export default class infor extends Component  {
 const styles = StyleSheet.create({
 contorno:{
 backgroundColor:'#F2D7EF',
-marginTop:30,
+marginTop:10,
 marginLeft:15,
 marginRight:15,
 borderRadius:30,
@@ -33,7 +33,7 @@ borderWidth: 2,
 shadowColor: '#480000',
 shadowOffset: {width: 0, height: 2},
 shadowOpacity: 0.5,
-elevation: 7
+elevation: 5
 },
   principal:{
     color:'#091114',
@@ -43,9 +43,10 @@ elevation: 7
     textAlign:'justify'
   },
   mainContainer:{
-    marginTop:20,
+    marginTop:10,
     backgroundColor:'#3EA5DB',
-    height: 80
+    height: 40,
+    borderRadius:15
   },
   textStyle:{
     color:'#091114',
@@ -56,9 +57,9 @@ elevation: 7
   },
   textTitulo:{
     color:'#f5ffed',
-    fontSize: 20,
+    fontSize: 17,
     textAlign:'center',
-    padding:15,
+    padding:5,
   },
   logo: {
     width: 400,

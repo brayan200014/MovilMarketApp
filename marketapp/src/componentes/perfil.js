@@ -8,13 +8,15 @@ import {
 } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 //import Share from 'react-native-share';
+import { useNavigation } from '@react-navigation/native';
 
-const perfilUsuario = () => {
+const PerfilUsuario = () => {
+  const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.container}>
 
       <View style={styles.userInfoSection}>
-        <View style={{flexDirection: 'row', marginTop: 80}}>
+        <View style={{flexDirection: 'row', marginTop: 10}}>
           <View style={{marginLeft: 20}}>
             <Title style={[styles.title, {
               marginTop:25,
@@ -40,7 +42,7 @@ const perfilUsuario = () => {
       </View>
 
       <View style={styles.menuWrapper}>
-      <TouchableRipple onPress={() =>{}}>
+      <TouchableRipple onPress={() =>navigation.navigate("Configuracion de cuenta")}>
           <View style={styles.menuItem}>
             <Icon name="account-edit" color="#3EA5DB" size={30}/>
             <Text style={styles.menuItemText}>Editar Perfil</Text>
@@ -49,7 +51,7 @@ const perfilUsuario = () => {
         <View style={styles.conteInfo}>
             <Text style={styles.info}>Edita tu perfil</Text>
           </View>
-        <TouchableRipple onPress={() => {}}>
+        <TouchableRipple onPress={() =>navigation.navigate("InfoAPP")}>
           <View style={styles.menuItem}>
             <Icon name="information" color="#3EA5DB" size={30}/>
             <Text style={styles.menuItemText}>Información</Text>
@@ -81,7 +83,7 @@ const perfilUsuario = () => {
   );
 
 };
-  export default perfilUsuario;
+  export default PerfilUsuario;
 
   const styles = StyleSheet.create({
     container: {

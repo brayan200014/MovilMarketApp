@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import DetailsScreen from "./componentes/Details";
-import SettingsScreen from "./componentes/Settings";
+//import SettingsScreen from "./componentes/settingScreen.js";
 import { StyleSheet, View, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -9,6 +9,8 @@ import Prueba from "./componentes/prueba";
 import EspecificaionCategorias from "./componentes/especificacionCategorias"
 import NavigatorDetails from "./NavigatorDetails";
 import NavigatorProductos from "./NavigatorProductos";
+import { NavigationContainer } from "@react-navigation/native";
+import settingsStackScreen from "../settingsScreen";
 
 const Tab= createBottomTabNavigator();
 const HomeStack= createNativeStackNavigator();
@@ -60,7 +62,8 @@ const Tabs= ()=>{
             }
             > 
                 </Tab.Screen>
-            <Tab.Screen name="Settings" component={SettingsScreen}  options={
+            <Tab.Screen name="Settings" component={settingsStackScreen}
+             options={
                 {
                    tabBarIcon: ({color, size}) => (
                     <Ionicons name="settings" size={24} color={color} />
