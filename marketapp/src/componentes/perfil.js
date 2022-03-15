@@ -1,7 +1,6 @@
 import React from 'react';
 import {View, SafeAreaView, StyleSheet} from 'react-native';
 import {
-  Avatar,
   Title,
   Caption,
   Text,
@@ -10,8 +9,7 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 //import Share from 'react-native-share';
 
-const PerfilUsuario = () => {
-
+const perfilUsuario = () => {
   return (
     <SafeAreaView style={styles.container}>
 
@@ -42,7 +40,7 @@ const PerfilUsuario = () => {
       </View>
 
       <View style={styles.menuWrapper}>
-      <TouchableRipple onPress={() => {}}>
+      <TouchableRipple onPress={() =>{}}>
           <View style={styles.menuItem}>
             <Icon name="account-edit" color="#3EA5DB" size={30}/>
             <Text style={styles.menuItemText}>Editar Perfil</Text>
@@ -83,7 +81,7 @@ const PerfilUsuario = () => {
   );
 
 };
-  export default PerfilUsuario;
+  export default perfilUsuario;
 
   const styles = StyleSheet.create({
     container: {
@@ -143,4 +141,3 @@ const PerfilUsuario = () => {
       justifyContent: 'center',
     }
   });
-  

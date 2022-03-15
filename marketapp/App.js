@@ -1,14 +1,12 @@
-import { StatusBar } from 'expo-status-bar';
-import { useState, useEffect } from 'react';
-import { ActivityIndicator, SafeAreaView, StyleSheet, Text, View } from 'react-native';
-
-import Factura from './src/Pantallas/Facturar';
+import EdicionPerfil from './src/componentes/edicionPerfil'
+import PerfilUsuario from './src/componentes/perfil'
+import Infor from './src/componentes/informacionApp'
 
 export default function App() {
-  
-  
- 
-    
+  return (
 
+    //<PerfilUsuario></PerfilUsuario>
+    <EdicionPerfil></EdicionPerfil>
+    //<Infor></Infor>
+  );
 }
-

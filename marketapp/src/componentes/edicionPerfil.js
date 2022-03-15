@@ -32,7 +32,7 @@ const edicionPerfil = () => {
       <View style={styles.action}>
       <FontAwesome name="user-o" color={colors.text} size={30} />
       <TextInput
-        placeholder="Apellido"
+        placeholder="Apellido:"
         placeholderTextColor="#666666"
         autoCorrect={false}
         style={[
@@ -46,7 +46,7 @@ const edicionPerfil = () => {
       <View style={styles.action}>
       <FontAwesome name="user-o" color={colors.text} size={30} />
       <TextInput
-        placeholder="Usuario"
+        placeholder="Usuario:"
         placeholderTextColor="#666666"
         autoCorrect={false}
         style={[
@@ -60,7 +60,7 @@ const edicionPerfil = () => {
       <View style={styles.action}>
           <Feather name="phone" color={colors.text} size={30} />
           <TextInput
-            placeholder="Teléfono"
+            placeholder="Teléfono:"
             placeholderTextColor="#666666"
             keyboardType="number-pad"
             autoCorrect={false}
@@ -75,7 +75,7 @@ const edicionPerfil = () => {
         <View style={styles.action}>
           <FontAwesome name="lock" color={colors.text} size={30} />
           <TextInput
-            placeholder="Contraseña"
+            placeholder="Contraseña:"
             placeholderTextColor="#666666"
             returnKeyType='go'
             secureTextEntry
