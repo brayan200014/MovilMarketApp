@@ -19,7 +19,7 @@ export default function App({route,navigation}) {
     
  
   const agregarCarrito= async () => {
-
+    
       let boolean=false;
       const getStorage= await AsyncStorage.getItem('ProductosArray');
       console.log(getStorage);
@@ -291,7 +291,7 @@ botonAgregar: {
   flex: 1,
   width: '40%',
   marginBottom: '20%',
-  borderRadius: 30,
+  borderRadius: 10,
   alignItems: 'center',
   
 },
