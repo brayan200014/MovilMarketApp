@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState, useEffect} from 'react';
-import { ActivityIndicator, StyleSheet, Text, TextInput, View, Alert, ImageBackground, Dimensions,Image } from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, TextInput, View, Alert, ImageBackground, Dimensions,Image, KeyboardAvoidingView,
+    TouchableWithoutFeedback, Keyboard } from 'react-native';
 import AsyncStorage  from '@react-native-async-storage/async-storage';
 import * as Font from 'expo-font';
 
@@ -88,6 +89,9 @@ export default function App({navigation}) {
     }
   }
   return (
+     <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.keyboardStyle}>
+  <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
             <ImageBackground source={require('../../assets/image/background7.png')} style={{width: width, height: height}}>
                 <View style={styles.darkLayer}></View>
@@ -143,9 +147,14 @@ export default function App({navigation}) {
                 </View>
             </ImageBackground>
         </View>
+        </TouchableWithoutFeedback>
+        </KeyboardAvoidingView> 
     );
   } 
   const styles = StyleSheet.create({
+      keyboardStyle: {
+          flex: 1
+      },
     container:{
         flex: 1,
         flexDirection: 'row',
