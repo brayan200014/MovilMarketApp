@@ -26,7 +26,7 @@ export default function DetailsScreen({ navigation }) {
                <Text style={styles.textProducto}>Agua Goascoran</Text>
                 <Text style={styles.textPrecio}>L 50.00</Text>
               <View style={styles.containerCantidadElegida}>
-                <Pressable onPress={()=> navigation.navigate('Productos', {ProductoId: 3, ProductoNombre: "Bananas"})}>
+                <Pressable onPress={()=> navigation.navigate('Productos', {ProductoId: 2, ProductoNombre: "Bananas",PrecioProducto: 60})}>
                   <AntDesign name="pluscircleo" size={24} color="black" /></Pressable>
               </View>
               </View>

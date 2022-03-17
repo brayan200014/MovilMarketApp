@@ -72,6 +72,7 @@ export default function App({navigation}) {
                 await AsyncStorage.setItem('Token',token);
               }
               Alert.alert("Bienvenido(a)", "Escoge tus Productos");
+              await AsyncStorage.removeItem('ProductosArray');
               navigation.navigate('Root');
           } catch(error) {
               console.log(error);

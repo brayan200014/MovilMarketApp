@@ -1,13 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { StyleSheet, Text, View, Image, Button, Alert, Pressable} from 'react-native';
+import { StyleSheet, Text, View, Image, Button, Alert, Modal, Pressable} from 'react-native';
 import { AntDesign } from '@expo/vector-icons'; 
 import { NavigationContainer } from '@react-navigation/native';
 import AsyncStorage  from '@react-native-async-storage/async-storage';
 
 export default function App({route,navigation}) {
 
-  const {ProductoId, ProductoNombre}= route.params; 
+  const {ProductoId, ProductoNombre,PrecioProducto}= route.params; 
   const [nombreProducto, setNombreProducto]= useState(ProductoNombre);
   const [descripcionProducto, setDescripcion]= useState('hola');
   const [IdProducto, setIdProducto]= useState(ProductoId);
@@ -15,6 +15,7 @@ export default function App({route,navigation}) {
   const [cantidad, setCantidad]= useState((1));
   const[cambio, setCambio]= useState(false);
   const [ProductosArray, setProductosArray]= useState([]);
+  const [visible, setVisible]= useState(false);
 
     
  
@@ -26,7 +27,8 @@ export default function App({route,navigation}) {
       const infoProducto= {
         IdProducto: IdProducto,
         NombreProducto: nombreProducto,
-        Cantidad: cantidad
+        Cantidad: cantidad,
+        Precio: PrecioProducto
       }
 
       const editar=JSON.parse(getStorage);
@@ -103,6 +105,8 @@ export default function App({route,navigation}) {
 
         storeData(nuevaInfo);
       }
+
+      setVisible(true);
   }
 
   const addCantidad= async () => {
@@ -157,6 +161,20 @@ export default function App({route,navigation}) {
 
   return (
     <View style={styles.container}>
+      <Modal transparent={true}
+            animationType={'fade'}
+            visible={visible}
+            >
+         <View style={styles.containerPmodal}>
+           <View style={styles.conatinerInfoModal}>
+           <AntDesign name="checkcircle" size={24} color="green" />
+           <Text style={styles.textmessagemodal}>Producto agregado al carrito</Text>
+                  <Pressable style={styles.pressabelStyleModal} onPress={() => setVisible(false)}>
+                    <Text style={styles.textbotonModal}>Cerrar</Text>
+                  </Pressable>
+           </View> 
+         </View>
+      </Modal>
      <View style={styles.containerProducto}>
         
            <Image 
@@ -171,7 +189,7 @@ export default function App({route,navigation}) {
         </View>
        
         <View style={styles.containerCantidad}>
-          <View style={styles.containerCantidadElegida}>
+          <View style={styles.containerCantidadElegida}> 
               <Pressable onPress={()=> addCantidad()}>
                  <AntDesign name="pluscircleo" size={30} color="black" />
               </Pressable>
@@ -181,7 +199,7 @@ export default function App({route,navigation}) {
               </Pressable>
             </View>
             <View style={styles.containerPrecioProducto}>
-                  <Text style= {styles.precioProducto}>L 15</Text>
+                  <Text style= {styles.precioProducto}>{"L"+PrecioProducto}</Text>
             </View>
         </View>
         <View style={styles.containerBotonAgregar}>
@@ -303,7 +321,36 @@ containerTextoAgregar:{
 textAgregar: {
   fontSize: 20, 
   color: '#fff'
+},
+containerPmodal: {
+  flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor:'rgba(0, 0, 0, 0.5)'
+},
+conatinerInfoModal: {
+  alignItems: 'center',
+  backgroundColor: '#fff',
+  borderRadius: 20,
+  padding: '5%'
+},
+pressabelStyleModal: {
+  marginTop: '8%',
+  paddingLeft: '20%',
+  paddingRight:'20%',
+  backgroundColor: '#3EA5DB',
+  paddingBottom:'4%',
+  borderRadius: 10
+},
+textbotonModal: {
+  color: '#fff',
+  marginTop: '6%'
+},
+textmessagemodal: {
+  color:'green',
+  marginTop: '1%',
 }
+
 
 
 });

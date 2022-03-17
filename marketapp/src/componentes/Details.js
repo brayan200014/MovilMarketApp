@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, Text, StyleSheet, Pressable, Image, SafeAreaView, ScrollView, StatusBar, RefreshControl} from 'react-native';
 import { AntDesign } from '@expo/vector-icons'; 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {AsyncStorage,  useAsyncStorage } from '@react-native-async-storage/async-storage';
 
 
@@ -15,24 +15,58 @@ export default function DetailsScreen({ navigation }) {
     const [descripcionProducto, setDescripcion]= useState('hola');
     const [IdProducto, setIdProducto]= useState(null);
     const encondedValue= encodeURIComponent(IdProducto);
-    const [cantidad, setCantidad]= useState(0);
+   // const [cantidad, setCantidad]= useState(0);
     const[productosCarrito, setProductosCarrito]= useState([]);
     const {getItem,setItem}= useAsyncStorage('ProductosArray'); 
 
-    const addCantidad = async () => {
-        let add=cantidad+1;
-        setCantidad(add);
-    }
-  
-    const lessCantidad= async () => {
-      let add=cantidad-1;
-  
-      if(!add==0) {
-        setCantidad(add);
-      }
+    useEffect(() => {
+
+    })
+
+
+  const updatePlusCantidad= async (id) => {
+        const arrayProductos= await getItem();
+        const getArray= JSON.parse(arrayProductos); 
+
+        for (var i=0; i<getArray.length; i++) {
+            if(id== getArray[i]['IdProducto']) {
+                getArray[i]['Cantidad']+= 1;
+            }
+        }
+
+        await setItem(JSON.stringify(getArray));
+        setProductosCarrito(JSON.parse(arrayProductos));
   }
 
+  const updateMinusCantidad= async (id) => {
+    const arrayProductos= await getItem();
+    const getArray= JSON.parse(arrayProductos); 
 
+    for (var i=0; i<getArray.length; i++) {
+        if(id== getArray[i]['IdProducto']) {
+            if(getArray[i]['Cantidad']!=1){
+                getArray[i]['Cantidad']-= 1;
+            }
+        }
+    }
+
+    await setItem(JSON.stringify(getArray));
+    setProductosCarrito(JSON.parse(arrayProductos));
+}
+
+const deleteProducto = async (id) => {
+    const arrayProductos= await getItem();
+    const getArray= JSON.parse(arrayProductos); 
+
+    for (var i=0; i<getArray.length; i++) {
+        if(id== getArray[i]['IdProducto']) {
+            getArray.splice(i,1); 
+        }
+    }
+
+    await setItem(JSON.stringify(getArray));
+    setProductosCarrito(JSON.parse(arrayProductos));
+}
   
 
   const cargarArreglo = async () => {
@@ -43,41 +77,87 @@ export default function DetailsScreen({ navigation }) {
     }
 
 
+  const cargarPago= () => {
+      let listado= [
+          {
+              key: 1
+          }
+      ];
+
+      let arrayProductos= productosCarrito;
+      let subtotal=0;
+
+      if(productosCarrito) {
+        for(var i=0; i<arrayProductos.length;i++) {
+            subtotal+= arrayProductos[i]['Precio']*arrayProductos[i]['Cantidad'];
+        }
+        return listado.map((item) => {
+            return (
+                <View key={item.key} style= {styles.containerBotones} >
+                <View style={styles.containerBotonPagar}>
+                    <Pressable style={styles.botonPagar} onPress={()=> navigation.navigate("Factura", subtotal)}>
+                         <Text style={styles.textPagar}> Pagar</Text>
+                     </Pressable>
+                 </View>
+                 <View style={styles.containerSubtotal}>
+                         <Text style={styles.textSubtotal}>{"Subtotal: L "+subtotal}</Text>
+                 </View>    
+            </View>
+            )
+          })
+      }
+      
+  }
+
   const itemsCarrito =  () => {
     cargarArreglo();
     let list= productosCarrito;
     let listado=list;
-      return listado.map((item)=> {
-          return (
-        <View key={item.IdProducto} style={styles.containerProducto}>
-            <View style={styles.containerFilaPro}>
-            <View style={styles.containerImagen}>
-                 <Image 
-                 style={styles.imagen}
-                 source={{uri: 'http://192.168.0.8:6001/api/archivos/consultar?id='+item.IdProducto}}
-              ></Image>
-            </View>
-            <View style={styles.containerInfo}>
-            <Text style={styles.textProducto}>{item.NombreProducto}</Text>
-            <Text style={styles.textPrecio}>L 15.00</Text>
-            <View style={styles.containerCantidadElegida}>
-                 <Pressable onPress={()=> addCantidad()}>
-                     <AntDesign name="pluscircleo" size={24} color="black" />
-                 </Pressable>
-                 <Text style={styles.textCantidad}>{item.Cantidad}</Text>
-                 <Pressable onPress={()=> lessCantidad()}>
-                     <AntDesign name="minuscircleo" size={24} color="black" />
-                 </Pressable>
-                 <Pressable onPress={()=> imprimir()}>
-                      <AntDesign name="delete" size={24} color="black" />
-                 </Pressable>
-            </View>
-            </View>
-            </View>
-        </View>
+
+    if(!list)
+    {
         
-          )
-      })
+        return (
+            <View>
+                <Text>Tu Carrito esta vacio</Text>
+            </View>
+        )
+    }
+    else 
+    {
+        return listado.map((item)=> {
+            return (
+          <View key={item.IdProducto} style={styles.containerProducto}>
+              <View style={styles.containerFilaPro}>
+              <View style={styles.containerImagen}>
+                   <Image 
+                   style={styles.imagen}
+                   source={{uri: 'http://192.168.0.8:6001/api/archivos/consultar?id='+item.IdProducto}}
+                ></Image>
+              </View>
+              <View style={styles.containerInfo}>
+              <Text style={styles.textProducto}>{item.NombreProducto}</Text>
+              <Text style={styles.textPrecio}>{"L "+item.Precio}</Text>
+              <View style={styles.containerCantidadElegida}>
+                   <Pressable onPress={()=> updatePlusCantidad(item.IdProducto)}>
+                       <AntDesign name="pluscircleo" size={24} color="black" />
+                   </Pressable>
+                   <Text style={styles.textCantidad}>{item.Cantidad}</Text>
+                   <Pressable onPress={()=> updateMinusCantidad(item.IdProducto)}>
+                       <AntDesign name="minuscircleo" size={24} color="black" />
+                   </Pressable>
+                   <Pressable onPress={()=> deleteProducto(item.IdProducto)}>
+                        <AntDesign name="delete" size={24} color="black" />
+                   </Pressable>
+              </View>
+              </View>
+              </View>
+          </View>
+          
+            )
+        })
+    }
+      
   }
     
     return (
@@ -94,16 +174,7 @@ export default function DetailsScreen({ navigation }) {
         <View style={styles.containerPrincipal} >
             {itemsCarrito()}
         </View>
-        <View style= {styles.containerBotones} >
-               <View style={styles.containerBotonPagar}>
-                   <Pressable style={styles.botonPagar} onPress={()=> navigation.navigate("Factura")}>
-                        <Text style={styles.textPagar}> Pagar</Text>
-                    </Pressable>
-                </View>
-                <View style={styles.containerSubtotal}>
-                        <Text style={styles.textSubtotal}>Subtotal: L45.00</Text>
-                </View>    
-           </View>
+        <View>{cargarPago()}</View>
         </ScrollView>
         </SafeAreaView>
        
