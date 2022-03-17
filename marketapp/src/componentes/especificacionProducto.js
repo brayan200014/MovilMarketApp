@@ -3,13 +3,107 @@ import { useState } from 'react';
 import { StyleSheet, Text, View, Image, Button, Alert, Pressable} from 'react-native';
 import { AntDesign } from '@expo/vector-icons'; 
 import { NavigationContainer } from '@react-navigation/native';
+import AsyncStorage  from '@react-native-async-storage/async-storage';
 
-export default function App({navigation}) {
-  const [nombreProducto, setNombreProducto]= useState('hola');
+export default function App({route,navigation}) {
+
+  const {ProductoId, ProductoNombre}= route.params; 
+  const [nombreProducto, setNombreProducto]= useState(ProductoNombre);
   const [descripcionProducto, setDescripcion]= useState('hola');
-  const [IdProducto, setIdProducto]= useState(null);
+  const [IdProducto, setIdProducto]= useState(ProductoId);
   const encondedValue= encodeURIComponent(IdProducto);
-  const [cantidad, setCantidad]= useState(1);
+  const [cantidad, setCantidad]= useState((1));
+  const[cambio, setCambio]= useState(false);
+  const [ProductosArray, setProductosArray]= useState([]);
+
+    
+ 
+  const agregarCarrito= async () => {
+    
+      let boolean=false;
+      const getStorage= await AsyncStorage.getItem('ProductosArray');
+      console.log(getStorage);
+      const infoProducto= {
+        IdProducto: IdProducto,
+        NombreProducto: nombreProducto,
+        Cantidad: cantidad
+      }
+
+      const editar=JSON.parse(getStorage);
+      console.log(editar);
+      console.log("SEPARACION")
+     
+
+      if(!editar=="")
+    
+      {
+        console.log("ANTES DE ENTRAR")
+        for(let i=0; i<editar.length; i++) {
+          if(editar[i]['IdProducto']== infoProducto.IdProducto) {
+            editar[i]['Cantidad']= editar[i]['Cantidad'] + infoProducto.Cantidad;
+            boolean= true;
+            console.log(boolean);
+            console.log(editar[i]['Cantidad']);
+            console.log("Si entre"); 
+          }
+        }
+        if(boolean==true) {
+          const storeData= async (editar) => {
+            try {
+                const jsonValue= JSON.stringify(editar);
+                await AsyncStorage.setItem('ProductosArray', jsonValue);
+                const storage= await AsyncStorage.getItem('ProductosArray');
+                setCantidad(1);
+                console.log(storage);
+            } catch (error) {
+              console.log(error); 
+            }
+          }
+          storeData(editar);
+        }
+        else 
+        {
+          const nuevaInfo= [
+            infoProducto,
+            ...editar
+          ];
+  
+          const storeData= async (nuevaInfo) => {
+            try {
+              const jsonValue= JSON.stringify(nuevaInfo);
+              await AsyncStorage.setItem('ProductosArray', jsonValue);
+              const storage= await AsyncStorage.getItem('ProductosArray');
+              console.log(storage);
+              setCantidad(1);
+            } catch (error) {
+              console.log(error); 
+            }
+          }
+          storeData(nuevaInfo);
+        }
+       
+      }
+      else {
+      
+        const nuevaInfo= [
+          infoProducto
+        ];
+
+        const storeData= async (nuevaInfo) => {
+          try {
+            const jsonValue= JSON.stringify(nuevaInfo);
+            await AsyncStorage.setItem('ProductosArray', jsonValue);
+            const storage= await AsyncStorage.getItem('ProductosArray');
+            console.log(storage);
+            setCantidad(1);
+          } catch (error) {
+            console.log(error); 
+          }
+        }
+
+        storeData(nuevaInfo);
+      }
+  }
 
   const addCantidad= async () => {
       let add=cantidad+1;
@@ -32,7 +126,7 @@ export default function App({navigation}) {
      {
        try {
          const solicitud= await fetch(
-           'http://192.168.0.8:6001/api/productos/listarProducto?id=2',
+           'http://192.168.0.8:6001/api/productos/listarProducto?id='+encondedValue,
            {
              method: 'GET',
              headers: {
@@ -45,8 +139,8 @@ export default function App({navigation}) {
          const respuesta= await solicitud.json();
          const data= respuesta.data;
          setDescripcion(data.DescripcionProducto);
-         setNombreProducto(data.NombreProducto);
-         setIdProducto(data.IdProducto);
+        // setNombreProducto(data.NombreProducto);
+        // setIdProducto(data.IdProducto);
          console.log(respuesta);
          
        } catch (error) {
@@ -72,7 +166,7 @@ export default function App({navigation}) {
       </View>
       <View style= {styles.containerInformacion}>
         <View style={styles.containerNombreProducto}> 
-          <Text style= {styles.nombreProducto}>{nombreProducto}</Text>
+          <Text style= {styles.nombreProducto}>{ProductoNombre}</Text>
           <Text style= {styles.informacionProducto}>{descripcionProducto}</Text>
         </View>
        
@@ -91,7 +185,7 @@ export default function App({navigation}) {
             </View>
         </View>
         <View style={styles.containerBotonAgregar}>
-        <Pressable style={styles.botonAgregar} onPress={() => consultarProducto()}>
+        <Pressable style={styles.botonAgregar} onPress={() => agregarCarrito()}>
                 <View style={styles.containerTextoAgregar}>
                   <Text style={styles.textAgregar}>Agregar</Text>
                   <AntDesign name="shoppingcart" size={30} color="white" />
@@ -197,7 +291,7 @@ botonAgregar: {
   flex: 1,
   width: '40%',
   marginBottom: '20%',
-  borderRadius: 30,
+  borderRadius: 10,
   alignItems: 'center',
   
 },
