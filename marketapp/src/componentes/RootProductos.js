@@ -4,15 +4,14 @@ import Pantalla from './src/componentes/especificacionProducto';
 import { NavigationContainer } from '@react-navigation/native';
 import Nav from './src/Nav'
 import NavigatorPrincipal from "./src/NavigatorPrincipal";
-import NavigatiorDetails from "./src/NavigatorDetails";
+import NavigatorProductos from "../NavigatorProductos";
 
 export default function App() {
     
   return (
-   <NavigationContainer>
-     <NavigatorPrincipal/>
-   </NavigationContainer>
+   
+     <NavigatorProductos/>
+   
   );
 }
-
 
