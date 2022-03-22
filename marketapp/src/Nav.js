@@ -11,6 +11,7 @@ import NavigatorDetails from "./NavigatorDetails";
 import NavigatorProductos from "./NavigatorProductos";
 import { Badge }from 'react-native-paper';
 import {AsyncStorage,  useAsyncStorage } from '@react-native-async-storage/async-storage';
+import { useEffect, useState } from "react";
 
 
 const Tab= createBottomTabNavigator();
@@ -63,7 +64,7 @@ const Tabs= () =>{
                     
                    <View>
                         <Ionicons name="cart-sharp" size={30} color={color}></Ionicons>
-                        <Badge visible={true} style={styles.badgeStyle} size={15}>0</Badge>
+                        <Badge visible={true} style={styles.badgeStyle} size={15}>{0}</Badge>
                    </View>
                    
                     

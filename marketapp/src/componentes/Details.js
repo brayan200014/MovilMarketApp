@@ -1,8 +1,11 @@
 import * as React from 'react';
 import { View, Text, StyleSheet, Pressable, Image, SafeAreaView, ScrollView, StatusBar, RefreshControl} from 'react-native';
-import { AntDesign } from '@expo/vector-icons'; 
-import { useState, useEffect } from 'react';
+import { AntDesign, MaterialIcons, Feather } from '@expo/vector-icons'; 
+import { useState, useEffect, Component } from 'react';
 import {AsyncStorage,  useAsyncStorage } from '@react-native-async-storage/async-storage';
+import { Button } from 'react-native-paper';
+
+
 
 
 export default function DetailsScreen({ navigation }) {
@@ -16,11 +19,14 @@ export default function DetailsScreen({ navigation }) {
     const [IdProducto, setIdProducto]= useState(null);
     const encondedValue= encodeURIComponent(IdProducto);
    // const [cantidad, setCantidad]= useState(0);
-    const[productosCarrito, setProductosCarrito]= useState([]);
+    const[productosCarrito, setProductosCarrito]= useState([{}]);
     const {getItem,setItem}= useAsyncStorage('ProductosArray'); 
+    const [pagoListen, setPagoListen]= useState([{key:1}]);
+    const [refreshing, setRefreshing] = React.useState(false);
+    
 
     useEffect(() => {
-
+        
     })
 
 
@@ -63,6 +69,13 @@ const deleteProducto = async (id) => {
             getArray.splice(i,1); 
         }
     }
+    
+
+  /*  if(getArray=='') {
+        setPagoListen(getArray);
+        console.log("Wntre")
+    }*/
+
 
     await setItem(JSON.stringify(getArray));
     setProductosCarrito(JSON.parse(arrayProductos));
@@ -72,22 +85,30 @@ const deleteProducto = async (id) => {
   const cargarArreglo = async () => {
       const items= await getItem();
       const listado= JSON.parse(items);
-       setProductosCarrito(JSON.parse(items));
-     // console.log(listado); 
+      setProductosCarrito(JSON.parse(items));
     }
 
 
-  const cargarPago= () => {
-      let listado= [
-          {
-              key: 1
-          }
-      ];
+
+  
+   
+
+ const cargarPago= () => {
+      let listado= pagoListen;
 
       let arrayProductos= productosCarrito;
       let subtotal=0;
 
-      if(productosCarrito) {
+      if(arrayProductos==null || arrayProductos=='')
+      {
+        return listado.map((item) => {
+            return (
+                <View key={item.key} ></View>
+            )
+          })
+      }
+
+     else  if(arrayProductos) {
         for(var i=0; i<arrayProductos.length;i++) {
             subtotal+= arrayProductos[i]['Precio']*arrayProductos[i]['Cantidad'];
         }
@@ -105,27 +126,34 @@ const deleteProducto = async (id) => {
             </View>
             )
           })
-      }
-      
+      } 
+    
   }
 
-  const itemsCarrito =  () => {
+
+
+ const itemsCarrito =  () => {
     cargarArreglo();
     let list= productosCarrito;
     let listado=list;
-
-    if(!list)
+   
+     if(listado=='' || listado==null)
     {
         
         return (
-            <View>
-                <Text>Tu Carrito esta vacio</Text>
+            <View style={styles.containerEmptyCar}>
+               <Image source={require('./img/empty-cart.png')}></Image>
+               <Text style={styles.textEmptyCar}>Tu carrito de compras esta vacio </Text>
+               <Text style={styles.textEmptyCar}>Añade un producto a tu carrito</Text>
+               <Text style={styles.textRefresh}>Refresca deslizando sino aparece</Text>
             </View>
         )
     }
-    else 
+    else if(listado)
     {
-        return listado.map((item)=> {
+        
+        
+        return listado.map((item)=> { 
             return (
           <View key={item.IdProducto} style={styles.containerProducto}>
               <View style={styles.containerFilaPro}>
@@ -154,44 +182,61 @@ const deleteProducto = async (id) => {
               </View>
           </View>
           
-            )
-        })
-    }
+            
+        )})
+      
+    
+    } 
       
   }
-    
+
+  const wait = (timeout) => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+  }
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    cargarArreglo();
+    wait(500).then(() => setRefreshing(false));
+  }, []);
+
+ 
+ 
     return (
   
-    <SafeAreaView style={styles.safearea}>
-    <ScrollView style={styles.scrolli}
-         refreshControl={
-            <RefreshControl
-              
-            />
-          }
-    
-    >
-        <View style={styles.containerPrincipal} >
-            {itemsCarrito()}
-        </View>
-        <View>{cargarPago()}</View>
-        </ScrollView>
-        </SafeAreaView>
-       
-    );
+        <SafeAreaView style={styles.safearea}>
+        <ScrollView style={styles.scrolli}
+             refreshControl={
+                <RefreshControl
+                 refreshing={refreshing}
+                 onRefresh= {onRefresh}
+                />
+              }
+        
+        >
+            <View style={styles.containerPrincipal} >
+               {itemsCarrito()}
+               {cargarPago()}
+            </View>
+            </ScrollView>
+            </SafeAreaView>
+           
+        ); 
+  
+   
 }
 
 const styles= StyleSheet.create({
     safearea: {
         flex: 1,
         paddingTop: StatusBar.currentHeight,
-        backgroundColor: '#fff',
-        
-        
+        backgroundColor: '#fff'
+
     },
+
     scrolli: {
         flex: 1,
-        marginBottom: '15%'
+        marginBottom: '15%',
+        
     },
     containerPrincipal: {
         width: '100%',
@@ -293,7 +338,8 @@ containerBotones: {
     borderRadius: 20,
     borderWidth: 2,
     borderColor: '#F4F0E8',
-    marginLeft: '5%'
+    marginLeft: '5%',
+    
 },
 containerSubtotal: {
     flex: 1,
@@ -345,8 +391,20 @@ containerCantidadElegida: {
     width: '100%',
 
   },
+  containerEmptyCar: {
+      alignItems: 'center',
+      paddingTop: '30%'
+  },
   textPagar: {
       fontSize: 20,
       color: '#fff'
+  },
+  textEmptyCar: {
+      fontSize: 16,
+      paddingTop: '4%'
+  },
+  textRefresh: {
+      fontSize: 13,
+      paddingTop: '4%'
   }
 })

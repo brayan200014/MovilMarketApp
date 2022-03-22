@@ -17,12 +17,15 @@ export default function App({route,navigation}) {
   const [ProductosArray, setProductosArray]= useState([]);
   const [visible, setVisible]= useState(false);
 
+
     
  
   const agregarCarrito= async () => {
     
       let boolean=false;
       const getStorage= await AsyncStorage.getItem('ProductosArray');
+     //const pagoListen= await AsyncStorage.getItem('PagoListen');
+     // await AsyncStorage.setItem('PagoListen', JSON.stringify([{key:1}]));
       console.log(getStorage);
       const infoProducto= {
         IdProducto: IdProducto,
@@ -83,7 +86,7 @@ export default function App({route,navigation}) {
           }
           storeData(nuevaInfo);
         }
-       
+        
       }
       else {
       
@@ -93,6 +96,7 @@ export default function App({route,navigation}) {
 
         const storeData= async (nuevaInfo) => {
           try {
+           
             const jsonValue= JSON.stringify(nuevaInfo);
             await AsyncStorage.setItem('ProductosArray', jsonValue);
             const storage= await AsyncStorage.getItem('ProductosArray');
@@ -105,7 +109,8 @@ export default function App({route,navigation}) {
 
         storeData(nuevaInfo);
       }
-
+      
+     // await AsyncStorage.setItem('PagoListen', JSON.stringify(arrayPagoListen));
       setVisible(true);
   }
 
