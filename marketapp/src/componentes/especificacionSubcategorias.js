@@ -25,7 +25,7 @@ export default function DetailsScreen({ navigation }) {
                <Text style={styles.textProducto}>Agua Goascoran</Text>
                 <Text style={styles.textPrecio}>L 50.00</Text>
               <View style={styles.containerCantidadElegida}>
-                <Pressable onPress={()=> imprimir()}>
+                <Pressable onPress={()=> navigation.navigate('Productos',{ProductoId:1,ProductoNombre:"Bananas",PrecioProducto: 60})}>
                   <AntDesign name="pluscircleo" size={24} color="black" /></Pressable>
               </View>
               </View>
@@ -36,7 +36,7 @@ export default function DetailsScreen({ navigation }) {
                <Text style={styles.textProducto}>Jugo Sula</Text>
                 <Text style={styles.textPrecio}>L 15.00</Text>
               <View style={styles.containerCantidadElegida}>
-                <Pressable onPress={()=> imprimir()}>
+                <Pressable onPress={()=> navigation.navigate('Productos',{ProductoId:1,ProductoNombre:"Bananas",PrecioProducto: 60})}>
                   <AntDesign name="pluscircleo" size={24} color="black" /></Pressable>
               </View>
               </View>
@@ -51,7 +51,7 @@ export default function DetailsScreen({ navigation }) {
                <Text style={styles.textProducto}>Jugo Leyde</Text>
                 <Text style={styles.textPrecio}>L 50.00</Text>
               <View style={styles.containerCantidadElegida}>
-                <Pressable onPress={()=> imprimir()}>
+                <Pressable onPress={()=> navigation.navigate('Productos',{ProductoId:1,ProductoNombre:"Bananas",PrecioProducto: 60})}>
                   <AntDesign name="pluscircleo" size={24} color="black" /></Pressable>
               </View>
               </View>
@@ -62,7 +62,7 @@ export default function DetailsScreen({ navigation }) {
                 <Text style={styles.textProducto}>Vino</Text>
                 <Text style={styles.textPrecio}>L 15.00</Text>
               <View style={styles.containerCantidadElegida}>
-                <Pressable onPress={()=> imprimir()}>
+                <Pressable onPress={()=> navigation.navigate('Productos',{ProductoId:1,ProductoNombre:"Bananas",PrecioProducto: 60})}>
                   <AntDesign name="pluscircleo" size={20} color="black" /></Pressable>
               </View>
               </View>
@@ -77,7 +77,7 @@ export default function DetailsScreen({ navigation }) {
                <Text style={styles.textProducto}>Agua Dassani</Text>
                 <Text style={styles.textPrecio}>L 50.00</Text>
               <View style={styles.containerCantidadElegida}>
-                <Pressable onPress={()=> imprimir()}>
+                <Pressable onPress={()=> navigation.navigate('Productos',{ProductoId:1,ProductoNombre:"Bananas",PrecioProducto: 60})}>
                   <AntDesign name="pluscircleo" size={24} color="black" /></Pressable>
               </View>
               </View>
@@ -88,7 +88,7 @@ export default function DetailsScreen({ navigation }) {
                <Text style={styles.textProducto}>Gatorade</Text>
                 <Text style={styles.textPrecio}>L 15.00</Text>
               <View style={styles.containerCantidadElegida}>
-                <Pressable onPress={()=> imprimir()}>
+                <Pressable onPress={()=> navigation.navigate('Productos',{ProductoId:1,ProductoNombre:"Bananas",PrecioProducto: 60})}>
                   <AntDesign name="pluscircleo" size={24} color="black" /></Pressable>
               </View>
               </View>

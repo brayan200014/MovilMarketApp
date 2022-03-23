@@ -1,104 +1,71 @@
 import * as React from 'react';
-import { View, Text, StyleSheet, Pressable, Image, TextInput } from 'react-native';
+import { View, Text, StyleSheet, Pressable, Image, ScrollView, FlatList } from 'react-native';
 import { AntDesign } from '@expo/vector-icons'; 
+import { useState } from 'react';
 
 export default function DetailsScreen({ navigation }) {
-    const imprimir= () => {
-        console.log("Press")
-    }
+
+  const categoriasURL="http://192.168.0.100:6001/api/categorias/listar/"
+  const [categorias, setcategorias]= useState([]);
+  const cargar=async()=>{
+    await fetch(categoriasURL).then((response)=>response.json())
+    .then((json)=>{
+      setcategorias(json.categorias);
+    })
+  }
+  const consultarCategoria= async ()=>{
+      try {
+        const solicitud= await fetch(
+          'http://192.168.0.100:6001/api/categorias/listar/',
+          {
+            method: 'GET',
+            headers: {
+              Accept: 'application/json', 
+              'Content-Type': 'application/json'
+            }
+          }
+        )
+        
+        const json = await solicitud.json()
+        return(json[0].categorias)
+        cargar();
+        
+      } catch (error) {
+       
+       console.log(error);
+      }
+ }
+ const imprimir= () => {
+    console.log("Ho0pl");
+ }
+
+
     return (
         <View style={styles.containerPrincipal} >
 
-           <View style={styles.containerTitulo}>
-             <View style={styles.containerBack}>
-             <Image 
-                    style={styles.imagenusuario}
-                    source={require('./img/usuario.png')}
-                 ></Image>
-              <Text style={styles.textCarrito}>Hola Gabriela,</Text>
-              <Text style={styles.textCarrito}>Bienvenida</Text>
-            </View>
-           </View>
-           <View style={styles.contenedorbuscar}>
-              <TextInput
-                placeholder="Que desea comprar"
-                style={styles.entradas}>
-              </TextInput>
-            </View>
-           <View style={styles.containerProducto}>
-               <View style={styles.containerFilaPro}>
-               <View style={styles.containerImagen}>
-                    <Image 
-                    style={styles.imagen}
-                    source={require('./img/promos.png')}
-                 ></Image>
-                 <Text style={styles.textProducto}>Promociones</Text>
-               </View>
-               <View style={styles.containerImagen}>
-                    <Image 
-                    style={styles.imagen}
-                    source={require('./img/canasta.png')}
-                 ></Image>
-                 <Text style={styles.textProducto}>Canasta Basica</Text>
-               </View>
-               </View>
-           </View>
-           <View style={styles.containerProducto}>
-           <View style={styles.containerFilaPro}>
-               <View style={styles.containerImagen}>
-                    <Image 
-                    style={styles.imagen}
-                    source={require('./img/bebidas.png')}
-                 ></Image>
-                 <Text style={styles.textProducto}>Juego y bebidas</Text>
-               </View>
-               <View style={styles.containerImagen}>
-                    <Image 
-                    style={styles.imagen}
-                    source={require('./img/carnes.png')}
-                 ></Image>
-                 <Text style={styles.textProducto}>Carnes y embutidos</Text>
-               </View>
-               </View>
-           </View>
-           <View style={styles.containerProducto}>
-           <View style={styles.containerFilaPro}>
-               <View style={styles.containerImagen}>
-                    <Image 
-                    style={styles.imagen}
-                    source={require('./img/lacteos.png')}
-                 ></Image>
-                 <Text style={styles.textProducto}>Lacteos</Text>
-               </View>
-               <View style={styles.containerImagen}>
-                    <Image 
-                    style={styles.imagen}
-                    source={require('./img/frutas.png')}
-                 ></Image>
-                 <Text style={styles.textProducto}>Frutas y verduras</Text>
-               </View>
-               </View>
-           </View>
-           <View style={styles.containerProducto}>
-           <View style={styles.containerFilaPro}>
-               <View style={styles.containerImagen}>
-                    <Image 
-                    style={styles.imagen}
-                    source={require('./img/hogar.jpg')}
-                 ></Image>
-                 <Text style={styles.textProducto}>Cuidado Personal</Text>
-               </View>
 
-
-               <View style={styles.containerImagen}>
-                    <Image 
-                    style={styles.imagen}
-                    source={require('./img/limpieza.png')}
-                 ></Image>
-                 <Text style={styles.textProducto}>Cuidado del hogar</Text>
-               </View>
-               </View>
+            <View style={styles.containerTitulo}>
+              <View style={styles.containerBack}>
+                <Pressable onPress={()=> consultarCategoria}>
+              <Image 
+                      style={styles.imagenusuario}
+                      source={require('./img/usuario.png')}
+                  ></Image></Pressable>
+                <Text style={styles.textCarrito}>Hola Gabriela,</Text>
+                <Text style={styles.textCarrito}>Bienvenida</Text>
+              </View>
            </View>
+
+          <ScrollView>
+            {
+              people.map(item =>(
+              <View key={item.IdCategoria}>
+                <Text style={styles.item}>{item.NombreCategoria}</Text>
+              </View>
+              ))
+            }
+          </ScrollView>
+
         </View>
     );
 }
@@ -190,20 +157,25 @@ imagenusuario: {
   width: 50,
   height: 50
 },
-entradas:{
-  flex:1,
-  alignItems:"stretch",
-  margin:10,
-  padding:10,
+
+item:{
+  backgroundColor: '#B3E5FC',
+  marginTop: 24,
+  padding:30,
+  fontSize:24,
+  marginHorizontal:10,
+  marginTop: 24,
+},
+imagen: {
+  margin: 0,
+  width: 70,
+  height: 70,
+  alignItems:'center',
+},
+name:{
   fontSize: 20,
-  fontWeight:"400",
-  color: "#495057",
-  backgroundColor:"#fff",
-  borderWidth:1,
-  borderStyle:"solid",
-  borderColor: "#ced4da",
-  borderRadius: 15,
-  textAlign:'center'
+  color: '#000',
+  paddingHorizontal: '1%'
 }
 
 })
