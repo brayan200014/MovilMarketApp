@@ -1,10 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
-import React, {useState, useEffect} from 'react';
-import { ActivityIndicator, StyleSheet, Text, TextInput, View, Alert, ImageBackground, Dimensions,Image, KeyboardAvoidingView,
-    TouchableWithoutFeedback, Keyboard } from 'react-native';
+import React, {useState,useContext, useEffect, Component} from 'react';
+import { ActivityIndicator, StyleSheet, Text, TextInput, View, Alert, ImageBackground, Dimensions,Image } from 'react-native';
 import AsyncStorage  from '@react-native-async-storage/async-storage';
 import * as Font from 'expo-font';
-
 
 /*//Para las fuentes
 const customFonts = {
@@ -13,8 +11,6 @@ const customFonts = {
   'Nunito-ExtraBold': require('./assets/fonts/Nunito-ExtraBold.ttf'),
   'Nunito-SemiBold': require('./assets/fonts/Nunito-SemiBold.ttf'),
 };
-
-
 Importando Pantallas
 import Onboarding from './src/screen/Onboarding';
 import Login from './src/screen/Login';
@@ -27,16 +23,16 @@ const {width, height} = Dimensions.get('window');
 
 //import Input from './src/componentes/Input';
 import Button from '../componentes/Button';
-
+import { useNavigation } from '@react-navigation/native';
 const title = '¡Bienvenido(a) de Vuelta!';
 const tip = 'Debe Iniciar Sesión para continuar';
 const signup = 'Nuevo Usuario? Registrate';
 const terms = 'Para registrarse, debe indicar que esta de acuerdo con los términos';
 
+export default function App () {
 
-export default function App({navigation}) {
-
-  const [Correo, setCorreo]= useState(null);
+  const navigation = useNavigation(); 
+  const [Correo, setCorreo]=  useState(null);
   const [Contrasena, setContrasena]= useState(null);
   const presIniciarSesion= async () => {
     console.log(Correo);
@@ -48,13 +44,12 @@ export default function App({navigation}) {
       else 
       { 
         try {
-              const respuesta= await fetch(
-                'http://192.168.1.5:4001/api/autenticacion/iniciosesion',
-                {
-                    method: 'POST',
+              const respuesta= await fetch("http://192.168.1.5:5001/api/autenticacion/iniciosesion",
+              {
+                    method: "POST",
                     headers: {
-                        Accept: 'application/json',
-                        'Content-Type': 'application/json'
+                        Accept: "application/json",
+                        "Content-Type": "application/json"
                     },
                     body: JSON.stringify({
                         Correo: Correo,
@@ -62,17 +57,17 @@ export default function App({navigation}) {
                     })
                 }  
               );
-
               const json = await respuesta.json();
               console.log(json);
-              const data= json.data;
+              const data= json.data ;
               if(!data.token) {
-                const token=data.token;
+              const token= data.token;
                 console.log(token);
-                await AsyncStorage.setItem('Token',token);
+                await AsyncStorage.setItem("Token", token);
               }
               Alert.alert("Bienvenido(a)", "Escoge tus Productos");
               navigation.navigate('Root');
+              
           } catch(error) {
               console.log(error);
           }
@@ -81,17 +76,19 @@ export default function App({navigation}) {
   const presToken= async ()=> {
     try {
       const token= await AsyncStorage.getItem('Token');
-      console.log( token);
+      console.log(token);
       Alert.alert("Supermarket", token);
-      
+        
     } catch (error) {
       console.error(error);
     }
   }
+  const cerrarSesion = async () =>{
+    await AsyncStorage.removeItem('Token');
+    console.log("Sesion Cerrada");
+    Alert.alert("MEDI", "Sesion Cerrada");
+  };
   return (
-     <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={styles.keyboardStyle}>
-  <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
             <ImageBackground source={require('../../assets/image/background7.png')} style={{width: width, height: height}}>
                 <View style={styles.darkLayer}></View>
@@ -147,14 +144,9 @@ export default function App({navigation}) {
                 </View>
             </ImageBackground>
         </View>
-        </TouchableWithoutFeedback>
-        </KeyboardAvoidingView> 
     );
   } 
   const styles = StyleSheet.create({
-      keyboardStyle: {
-          flex: 1
-      },
     container:{
         flex: 1,
         flexDirection: 'row',

@@ -10,7 +10,7 @@ import EspecificaionCategorias from "./componentes/especificacionCategorias"
 import NavigatorDetails from "./NavigatorDetails";
 import NavigatorProductos from "./NavigatorProductos";
 import { NavigationContainer } from "@react-navigation/native";
-import settingsStackScreen from "../settingsScreen";
+import NavigatorSetting from "./NavigatorSetting";
 
 const Tab= createBottomTabNavigator();
 const HomeStack= createNativeStackNavigator();
@@ -62,7 +62,7 @@ const Tabs= ()=>{
             }
             > 
                 </Tab.Screen>
-            <Tab.Screen name="Settings" component={settingsStackScreen}
+            <Tab.Screen name="Settings" component={NavigatorSetting}
              options={
                 {
                    tabBarIcon: ({color, size}) => (

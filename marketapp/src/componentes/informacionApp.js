@@ -7,9 +7,6 @@ export default class Infor extends Component  {
   render(){
     return(
       <View>
-        <View style={styles.mainContainer}>
-          <Text style={styles.textTitulo}>Información</Text>
-      </View>
       <View style={styles.contorno}>
 
       <Text style={styles.textStyle}>Super Mercado 1801</Text>
@@ -25,28 +22,22 @@ export default class Infor extends Component  {
 const styles = StyleSheet.create({
 contorno:{
 backgroundColor:'#F2D7EF',
-marginTop:10,
+marginTop:110,
 marginLeft:15,
 marginRight:15,
 borderRadius:30,
 borderWidth: 2,
 shadowColor: '#480000',
-shadowOffset: {width: 0, height: 2},
+shadowOffset: {width: 0, height: 1},
 shadowOpacity: 0.5,
-elevation: 5
+elevation: 4
 },
   principal:{
     color:'#091114',
-    padding: 30,
+    padding: 20,
     fontSize: 17,
-    margin: 15,
+    margin: 10,
     textAlign:'justify'
-  },
-  mainContainer:{
-    marginTop:10,
-    backgroundColor:'#3EA5DB',
-    height: 40,
-    borderRadius:15
   },
   textStyle:{
     color:'#091114',
@@ -63,8 +54,9 @@ elevation: 5
   },
   logo: {
     width: 400,
-    height: 150,
+    height: 170,
     resizeMode:'contain',
-    justifyContent: 'center',
+    alignContent:'center',
+    marginLeft:-10
   }
 });

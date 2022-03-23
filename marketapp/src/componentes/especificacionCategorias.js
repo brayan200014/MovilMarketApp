@@ -5,7 +5,12 @@ import { AntDesign } from '@expo/vector-icons';
 export default function DetailsScreen({ navigation }) {
     const imprimir= () => {
         console.log("Press")
+
+        AsyncStorage.getItem('token', (err, result) => {
+          console.log(result);
+        });
     }
+  
     return (
         <View style={styles.containerPrincipal} >
 

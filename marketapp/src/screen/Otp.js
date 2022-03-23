@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, StyleSheet, Image, ImageBackground, Dimensions } from 'react-native';
-import { RadioGroup,RadioButton} from 'react-native-flexi-radio-button';
+//import { RadioGroup,RadioButton} from 'react-native-flexi-radio-button';
 
 const {width, height} = Dimensions.get('window');
 

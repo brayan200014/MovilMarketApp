@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react'
 import {View,Text,TextInput, SafeAreaView,TouchableOpacity,StyleSheet} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import {useTheme, Title,Caption,} from 'react-native-paper';
 
+ //<const {colors} = useTheme();>
+  class EdicionPerfil extends Component {
 
-const EdicionPerfil = () => {
-  const {colors} = useTheme();
+  render() {  
+
   return (
     <View >
       <View style={styles.seccion}>
@@ -15,7 +17,7 @@ const EdicionPerfil = () => {
       </View>
       </View>
       <View style={styles.action}>
-          <FontAwesome name="user-o" color={colors.text} size={30} />
+          <FontAwesome name="user-o" size={30} />
           <TextInput
             placeholder="Nombre:"
             placeholderTextColor="#666666"
@@ -23,14 +25,14 @@ const EdicionPerfil = () => {
             style={[
               styles.textInput,
               {
-                color: colors.text,
+                
               },
             ]}
           />
         </View>
 
       <View style={styles.action}>
-      <FontAwesome name="user-o" color={colors.text} size={30} />
+      <FontAwesome name="user-o" size={30} />
       <TextInput
         placeholder="Apellido:"
         placeholderTextColor="#666666"
@@ -38,13 +40,13 @@ const EdicionPerfil = () => {
         style={[
           styles.textInput,
           {
-            color: colors.text,
+            //color: colors.text,
           },
         ]}
       />
       </View>
       <View style={styles.action}>
-      <FontAwesome name="user-o" color={colors.text} size={30} />
+      <FontAwesome name="user-o" size={30} />
       <TextInput
         placeholder="Usuario:"
         placeholderTextColor="#666666"
@@ -52,13 +54,13 @@ const EdicionPerfil = () => {
         style={[
           styles.textInput,
           {
-            color: colors.text,
+            //color: colors.text,
           },
         ]}
       />
       </View>
       <View style={styles.action}>
-          <Feather name="phone" color={colors.text} size={30} />
+          <Feather name="phone"size={30} />
           <TextInput
             placeholder="Teléfono:"
             placeholderTextColor="#666666"
@@ -67,13 +69,13 @@ const EdicionPerfil = () => {
             style={[
               styles.textInput,
               {
-                color: colors.text,
+                //color: colors.text,
               },
             ]}
           />
         </View>
         <View style={styles.action}>
-          <FontAwesome name="lock" color={colors.text} size={30}/>
+          <FontAwesome name="lock" size={30}/>
           <TextInput
             placeholder="Contraseña:"
             placeholderTextColor="#666666"
@@ -85,7 +87,7 @@ const EdicionPerfil = () => {
             style={[
               styles.textInput,
               {
-                color: colors.text,
+                //color: colors.text,
               },
             ]}
           />
@@ -100,22 +102,24 @@ const EdicionPerfil = () => {
     </View>
    
   );
-};
-export default EdicionPerfil;
+}
+  }
+export default EdicionPerfil
 
 const styles = StyleSheet.create({
   name:{
       color:"#FFFFFF",
       fontSize:18,
-      marginLeft:110,
+      marginLeft:20
   },
   seccion:{
-   margin:10,
-    backgroundColor: "#3EA5DB",
+    backgroundColor: "#2874A6",
     height:50,
-    borderRadius:30,
+    width:200,
     justifyContent:'center',
-    marginTop:25
+    marginTop:120,
+    borderColor:'#828282',
+    borderWidth:2
   },
   seccion2:{
     backgroundColor:"#FF6347",
@@ -128,11 +132,11 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     backgroundColor: '#2874A6',
     alignItems: 'center',
-    marginTop: 5,
+    marginTop: 50,
     marginLeft:20,
     marginRight:20,
     borderWidth:2,
-    borderColor:'#FF5733'
+    borderColor:'#828282'
   },
   Sbutton: {
     backgroundColor:'#3EA5DB',
