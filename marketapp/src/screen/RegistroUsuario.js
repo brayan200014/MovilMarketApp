@@ -77,19 +77,33 @@ export default function Usuario({navigation}) {
              onChangeText={newText => setNombreUsuario(newText)}
               placeholder="Escriba nombre de usuario">
             </TextInput>
-            
+           
             <TextInput style={styles.inputCorreo}
             onChangeText={newText => setCorreo(newText)}
               placeholder="Escriba su correo electrónico">
             </TextInput>
 
+            <TextInput style={styles.inputTelefono}
+              placeholder="Escriba su número de telefono">
+            </TextInput>
+
+            <TextInput style={styles.inputDireccion}
+              placeholder="Escriba su Dirección">
+            </TextInput>
+
             <TextInput style={styles.inputContra} passwordRules=""
+             secureTextEntry={true}
               onChangeText={newText => setContrasena(newText)}
               placeholder="Escriba una contraseña">
             </TextInput>
 
+            <TextInput style={styles.inputConfirmContra} passwordRules=""
+             secureTextEntry={true}
+              placeholder="Escriba confirme su contraseña">
+            </TextInput>
+
           </View>
-            <View style={{marginTop:60, justifyContent:'center', alignItems:'center'}}>
+            <View style={{marginTop:200, justifyContent:'center', alignItems:'center'}}>
                 <Button text="Guardar"
                     onPress={presGuardarUsuario}
                 />
@@ -113,12 +127,14 @@ const styles = StyleSheet.create({
         opacity: 0.4
     },
     logo:{
-        marginTop: 75,
+        marginTop: 30,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        
+    
     },
     title:{
-        marginTop: 50,
+        marginTop: 10,
         justifyContent: 'center',
         alignItems: 'center'
     },
@@ -200,7 +216,25 @@ const styles = StyleSheet.create({
         height: 40, 
         paddingLeft:60, 
         paddingRight:60,
-        marginTop: 60,  
+        marginTop: 190,  
+        borderRadius:15,
+        textAlign: 'center'
+    },
+    inputTelefono:{
+        backgroundColor: '#fff', 
+        height: 40, 
+        paddingLeft:60, 
+        paddingRight:60,
+        marginTop: 190,  
+        borderRadius:15,
+        textAlign: 'center'
+    },
+    inputDireccion:{
+        backgroundColor: '#fff', 
+        height: 40, 
+        paddingLeft:60, 
+        paddingRight:60,
+        marginTop: 190,  
         borderRadius:15,
         textAlign: 'center'
     },
@@ -209,7 +243,16 @@ const styles = StyleSheet.create({
         height: 40, 
         paddingLeft:60, 
         paddingRight:60, 
-        marginTop: 60, 
+        marginTop: 190, 
+        borderRadius: 15,
+        textAlign: 'center'
+    },
+    inputConfirmContra: {
+        backgroundColor: '#fff', 
+        height: 40, 
+        paddingLeft:60, 
+        paddingRight:60, 
+        marginTop: 190, 
         borderRadius: 15,
         textAlign: 'center'
     },
@@ -218,7 +261,7 @@ const styles = StyleSheet.create({
         height: 40, 
         paddingLeft:60, 
         paddingRight:60, 
-        marginTop: 40, 
+        marginTop: 165, 
         textAlign: 'center',
         borderRadius: 15
     }

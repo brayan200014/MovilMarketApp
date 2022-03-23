@@ -87,7 +87,8 @@ export default function CambioContra({navigation}) {
 
         
 
-            <TextInput style={styles.inputContra} 
+            <TextInput style={styles.inputContra} passwordRules=""
+              secureTextEntry={true}
               onChangeText={newText => setcontraseniaNueva(newText)}
               placeholder="Escriba su nueva contraseña">
             </TextInput>
