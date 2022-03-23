@@ -5,32 +5,14 @@ import AsyncStorage  from '@react-native-async-storage/async-storage';
 import * as Font from 'expo-font';
 
 
-/*//Para las fuentes
-const customFonts = {
-  'CircularStdBold': require('./assets/fonts/CircularStdBold.ttf'),
-  'Nunito-Bold': require('./assets/fonts/Nunito-Bold.ttf'),
-  'Nunito-ExtraBold': require('./assets/fonts/Nunito-ExtraBold.ttf'),
-  'Nunito-SemiBold': require('./assets/fonts/Nunito-SemiBold.ttf'),
-};
-
-
-Importando Pantallas
-import Onboarding from './src/screen/Onboarding';
-import Login from './src/screen/Login';
-import ForgetPassword from './src/screen/ForgetPassword';
-import Otp from './src/screen/Otp';
-import  Email from './src/screen/Email';*/
-
-
 const {width, height} = Dimensions.get('window');
 
-//import Input from './src/componentes/Input';
 import Button from '../componentes/Button';
 
-const title = '¡Bienvenido(a) de Vuelta!';
-const tip = 'Debe Iniciar Sesión para continuar';
-const signup = 'Nuevo Usuario? Registrate';
-const terms = 'Para registrarse, debe indicar que esta de acuerdo con los términos';
+const title = '¡Bienvenido(a)!';
+const tip = 'Debes Iniciar Sesión para continuar';
+const signup = '¿Nuevo Usuario? Registrate';
+const terms = 'Al registrarse usted esta de acuerdo con todas nuestros términos y condiciones';
 
 
 export default function App({navigation}) {
@@ -42,13 +24,13 @@ export default function App({navigation}) {
     console.log(Contrasena);
       if(!Correo || !Contrasena) {
           console.log("Escriba los datos completos");
-          Alert.alert("Estimado","Escriba los datos completos");
+          Alert.alert("¡Estimado Usuario!","Por favor, escriba los datos completos");
       }
       else 
       { 
         try {
               const respuesta= await fetch(
-                'http://192.168.0.8:6001/api/autenticacion/iniciosesion',
+                'http://192.168.1.5:6001/api/autenticacion/iniciosesion',
                 {
                     method: 'POST',
                     headers: {
@@ -70,7 +52,7 @@ export default function App({navigation}) {
                 console.log(token);
                 await AsyncStorage.setItem('Token',token);
               }
-              Alert.alert("Bienvenido(a)", "Escoge tus Productos");
+              Alert.alert("Bienvenido(a) a Supermarket", "Escoge tus Productos");
               navigation.navigate('Root');
           } catch(error) {
               console.log(error);
@@ -85,8 +67,10 @@ export default function App({navigation}) {
       
     } catch (error) {
       console.error(error);
+      
     }
   }
+  
   return (
         <View style={styles.container}>
             <ImageBackground source={require('../../assets/image/background7.png')} style={{width: width, height: height}}>
@@ -100,6 +84,7 @@ export default function App({navigation}) {
                 <View style={styles.tip}>
                     <Text style={styles.tipText}>{tip}</Text>
                 </View>
+                
                 <View style={styles.input}>
             <TextInput style={styles.inputCorreo}
                 onChangeText={newText => setCorreo(newText)}
@@ -111,18 +96,6 @@ export default function App({navigation}) {
                 onChangeText={newText => setContrasena(newText)}
               placeholder="Escriba su contraseña">
             </TextInput>
-            
-            {/*<TextInput icon={require('./assets/image/iconoEmail.png')}
-                onChangeText={newText => setCorreo(newText)}
-              placeholder="Escriba su correo electrónico">
-            </TextInput>
-            <View style={{paddingTop: 18}}></View>
-            <TextInput icon={require('./assets/image/passport.png')}
-                onChangeText={newText => setContrasena(newText)}
-              placeholder="Escriba su contraseña"
-              passwordRules=""
-              secureTextEntry={true}>
-            </TextInput>*/}
 
           </View>
                 <View style={styles.remember}>
@@ -166,18 +139,18 @@ export default function App({navigation}) {
         opacity: 0.4
     },
     logo:{
-        marginTop: 85,
+        marginTop: 95,
         justifyContent: 'center',
         alignItems: 'center'
     },
     title:{
-        marginTop: 59,
+        marginTop: 49,
         justifyContent: 'center',
         alignItems: 'center'
     },
     titleText:{
         color: '#FFFFFF',
-        //fontFamily: 'Nunito-ExtraBold',
+        fontFamily: 'Nunito-ExtraBold',
         fontSize:22
     },
     tip:{
@@ -188,7 +161,7 @@ export default function App({navigation}) {
     },
     tipText:{
         color: '#FFFFFF',
-        //fontFamily: 'Nunito-SemiBold',
+        fontFamily: 'Nunito-SemiBold',
         fontSize: 17
     },
     input: {
@@ -199,7 +172,7 @@ export default function App({navigation}) {
         alignSelf: 'center',
         borderColor: '#FFFFFF',
         color: '#727C8E',
-        //fontFamily: 'Nunito-SemiBold',
+        fontFamily: 'Nunito-SemiBold',
         fontWeight: '500',
         fontSize: 12,
         paddingLeft: 0,
@@ -216,50 +189,55 @@ export default function App({navigation}) {
     },
     rememberText:{
         color: '#FFFFFF',
-        //fontFamily: 'Nunito-SemiBold',
-        fontSize: 12
+        fontFamily: 'Nunito-Bold',
+        fontSize: 12,
+        
     },
     forgotText:{
         color: '#FFFFFF',
-        //fontFamily: 'Nunito-SemiBold',
-        fontSize: 12
+        fontFamily: 'Nunito-Bold',
+        fontSize: 12,
+        marginLeft:20
     },
     signup:{
-        marginTop:113,
+        marginTop:-610,
+        marginLeft:180,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: '#F7D35C',
+        borderRadius: 8
     },
     signupText: {
-        color: '#2A67CA',
-        //fontFamily: 'Nunito-SemiBold',
-        fontSize: 12
+        color: '#000000',
+        fontFamily: 'Nunito-Bold',
+        fontSize: 14
     },
     terms:{
-        marginTop: 52,
-        marginRight: 80,
-        marginLeft: 80,
+        marginTop: 600,
+        marginRight: 90,
+        marginLeft: 90,
         justifyContent: 'center',
         alignItems: 'center'
     },
     termsText:{
         color: '#FFFFFF',
-        //fontFamily: 'Nunito-SemiBold',
-        fontSize: 10,
+        fontFamily: 'Nunito-SemiBold',
+        fontSize: 11,
         textAlign: 'center'
     },
     inputCorreo: {
         backgroundColor: '#fff', 
         height: 40, 
-        paddingLeft:20, 
-        paddingRight:20, 
+        paddingLeft:60, 
+        paddingRight:60, 
         borderRadius:15,
     },
     inputContra: {
         backgroundColor: '#fff', 
         height: 40, 
-        paddingLeft:20, 
-        paddingRight:20, 
-        marginTop: 7, 
+        paddingLeft:60, 
+        paddingRight:60, 
+        marginTop: 12, 
         borderRadius: 15
     }
 });

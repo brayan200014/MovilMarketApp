@@ -1061,6 +1061,11 @@
     "exec-sh" "^0.3.2"
     "minimist" "^1.2.0"
 
+"@dietime/react-native-date-picker@^1.2.0":
+  "integrity" "sha512-hFd1OUlVeJLpRZ//B99mfB4G8UYGpXOIL1KNG3SNByLS7o5gEtnlXp6Pk7B4/mz2an6t+T6UBaF4tqye0tBzdw=="
+  "resolved" "https://registry.npmjs.org/@dietime/react-native-date-picker/-/react-native-date-picker-1.2.0.tgz"
+  "version" "1.2.0"
+
 "@expo/config-plugins@^4.0.2", "@expo/config-plugins@4.0.6":
   "integrity" "sha512-K/KQaw/CU8uLQgk7sFnZC54YGHoGucKFfdjYeZx5ds2eyzbuMAiKzGFcxZ/S+1dVBZ8QHzwowsVBW3kuYhnQ3Q=="
   "resolved" "https://registry.npmjs.org/@expo/config-plugins/-/config-plugins-4.0.6.tgz"
@@ -1383,6 +1388,13 @@
     "strip-ansi" "^5.2.0"
     "sudo-prompt" "^9.0.0"
     "wcwidth" "^1.0.1"
+
+"@react-native-community/datetimepicker@4.0.0":
+  "integrity" "sha512-q3JfDHX5PI0AxFeMsB6jcHSXODloXAqBVsOfkIvm+YbAe1TUs/xZ3qGazsKVBk9EdFyHO4k+S1Q8tQkEnk2YrQ=="
+  "resolved" "https://registry.npmjs.org/@react-native-community/datetimepicker/-/datetimepicker-4.0.0.tgz"
+  "version" "4.0.0"
+  dependencies:
+    "invariant" "^2.2.4"
 
 "@react-native/assets@1.0.0":
   "integrity" "sha512-KrwSpS1tKI70wuKl68DwJZYEvXktDHdZMG0k2AXD/rJVSlB23/X2CB2cutVR0HwNMJIal9HOUOBB2rVfa6UGtQ=="
@@ -2591,6 +2603,11 @@
   "integrity" "sha512-Ro1lgyKldbFs4mxhWM+goX9sg0S2SRR8FiJJeOvaRzf8xNhrZfWA00Zpr+/3ocCoWQ3eEL+X9UF4PXXHf0KoOg=="
   "resolved" "https://registry.npmjs.org/expo-keep-awake/-/expo-keep-awake-10.0.2.tgz"
   "version" "10.0.2"
+
+"expo-linear-gradient@^11.0.3", "expo-linear-gradient@^8.4.0":
+  "integrity" "sha512-LuzTM5+iEHCQfC2TBHAAI+ZjPvf0TvGiA7GYMsyTnakGA2r4JtsV8Ah/miQPKhfG06jLDOo4grUoSMGqbmSrEw=="
+  "resolved" "https://registry.npmjs.org/expo-linear-gradient/-/expo-linear-gradient-11.0.3.tgz"
+  "version" "11.0.3"
 
 "expo-modules-autolinking@0.5.5":
   "integrity" "sha512-bILEG0Fg+ZhIhdEaShHzsEN1WC0hUmXJ5Kcd4cd+8rVk1Ead9vRZxA/yLx1cNBDCOwMe0GAMrhF7TKT+A1P+YA=="
