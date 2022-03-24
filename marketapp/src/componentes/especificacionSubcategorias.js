@@ -79,11 +79,10 @@ export default function DetailsScreen({ navigation }) {
             <View style={styles.containerImagen}>
               <Image style={styles.imagen}source={require('./img/bebidas.png')}></Image>
                <View style={styles.containerInfo}>
-               
-               <Text style={styles.textProducto}>Agua Goascoran</Text>
+               <Text style={styles.textProducto}>Jugo Leyde</Text>
                 <Text style={styles.textPrecio}>L 50.00</Text>
               <View style={styles.containerCantidadElegida}>
-                <Pressable onPress={()=> navigation.navigate('Productos', {ProductoId: 2, ProductoNombre: "Bananas",PrecioProducto: 60})}>
+                <Pressable onPress={()=> imprimir()}>
                   <AntDesign name="pluscircleo" size={24} color="black" /></Pressable>
               </View>
               </View>
@@ -91,16 +90,43 @@ export default function DetailsScreen({ navigation }) {
             <View style={styles.containerImagen}>
               <Image style={styles.imagen}source={require('./img/bebidas.png')}></Image>
                <View style={styles.containerInfo}>
-               <Text style={styles.textProducto}>Jugo Sula</Text>
+                <Text style={styles.textProducto}>Vino</Text>
                 <Text style={styles.textPrecio}>L 15.00</Text>
               <View style={styles.containerCantidadElegida}>
                 <Pressable onPress={()=> imprimir()}>
-                  <AntDesign name="pluscircleo" size={24} color="black" padding='-10'/></Pressable>
+                  <AntDesign name="pluscircleo" size={20} color="black" /></Pressable>
               </View>
               </View>
             </View>
           </View>
         </View>
+        <View style={styles.containerProducto}>
+          <View style={styles.containerFilaPro}>
+            <View style={styles.containerImagen}>
+              <Image style={styles.imagen}source={require('./img/bebidas.png')}></Image>
+               <View style={styles.containerInfo}>
+               <Text style={styles.textProducto}>Agua Dassani</Text>
+                <Text style={styles.textPrecio}>L 50.00</Text>
+              <View style={styles.containerCantidadElegida}>
+                <Pressable onPress={()=> imprimir()}>
+                  <AntDesign name="pluscircleo" size={24} color="black" /></Pressable>
+              </View>
+              </View>
+            </View>
+            <View style={styles.containerImagen}>
+              <Image style={styles.imagen}source={require('./img/bebidas.png')}></Image>
+               <View style={styles.containerInfo}>
+               <Text style={styles.textProducto}>Gatorade</Text>
+                <Text style={styles.textPrecio}>L 15.00</Text>
+              <View style={styles.containerCantidadElegida}>
+                <Pressable onPress={()=> imprimir()}>
+                  <AntDesign name="pluscircleo" size={24} color="black" /></Pressable>
+              </View>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View style={{marginBottom: '10%'}}></View>
       </View>
     );
 }
@@ -123,36 +149,35 @@ containerTitulo : {
     marginTop: '0%'
 },
 containerProducto: {
-    flex: 1, 
-    marginLeft: '4%',
-    marginRight: '4%',
-    padding:10,
+  flex: 1, 
+  marginLeft: '4%',
+  marginRight: '4%',
+  padding: -1
 },
 containerFilaPro: {
-    flex:1,
-    width: '100%', 
-    alignItems: 'center', 
-    flexDirection: 'row',
-    marginTop: -30,
-
+  flex:1,
+  width: '100%', 
+  alignItems: 'center', 
+  flexDirection: 'row',
+  backgroundColor: '#fff',
 },
 containerImagen: {
-    flex:1, 
-    alignItems: 'center',
-    backgroundColor: '#B3E5FC',
-    justifyContent: 'center',
-    borderRadius: 30,
-    height: '80%',
-    paddingBottom:-30,
-    margin:10
+  flex:1, 
+  alignItems: 'center',
+  backgroundColor: '#B3E5FC',
+  justifyContent: 'center',
+  borderRadius: 30,
+  height: '80%',
+  margin:10,
+  paddingBottom:-30
 },
 imagen: {
-    margin: 0,
-    width: 70,
-    height: 70
+  margin: 3,
+  width: 70,
+  height: 70
 },
 containerInfo: {
-  paddingBottom:-30,
+    paddingBottom:-30,
     flex:1, 
     flexDirection: 'column',
     alignItems: 'center',
@@ -160,7 +185,6 @@ containerInfo: {
     height: '80%',
     marginLeft: '2%',
     textAlign:'left',
-    
 },
 textProducto: {
     fontSize: 18,

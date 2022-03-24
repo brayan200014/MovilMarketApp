@@ -56,19 +56,19 @@ export default function DetailsScreen({ navigation }) {
             <View style={styles.containerProducto} >
                <View style={styles.containerFilaPro}>
                <View style={styles.containerImagen}>
-                 
+               <Pressable onPress={()=>navigation.navigate('Subcategorias')}>
                     <Image 
                     style={styles.imagen}
                     source={require('./img/lacteos.png')}
-                 ></Image>
+                 ></Image></Pressable>
                  <Text style={styles.textProducto}>Lacteos</Text>
                </View>
                <View style={styles.containerImagen}>
-               
+               <Pressable onPress={()=>navigation.navigate('Subcategorias')}>
                     <Image 
                     style={styles.imagen}
                     source={require('./img/bebidas.png')}
-                 ></Image>
+                 ></Image></Pressable>
                  <Text style={styles.textProducto}>Fefrescos</Text>
                </View>
                </View>
@@ -76,16 +76,20 @@ export default function DetailsScreen({ navigation }) {
            <View style={styles.containerProducto} >
                <View style={styles.containerFilaPro}>
                <View style={styles.containerImagen}>
-                 
+                <Pressable onPress={()=>navigation.navigate('Subcategorias')}>
                     <Image 
                     style={styles.imagen}
                     source={require('./img/frutas.png')}
-                 ></Image>
+                 ></Image></Pressable>
                  <Text style={styles.textProducto}>Frutas</Text>
                </View>
                <View style={styles.containerImagen}>
                  <Pressable onPress={()=>navigation.navigate('Subcategorias')}>
-                 <Text style={styles.textProducto}>Dulces</Text></Pressable>
+                 <Image 
+                    style={styles.imagen}
+                    source={require('./img/descarga.jpg')}
+                 ></Image></Pressable>
+                 <Text style={styles.textProducto}>Dulces</Text>
                </View>
                </View>
            </View>
