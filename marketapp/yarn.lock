@@ -1073,6 +1073,7 @@
   "integrity" "sha512-hFd1OUlVeJLpRZ//B99mfB4G8UYGpXOIL1KNG3SNByLS7o5gEtnlXp6Pk7B4/mz2an6t+T6UBaF4tqye0tBzdw=="
   "resolved" "https://registry.npmjs.org/@dietime/react-native-date-picker/-/react-native-date-picker-1.2.0.tgz"
   "version" "1.2.0"
+
 "@egjs/hammerjs@^2.0.17":
   "integrity" "sha512-XQsZgjm2EcVUiZQf11UBJQfmZeEmOW8DpI1gsFeln6w0ae0ii4dMQEQ0kjl6DspdWX1aGY1/loyXnP0JS06e/A=="
   "resolved" "https://registry.npmjs.org/@egjs/hammerjs/-/hammerjs-2.0.17.tgz"

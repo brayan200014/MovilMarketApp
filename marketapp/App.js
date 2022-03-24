@@ -6,12 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import Nav from './src/Nav'
 import NavigatorPrincipal from "./src/NavigatorPrincipal";
 import NavigatiorDetails from "./src/NavigatorDetails";
-import ForgetPass from "./src/screen/ForgetPassword";
-import Pin from "./src/screen/Otp";
-import Email from "./src/screen/Email";
-import Login from "./src/screen/LoginIn";
-import Inicio from './src/screen/Onboarding';
-import Registro from './src/screen/RegistroUsuario';
+
 
 
 import * as Font from 'expo-font';
@@ -39,14 +34,11 @@ export default function App() {
     _loadAssetsAsync();
   });
 
- /*return (
+ return (
     <NavigationContainer>
       <NavigatorPrincipal/>
     </NavigationContainer>
-  );*/
+  );
 
-  return(
-    <Registro/>
-  )
 
 }

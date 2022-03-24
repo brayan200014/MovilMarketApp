@@ -23,7 +23,7 @@ export default function CambioContra({navigation}) {
         { 
           try {
                 let respuesta= await fetch(
-                  'http://192.168.1.5:6001/api/autenticacion/cambiarContra',
+                  'http://192.168.0.13:6001/api/autenticacion/cambiarContra',
                   {
                       method: 'PUT',
                       headers: {
