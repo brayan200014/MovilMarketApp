@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState, useEffect} from 'react';
 import { ActivityIndicator, StyleSheet, Text, TextInput, View, Alert, ImageBackground, Dimensions,Image, KeyboardAvoidingView,
-    TouchableWithoutFeedback, Keyboard } from 'react-native';
+    TouchableWithoutFeedback, Keyboard, Pressable } from 'react-native';
 import AsyncStorage  from '@react-native-async-storage/async-storage';
 import * as Font from 'expo-font';
 
@@ -105,7 +105,9 @@ export default function App({navigation}) {
           </View>
                 <View style={styles.remember}>
                 <View style={{}}>
+                <Pressable onPress={() => navigation.navigate('Email')}>
                     <Text style={styles.forgotText}>¿Olvide mi contraseña?</Text>
+                    </Pressable>
                 </View>
                 </View>
                 <View style={{marginTop:37, justifyContent:'center', alignItems:'center'}}>
@@ -113,9 +115,11 @@ export default function App({navigation}) {
                       onPress={presIniciarSesion}
                     />
                 </View>
-                <View style={styles.signup}>
+                <Pressable style={styles.signup} onPress={() => navigation.navigate('Registro')}>
+                <View>
                     <Text style={styles.signupText}>{signup}</Text>
                 </View>
+                </Pressable>
                 <View style={styles.terms}>
                     <Text style={styles.termsText}>{terms}</Text>
                 </View>

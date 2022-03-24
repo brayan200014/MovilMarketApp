@@ -11,7 +11,7 @@ export default function DetailsScreen({ navigation }) {
 
            <View style={styles.containerTitulo}>
              <View style={styles.containerBack}>
-              <Pressable onPress={()=> navigation.navigate('RootLogin')}>
+              <Pressable onPress={()=> navigation.navigate('Login')}>
              <Image 
                     style={styles.imagenusuario}
                     source={require('./img/usuario.png')}

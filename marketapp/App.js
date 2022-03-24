@@ -46,7 +46,9 @@ export default function App() {
   );*/
 
   return(
-    <Registro/>
+    <NavigationContainer>
+    <NavigatorPrincipal/>
+  </NavigationContainer>
   )
 
 }
