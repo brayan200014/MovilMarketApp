@@ -7,9 +7,12 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Root from "./componentes/Root";
 import Especificacion from "./componentes/especificacionProducto";
 import Prueba from "./componentes/prueba";
-import OnBoarding from "./screen/Onboarding";
-import Login from "./screen/LoginIn";
+import OnBoarding from "../screen/Onboarding";
+import Login from "../screen/LoginIn";
 import RootLogin from "./componentes/RootLogin";
+import Email from "../screen/Email";
+import RegistroUsuario from "../screen/RegistroUsuario";
+import CambioContra from "../screen/Otp"
 
 
 
@@ -22,9 +25,10 @@ const Navigation= () => {
    
    return (
     <HomeStack.Navigator>
-      <HomeStack.Screen name="Inicio" component={OnBoarding}  options={{headerShown:false}} />
-      <HomeStack.Screen  name="RootLogin" component={RootLogin} options={{headerTransparent: true, headerTintColor:'#fff', headerBackTitle: 'Regresar'}} />
-      <HomeStack.Screen  name="Root" component={Root} options={{headerShown:false}} />
+      <HomeStack.Screen name="Login" component={Login} />
+      <HomeStack.Screen  name="Email" component={Email} options={{headerTransparent: true, headerTintColor:'#fff', headerBackTitle: 'Regresar'}} />
+      <HomeStack.Screen  name="CambioContra" component={CambioContra} options={{headerTransparent: true, headerTintColor:'#fff', headerBackTitle: 'Regresar'}} />
+      <HomeStack.Screen  name="RegistroUsuario" component={RegistroUsuario} options={{headerTransparent: true, headerTintColor:'#fff', headerBackTitle: 'Regresar'}} />
     </HomeStack.Navigator>  
    )
 }

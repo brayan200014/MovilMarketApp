@@ -23,7 +23,7 @@ export default function CambioContra({navigation}) {
         { 
           try {
                 let respuesta= await fetch(
-                  'http://192.168.1.5:6001/api/autenticacion/cambiarContra',
+                  'http://192.168.0.8:6001/api/autenticacion/cambiarContra',
                   {
                       method: 'PUT',
                       headers: {
@@ -46,6 +46,7 @@ export default function CambioContra({navigation}) {
                   console.log(respuesta);
                   if(respuesta[0]==200){
                       Alert.alert("Contraseña Actualizada", "Inicie Sesión nuevamente");
+                      navigation.navigate("Login");
                   }
                   else{
                       Alert.alert("Error!", respuesta[1].msj);
