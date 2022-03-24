@@ -1,31 +1,62 @@
 import * as React from 'react';
-import { View, Text, StyleSheet, Pressable, Image, TextInput } from 'react-native';
+import { View, Text, StyleSheet, Pressable, Image, TextInput, DrawerLayoutAndroidBase, FlatList, SafeAreaView } from 'react-native';
 import { AntDesign } from '@expo/vector-icons'; 
+import { useState, useEffect } from 'react';
 
 export default function DetailsScreen({ navigation }) {
+
+  const[productos,setproductos]=useState([]);
+
+  useEffect(async()=>{
+    var a = await  consultarproducto();
+  })
+
+  const consultarproducto=async()=>{
+    try {
+      const solicitud= await fetch(
+        'http://192.168.0.100:6001/api/productos/listarproductos',
+        {
+          method: 'GET',
+          headers: {
+            Accept: 'application/json', 
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+      const json = await solicitud.json();
+      console.log(json);
+
+    } catch (error) {
+     console.log(error);
+    }
+  }
+
+  
+
     const imprimir= () => {
         console.log("Press")
     }
+
     return (
       <View style={styles.containerPrincipal} >
         <View style={styles.containerTitulo}>
           <View style={styles.containerBack}>
-            <Pressable onPress={() => {imprimir()}} >
+            <Pressable onPress={() => consultarproducto()} >
               <AntDesign name="arrowleft" size={24} color="white" />
             </Pressable>
             <Text style={styles.textinicio}>Bebidas y Jugos</Text>
           </View>
         </View>
-
         <View style={styles.containerProducto}>
           <View style={styles.containerFilaPro}>
             <View style={styles.containerImagen}>
               <Image style={styles.imagen}source={require('./img/bebidas.png')}></Image>
                <View style={styles.containerInfo}>
+               
                <Text style={styles.textProducto}>Agua Goascoran</Text>
                 <Text style={styles.textPrecio}>L 50.00</Text>
               <View style={styles.containerCantidadElegida}>
-                <Pressable onPress={()=> navigation.navigate('Productos',{ProductoId:1,ProductoNombre:"Bananas",PrecioProducto: 60})}>
+                <Pressable onPress={()=> navigation.navigate('Productos', {ProductoId: 2, ProductoNombre: "Bananas",PrecioProducto: 60})}>
                   <AntDesign name="pluscircleo" size={24} color="black" /></Pressable>
               </View>
               </View>
@@ -36,7 +67,7 @@ export default function DetailsScreen({ navigation }) {
                <Text style={styles.textProducto}>Jugo Sula</Text>
                 <Text style={styles.textPrecio}>L 15.00</Text>
               <View style={styles.containerCantidadElegida}>
-                <Pressable onPress={()=> navigation.navigate('Productos',{ProductoId:1,ProductoNombre:"Bananas",PrecioProducto: 60})}>
+                <Pressable onPress={()=> imprimir()}>
                   <AntDesign name="pluscircleo" size={24} color="black" /></Pressable>
               </View>
               </View>
@@ -48,10 +79,11 @@ export default function DetailsScreen({ navigation }) {
             <View style={styles.containerImagen}>
               <Image style={styles.imagen}source={require('./img/bebidas.png')}></Image>
                <View style={styles.containerInfo}>
-               <Text style={styles.textProducto}>Jugo Leyde</Text>
+               
+               <Text style={styles.textProducto}>Agua Goascoran</Text>
                 <Text style={styles.textPrecio}>L 50.00</Text>
               <View style={styles.containerCantidadElegida}>
-                <Pressable onPress={()=> navigation.navigate('Productos',{ProductoId:1,ProductoNombre:"Bananas",PrecioProducto: 60})}>
+                <Pressable onPress={()=> navigation.navigate('Productos', {ProductoId: 2, ProductoNombre: "Bananas",PrecioProducto: 60})}>
                   <AntDesign name="pluscircleo" size={24} color="black" /></Pressable>
               </View>
               </View>
@@ -59,37 +91,11 @@ export default function DetailsScreen({ navigation }) {
             <View style={styles.containerImagen}>
               <Image style={styles.imagen}source={require('./img/bebidas.png')}></Image>
                <View style={styles.containerInfo}>
-                <Text style={styles.textProducto}>Vino</Text>
+               <Text style={styles.textProducto}>Jugo Sula</Text>
                 <Text style={styles.textPrecio}>L 15.00</Text>
               <View style={styles.containerCantidadElegida}>
-                <Pressable onPress={()=> navigation.navigate('Productos',{ProductoId:1,ProductoNombre:"Bananas",PrecioProducto: 60})}>
-                  <AntDesign name="pluscircleo" size={20} color="black" /></Pressable>
-              </View>
-              </View>
-            </View>
-          </View>
-        </View>
-        <View style={styles.containerProducto}>
-          <View style={styles.containerFilaPro}>
-            <View style={styles.containerImagen}>
-              <Image style={styles.imagen}source={require('./img/bebidas.png')}></Image>
-               <View style={styles.containerInfo}>
-               <Text style={styles.textProducto}>Agua Dassani</Text>
-                <Text style={styles.textPrecio}>L 50.00</Text>
-              <View style={styles.containerCantidadElegida}>
-                <Pressable onPress={()=> navigation.navigate('Productos',{ProductoId:1,ProductoNombre:"Bananas",PrecioProducto: 60})}>
-                  <AntDesign name="pluscircleo" size={24} color="black" /></Pressable>
-              </View>
-              </View>
-            </View>
-            <View style={styles.containerImagen}>
-              <Image style={styles.imagen}source={require('./img/bebidas.png')}></Image>
-               <View style={styles.containerInfo}>
-               <Text style={styles.textProducto}>Gatorade</Text>
-                <Text style={styles.textPrecio}>L 15.00</Text>
-              <View style={styles.containerCantidadElegida}>
-                <Pressable onPress={()=> navigation.navigate('Productos',{ProductoId:1,ProductoNombre:"Bananas",PrecioProducto: 60})}>
-                  <AntDesign name="pluscircleo" size={24} color="black" /></Pressable>
+                <Pressable onPress={()=> imprimir()}>
+                  <AntDesign name="pluscircleo" size={24} color="black" padding='-10'/></Pressable>
               </View>
               </View>
             </View>
@@ -116,35 +122,18 @@ containerTitulo : {
     width: '100%',
     marginTop: '0%'
 },
-containerBack: {
-    backgroundColor: '#3EA5DB', 
-    alignItems: 'flex-start',
-    height: '90%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginLeft: '6%',
-    flexDirection: 'row',
-    marginTop:'1%',
-  },
-  textinicio:{
-      fontSize: 20,
-      color: '#fff',
-      paddingHorizontal: '1%',
-      textAlign: 'right'
-  },
-
-  containerProducto: {
+containerProducto: {
     flex: 1, 
     marginLeft: '4%',
     marginRight: '4%',
-    padding:-1,
+    padding:10,
 },
 containerFilaPro: {
     flex:1,
     width: '100%', 
     alignItems: 'center', 
     flexDirection: 'row',
-    marginTop: 10,
+    marginTop: -30,
 
 },
 containerImagen: {
@@ -154,7 +143,8 @@ containerImagen: {
     justifyContent: 'center',
     borderRadius: 30,
     height: '80%',
-    margin: 10
+    paddingBottom:-30,
+    margin:10
 },
 imagen: {
     margin: 0,
@@ -162,6 +152,7 @@ imagen: {
     height: 70
 },
 containerInfo: {
+  paddingBottom:-30,
     flex:1, 
     flexDirection: 'column',
     alignItems: 'center',
@@ -169,6 +160,7 @@ containerInfo: {
     height: '80%',
     marginLeft: '2%',
     textAlign:'left',
+    
 },
 textProducto: {
     fontSize: 18,
@@ -191,6 +183,7 @@ containerCantidadElegida: {
     flexDirection: 'row',
     marginTop: '10%',
     justifyContent: 'space-between',
-    width: '100%'
+    width: '100%',
+    paddingBottom:-30,
   },
 })
