@@ -60,7 +60,7 @@ export default function DetailsScreen({ navigation }) {
 
   useEffect(async()=>{
     var a = await  consultarCategoria();
-  })
+  }, []);
 
   const consultarCategoria= async ()=>{
       try {
