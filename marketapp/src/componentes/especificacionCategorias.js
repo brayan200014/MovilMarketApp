@@ -1,24 +1,110 @@
 import * as React from 'react';
-import { View, Text, StyleSheet, Pressable, Image, TextInput } from 'react-native';
+import { View, Text, StyleSheet, Pressable, Image, FlatList,  TextInput,StatusBar } from 'react-native';
 import { AntDesign } from '@expo/vector-icons'; 
+import { useState, useEffect } from 'react';
 
 export default function DetailsScreen({ navigation }) {
-    const imprimir= () => {
-        console.log("Press")
-    }
+
+  const Item = ({ NombreCategoria}) =>
+ {if(NombreCategoria=="Fefrescos")
+ {return(
+  <View style={styles.item}>
+    <Pressable onPress={()=>navigation.navigate('Subcategorias')}>
+      <Image 
+      style={styles.imagen}
+      source={require('./img/coca.png')}
+      ></Image>
+      <Text style={styles.NombreCategoria}>{NombreCategoria}</Text>
+      </Pressable>
+  </View>
+)}{if(NombreCategoria=="Lacteos")
+{return(
+ <View style={styles.item}>
+   <Pressable onPress={()=>navigation.navigate('Subcategorias')}>
+      <Image 
+      style={styles.imagen}
+      source={require('./img/lacteos.png')}
+      ></Image>
+      <Text style={styles.NombreCategoria}>{NombreCategoria}</Text>
+      </Pressable>
+ </View>
+)}} {if(NombreCategoria=="Frutas")
+{return(
+ <View style={styles.item}>
+   <Pressable onPress={()=>navigation.navigate('Subcategorias')}>
+      <Image 
+      style={styles.imagen}
+      source={require('./img/frutas.png')}
+      ></Image>
+      <Text style={styles.NombreCategoria}>{NombreCategoria}</Text>
+      </Pressable>
+ </View>
+)}}
+{if(NombreCategoria=="Dulces")
+{return(
+ <View style={styles.item}>
+   <Pressable onPress={()=>navigation.navigate('Subcategorias')}>
+      <Image 
+      style={styles.imagen}
+      source={require('./img/descarga.jpg')}
+      ></Image>
+      <Text style={styles.NombreCategoria}>{NombreCategoria}</Text>
+      </Pressable>
+ </View>
+)}}};
+
+
+
+  const [categorias, setcategorias]= useState([]);
+  
+
+  useEffect(async()=>{
+    var a = await  consultarCategoria();
+  })
+
+  const consultarCategoria= async ()=>{
+      try {
+        const solicitud= await fetch(
+          'http://192.168.0.100:6001/api/categorias/listar/',
+          {
+            method: 'GET',
+            headers: {
+              Accept: 'application/json', 
+              'Content-Type': 'application/json'
+            }
+          }
+        );
+        const json = await solicitud.json();
+        const data=json.data;
+        setcategorias(data);
+
+      } catch (error) {
+       console.log(error);
+      }
+ }
+ const imprimir= () => {
+    console.log("Ho0pl");
+ }
+
+ const renderItem = ({ item }) => (
+  <Item NombreCategoria={item.NombreCategoria}
+        IdCategoria={item.IdCategoria}/>
+);
+
     return (
         <View style={styles.containerPrincipal} >
 
-           <View style={styles.containerTitulo}>
-             <View style={styles.containerBack}>
-              <Pressable onPress={()=> navigation.navigate('Login')}>
-             <Image 
-                    style={styles.imagenusuario}
-                    source={require('./img/usuario.png')}
-                 ></Image></Pressable>
-              <Text style={styles.textCarrito}>Hola Gabriela,</Text>
-              <Text style={styles.textCarrito}>Bienvenida</Text>
-            </View>
+
+            <View style={styles.containerTitulo}>
+              <View style={styles.containerBack}>
+                <Pressable onPress={()=> consultarCategoria()}>
+                  <Image 
+                      style={styles.imagenusuario}
+                      source={require('./img/usuario.png')}
+                  ></Image></Pressable>
+                <Text style={styles.textCarrito}>Hola Josue,</Text>
+                <Text style={styles.textCarrito}>Bienvenido</Text>
+              </View>
            </View>
            <View style={styles.contenedorbuscar}>
               <TextInput
@@ -26,91 +112,26 @@ export default function DetailsScreen({ navigation }) {
                 style={styles.entradas}>
               </TextInput>
             </View>
-           <View style={styles.containerProducto} >
-               <View style={styles.containerFilaPro}>
-               <View style={styles.containerImagen}>
-                 
-                    <Image 
-                    style={styles.imagen}
-                    source={require('./img/promos.png')}
-                 ></Image>
-                 <Text style={styles.textProducto}>Promociones</Text>
-               </View>
-               <View style={styles.containerImagen}>
-               
-                    <Image 
-                    style={styles.imagen}
-                    source={require('./img/canasta.png')}
-                 ></Image>
-                 <Text style={styles.textProducto}>Canasta Basica</Text>
-               </View>
-               </View>
-           </View>
-           <View style={styles.containerProducto}>
-           <View style={styles.containerFilaPro}>
-               <View style={styles.containerImagen}>
-               <Pressable onPress={() => navigation.navigate('Subcategorias')}>
-                    <Image 
-                    style={styles.imagen}
-                    source={require('./img/bebidas.png')}
-                 ></Image></Pressable>
-                 <Text style={styles.textProducto}>Juego y bebidas</Text>
-               </View>
-               <View style={styles.containerImagen}>
-                    <Image 
-                    style={styles.imagen}
-                    source={require('./img/carnes.png')}
-                 ></Image>
-                 <Text style={styles.textProducto}>Carnes y embutidos</Text>
-               </View>
-               </View>
-           </View>
-           <View style={styles.containerProducto}>
-           <View style={styles.containerFilaPro}>
-               <View style={styles.containerImagen}>
-                    <Image 
-                    style={styles.imagen}
-                    source={require('./img/lacteos.png')}
-                 ></Image>
-                 <Text style={styles.textProducto}>Lacteos</Text>
-               </View>
-               <View style={styles.containerImagen}>
-                    <Image 
-                    style={styles.imagen}
-                    source={require('./img/frutas.png')}
-                 ></Image>
-                 <Text style={styles.textProducto}>Frutas y verduras</Text>
-               </View>
-               </View>
-           </View>
-           <View style={styles.containerProducto}>
-           <View style={styles.containerFilaPro}>
-               <View style={styles.containerImagen}>
-                    <Image 
-                    style={styles.imagen}
-                    source={require('./img/hogar.jpg')}
-                 ></Image>
-                 <Text style={styles.textProducto}>Cuidado Personal</Text>
-               </View>
+
+            <View style={styles.lista}>
+              <FlatList
+                numColumns={2}
+                data={categorias}
+                renderItem={renderItem}
+                keyExtractor={item => item.IdCategorias}
+              />
+              </View>
 
 
-               <View style={styles.containerImagen}>
-                    <Image 
-                    style={styles.imagen}
-                    source={require('./img/limpieza.png')}
-                 ></Image>
-                 <Text style={styles.textProducto}>Cuidado del hogar</Text>
-               </View>
-               </View>
-           </View>
-           <View style={styles.contenedorpie}>
-           
-           </View>
         </View>
+
     );
 }
-
 const styles= StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: StatusBar.currentHeight || 0,
+  },
     containerPrincipal: {
         width: '100%',
         height: '95%',
@@ -144,7 +165,6 @@ containerBack: {
       paddingHorizontal: '1%'
       
   },
-
   contenedorbienvenida:{
     backgroundColor: '#3EA5DB',
     alignItems: 'flex-start',
@@ -153,7 +173,6 @@ containerBack: {
     width: '100%',
     marginTop: '0%'
   },
-
   contenedorbuscar:{
     backgroundColor: '#3EA5DB',
     alignItems: 'flex-start',
@@ -165,17 +184,6 @@ containerBack: {
     marginTop: '0%'
   },
 
-  contenedorpie:{
-    backgroundColor: '#fff',
-    alignItems: 'flex-start',
-    flexDirection: 'row',
-    height: 50,
-    width: '100%',
-    borderBottomEndRadius: 0,
-    borderBottomStartRadius: 0,
-    borderRadius: 20,
-    marginTop: '0%'
-  },
 containerProducto: {
     flex: 1, 
     marginLeft: '4%',
@@ -192,7 +200,7 @@ containerFilaPro: {
 containerImagen: {
     flex:1, 
     alignItems: 'center',
-    backgroundColor: '#FAF0E8',
+    backgroundColor: '#B3E5FC',
     justifyContent: 'center',
     borderRadius: 30,
     height: '80%',
@@ -208,6 +216,39 @@ imagenusuario: {
   width: 50,
   height: 50
 },
+
+item: {
+  flex:1/2,
+  backgroundColor: '#B3E5FC',
+  padding: 20,
+  borderRadius: 30,
+  justifyContent: 'center',
+  flexDirection:'row',
+  margin:10
+},
+lista:{
+  flex:1,
+  //backgroundColor: '#B3E5FC',
+  padding: 20,
+  borderRadius: 30,
+  justifyContent: 'center',
+  flexDirection:'row',
+
+},
+NombreCategoria: {
+  fontSize: 20,
+},
+imagen: {
+  margin: 0,
+  width: 70,
+  height: 70,
+  alignItems:'center',
+},
+name:{
+  fontSize: 20,
+  color: '#000',
+  paddingHorizontal: '1%'
+},
 entradas:{
   flex:1,
   alignItems:"stretch",
@@ -222,6 +263,6 @@ entradas:{
   borderColor: "#ced4da",
   borderRadius: 15,
   textAlign:'center'
-}
+},
 
 })
