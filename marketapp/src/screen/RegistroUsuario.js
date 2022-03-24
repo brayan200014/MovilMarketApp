@@ -47,6 +47,7 @@ export default function Usuario({navigation}) {
                             console.log(respuesta);
                             if(respuesta[0]==200){
                                 Alert.alert("Registro Completado, Elusuario fue creado con Exito");
+                                navigation.navigate('Login');
                             }
                             else{
                                 Alert.alert("Error!", respuesta[1].msj);

@@ -40,6 +40,7 @@ const [correo, setCorreo]= useState(null);
                         console.log(respuesta);
                         if(respuesta[0]==200){
                             Alert.alert("Pin enviado, Verifique su correo electrónico");
+                            navigation.navigate('Cambio')
                         }
                         else{
                             Alert.alert("Error!", respuesta[1].msj);

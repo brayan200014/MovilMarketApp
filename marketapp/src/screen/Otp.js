@@ -46,6 +46,7 @@ export default function CambioContra({navigation}) {
                   console.log(respuesta);
                   if(respuesta[0]==200){
                       Alert.alert("Contraseña Actualizada", "Inicie Sesión nuevamente");
+                      navigation.navigate("Login");
                   }
                   else{
                       Alert.alert("Error!", respuesta[1].msj);
