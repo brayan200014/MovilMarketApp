@@ -5,6 +5,7 @@ import EdicionPerfil from "./componentes/edicionPerfil";
 import InformacionApp from "./componentes/informacionApp";
 import Perfil from "./componentes/perfil"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Targeta from "./componentes/targeta";
 
 const Tab= createBottomTabNavigator();
 const HomeStack= createNativeStackNavigator();
@@ -36,7 +37,17 @@ const Navigation= () => {
           <HomeStack.Screen  name="InfoAPP" component={InformacionApp} 
        options={{headerTransparent: true, 
        headerTintColor:'#fff', 
-       headerBackTitle: 'Productos',
+       headerBackTitle: 'Cuenta',
+        headerTitle: false, 
+        headerStyle:{
+          backgroundColor: '#3EA5DB',
+          
+          }}} />
+
+      <HomeStack.Screen  name="Ingresar targeta" component={Targeta} 
+       options={{headerTransparent: true, 
+       headerTintColor:'#fff', 
+       headerBackTitle: false,
         headerTitle: false, 
         headerStyle:{
           backgroundColor: '#3EA5DB',

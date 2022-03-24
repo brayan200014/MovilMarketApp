@@ -11,14 +11,61 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation} from '@react-navigation/native';
 import { useRoute } from '@react-navigation/native';
 import AsyncStorage  from '@react-native-async-storage/async-storage';
-class PerfilUsuario extends Component {
+import { useState } from 'react';
+import { useEffect } from 'react';
+    
+export default function PerfilUsuario({ navigation }) {
 
-  
-    render() {  
-        //console.log(token)
-        //const ejemplo =AsyncStorage.getItem('presIniciarSesion');
-        //console.log(ejemplo)
-    //const navigation = useNavigation(); 
+
+    useEffect( async ()=>{
+      await getCorreo();
+      console.log(Correo)
+    });
+
+    const [nombreuser, setuser]= useState(null);
+    const [iduser, setid]= useState(null);
+    const [Correo, setCorreo]= useState(null);
+    const [fecha, setfecha]= useState(null);
+
+    const getCorreo = async ()=> {
+      const correo= await AsyncStorage.getItem("correo")
+      setCorreo(correo);
+
+    }
+
+    const[usuarios, setUsuarios]= useState([])
+     useEffect(async() =>{
+       var a = await consultarUsuarios();
+     })
+
+     const consultarUsuarios= async ()=>{
+      try {
+        const solicitud= await fetch(
+          'http://192.168.1.5:5001/api/cliente/buscar',
+          {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json', 
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              Correo: Correo
+              })
+
+          }
+        );
+        const json = await solicitud.json();
+
+        setuser(json.NombreUsuario);
+        console.log(nombreuser);
+        setid(json.IdUsuarioCliente);
+        console.log(iduser);
+        setfecha(json.FechaCreacion);
+        
+      } catch (error) {
+       console.log(error);
+      }
+ }
 
     return (
       <SafeAreaView style={styles.container}>
@@ -32,28 +79,29 @@ class PerfilUsuario extends Component {
               <Title style={[styles.title, {
                 marginTop: 25,
                 marginBottom: 5,
-              }]}>Nombre Perfil</Title>
-              <Caption style={styles.caption}>nombre usuario</Caption>
+              }]}>{nombreuser}</Title>
+              <Caption style={styles.caption}>ID#{iduser}</Caption>
             </View>
           </View>
         </View>
 
         <View style={styles.userInfoSection}>
           <View style={styles.row}>
-            <Icon name="phone" color="#3EA5DB" size={30} />
-            <Text style={{ color: "#0b0a09", marginLeft: 20, fontSize: 15 }}>telefono usuario</Text>
+            <Icon name="email" color="#3EA5DB" size={30} />
+            <Text style={{ color: "#0b0a09", marginLeft: 20, fontSize: 15 }}>{Correo}</Text>
           </View>
           <View style={styles.row}>
-            <Icon name="email" color="#3EA5DB" size={30} />
-            <Text style={{ color: "#0b0a09", marginLeft: 20, fontSize: 15 }}>usuarioscliente.Correo</Text>
+            <Icon name="cellphone-arrow-down" color="#3EA5DB" size={30} />
+            <Text style={{ color: "#0b0a09", marginLeft: 20, fontSize: 15 }}>Creado: {fecha}</Text>
           </View>
+
         </View>
 
         <View style={styles.infoBoxWrapper}>
         </View>
 
         <View style={styles.menuWrapper}>
-          <TouchableRipple onPress={() => this.props.navigation.navigate("Configuracion de cuenta")}>
+          <TouchableRipple onPress={() =>navigation.navigate("Configuracion de cuenta")}>
             <View style={styles.menuItem}>
               <Icon name="account-edit" color="#3EA5DB" size={30} />
               <Text style={styles.menuItemText}>Editar Perfil</Text>
@@ -62,7 +110,7 @@ class PerfilUsuario extends Component {
           <View style={styles.conteInfo}>
             <Text style={styles.info}>Edita tu perfil</Text>
           </View>
-          <TouchableRipple onPress={() => this.props.navigation.navigate("InfoAPP")}>
+          <TouchableRipple onPress={() =>navigation.navigate("InfoAPP")}>
             <View style={styles.menuItem}>
               <Icon name="information" color="#3EA5DB" size={30} />
               <Text style={styles.menuItemText}>Información</Text>
@@ -71,7 +119,7 @@ class PerfilUsuario extends Component {
           <View style={styles.conteInfo}>
             <Text style={styles.info}>Información sobre aplicación</Text>
           </View>
-          <TouchableRipple onPress={() => { }}>
+          <TouchableRipple onPress={()  =>navigation.navigate("Ingresar targeta")}>
             <View style={styles.menuItem}>
               <Icon name="credit-card" color="#3EA5DB" size={30} />
               <Text style={styles.menuItemText}>Métodos de pago</Text>
@@ -80,7 +128,7 @@ class PerfilUsuario extends Component {
           <View style={styles.conteInfo}>
             <Text style={styles.info}>Gestiona metodos de pago</Text>
           </View>
-          <TouchableRipple onPress={() => this.props.navigation.navigate("Inicio")}>
+          <TouchableRipple onPress={() =>navigation.navigate("Inicio")}>
             <View style={styles.menuItem}>
               <Icon name="close-box" color="#3EA5DB" size={30} />
               <Text style={styles.menuItemText}>Cerrar sesión</Text>
@@ -93,8 +141,6 @@ class PerfilUsuario extends Component {
       </SafeAreaView>
     );
   }
-}
-  export default PerfilUsuario;
 
   const styles = StyleSheet.create({
     container: {
@@ -116,7 +162,8 @@ class PerfilUsuario extends Component {
       fontWeight: 'bold',
     },
     caption: {
-      fontSize: 14,
+      marginTop:10,
+      fontSize: 15,
       lineHeight: 14,
       fontWeight: '500',
     },
@@ -133,7 +180,7 @@ class PerfilUsuario extends Component {
       marginBottom: 10,
     },
     infoBoxWrapper: {
-     borderTopColor: '#3EA5DB',
+     borderTopColor: '#828282',
       borderTopWidth: 30,
       flexDirection: 'row',
       height: 10,

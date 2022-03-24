@@ -3,11 +3,57 @@ import {View,Text,TextInput, SafeAreaView,TouchableOpacity,StyleSheet} from 'rea
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import {useTheme, Title,Caption,} from 'react-native-paper';
-
+import { useEffect ,useState} from 'react';
+import AsyncStorage  from '@react-native-async-storage/async-storage';
  //<const {colors} = useTheme();>
-  class EdicionPerfil extends Component {
+ export default function EdicionPerfil({ navigation }) {
+     
 
-  render() {  
+  const [Correo, setCorreo]= useState(null);
+    const [usuario, setUsuario]= useState(null);
+    const [estado, setEstado]= useState(null);
+
+    const presGuardar= async () => {
+        if(!Correo || !usuario || !estado) {
+            Alert.alert("¡Estimado Usuario!","Por favor, llene los datoss");
+        }
+        else 
+        { 
+          try {
+                let respuesta= await fetch(
+                  'http://192.168.1.5:5001/api/cliente/modificarCorreo',
+                  {
+                      method: 'PUT',
+                      headers: {
+                          Accept: 'application/json',
+                          'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({
+                          Correo: Correo,
+                          NombreUsuario: usuario,
+                          Estado: estado,
+                      })
+                  }).then(response => {
+                      const statusCode = response.status;
+                      const data = response.json();
+                      return Promise.all([statusCode, data]);
+                  }).catch(error =>{
+                      console.log(error);
+                  });
+                  respuesta=respuesta;
+                  console.log(respuesta);
+                  if(respuesta[0]==200){
+                      Alert.alert("Usuario Modificado Actualizada");
+                  }
+                  else{
+                      Alert.alert("Error!", respuesta[1].msj);
+                  }
+
+            } catch(error) {
+                console.log(error);
+            }
+        }  
+}
 
   return (
     <View >
@@ -19,7 +65,8 @@ import {useTheme, Title,Caption,} from 'react-native-paper';
       <View style={styles.action}>
           <FontAwesome name="user-o" size={30} />
           <TextInput
-            placeholder="Nombre:"
+          onChangeText={newText => setCorreo(newText)}
+            placeholder={"Correo"}
             placeholderTextColor="#666666"
             autoCorrect={false}
             style={[
@@ -34,7 +81,8 @@ import {useTheme, Title,Caption,} from 'react-native-paper';
       <View style={styles.action}>
       <FontAwesome name="user-o" size={30} />
       <TextInput
-        placeholder="Apellido:"
+      onChangeText={newText => setUsuario(newText)}
+        placeholder="Nombre Usuario:"
         placeholderTextColor="#666666"
         autoCorrect={false}
         style={[
@@ -48,7 +96,8 @@ import {useTheme, Title,Caption,} from 'react-native-paper';
       <View style={styles.action}>
       <FontAwesome name="user-o" size={30} />
       <TextInput
-        placeholder="Usuario:"
+      onChangeText={newText => setEstado(newText)}
+        placeholder="Estado:"
         placeholderTextColor="#666666"
         autoCorrect={false}
         style={[
@@ -59,21 +108,6 @@ import {useTheme, Title,Caption,} from 'react-native-paper';
         ]}
       />
       </View>
-      <View style={styles.action}>
-          <Feather name="phone"size={30} />
-          <TextInput
-            placeholder="Teléfono:"
-            placeholderTextColor="#666666"
-            keyboardType="number-pad"
-            autoCorrect={false}
-            style={[
-              styles.textInput,
-              {
-                //color: colors.text,
-              },
-            ]}
-          />
-        </View>
         <View style={styles.action}>
           <FontAwesome name="lock" size={30}/>
           <TextInput
@@ -95,7 +129,7 @@ import {useTheme, Title,Caption,} from 'react-native-paper';
           <Text style={styles.ButtonPass}>Cambiar contraseña</Text>
         </TouchableOpacity>
         </View>
-    <TouchableOpacity style={styles.commandButton} onPress={() => {}}>
+    <TouchableOpacity style={styles.commandButton} onPress={presGuardar}>
           <Text style={styles.panelButtonTitle}>Guardar cambios</Text>
         </TouchableOpacity>
 
@@ -103,8 +137,6 @@ import {useTheme, Title,Caption,} from 'react-native-paper';
    
   );
 }
-  }
-export default EdicionPerfil
 
 const styles = StyleSheet.create({
   name:{
@@ -132,7 +164,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     backgroundColor: '#2874A6',
     alignItems: 'center',
-    marginTop: 50,
+    marginTop: 90,
     marginLeft:20,
     marginRight:20,
     borderWidth:2,

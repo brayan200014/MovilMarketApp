@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Image, View, Text} from 'react-native';
 
 
-export default class Infor extends Component  {
-
-  render(){
+export default function Infor() {
     return(
       <View>
       <View style={styles.contorno}>
@@ -18,7 +16,6 @@ export default class Infor extends Component  {
     
     );
   }
-}
 const styles = StyleSheet.create({
 contorno:{
 backgroundColor:'#F2D7EF',
