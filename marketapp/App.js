@@ -39,12 +39,6 @@ export default function App() {
     _loadAssetsAsync();
   });
 
- /*return (
-    <NavigationContainer>
-      <NavigatorPrincipal/>
-    </NavigationContainer>
-  );*/
-
   return(
     <NavigationContainer>
     <NavigatorPrincipal/>

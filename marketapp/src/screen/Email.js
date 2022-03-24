@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState, useEffect} from 'react';
-import { Text, View, StyleSheet, Image, TextInput, ImageBackground, Dimensions, Alert } from 'react-native';
+import { ActivityIndicator,Text, View, StyleSheet, Image, TextInput, ImageBackground, Dimensions, Alert, KeyboardAvoidingView,
+    TouchableWithoutFeedback, Keyboard, Pressable  } from 'react-native';
 const {width, height} = Dimensions.get('window');
 
 import Button from '../componentes/Button';
@@ -19,7 +20,7 @@ const [correo, setCorreo]= useState(null);
               { 
                 try {
                       let respuesta= await fetch(
-                        'http://192.168.0.8:6001/api/autenticacion/recuperarcontrasena',
+                        'http://192.168.1.5:6001/api/autenticacion/recuperarcontrasena',
                         {
                             method: 'POST',
                             headers: {
@@ -54,6 +55,9 @@ const [correo, setCorreo]= useState(null);
 
 
     return (
+        <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.keyboardStyle}>
+  <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <View style={styles.container}>
         <ImageBackground source={require('../../assets/image/background4.png')} style={{width: width, height: height}}>
             <View style={styles.darkLayer}></View>
@@ -79,12 +83,24 @@ const [correo, setCorreo]= useState(null);
             </View>
         </ImageBackground>
     </View>
+    </TouchableWithoutFeedback>
+    </KeyboardAvoidingView> 
     );
 }
 
 const styles = StyleSheet.create({
+    keyboardStyle: {
+        flex: 1
+    },
     container:{
         flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        width: width -60,
+        height: 45,
+        backgroundColor: '#FFFFFF',
+        borderRadius: 8,
     },
     darkLayer:{
         position: 'absolute',
