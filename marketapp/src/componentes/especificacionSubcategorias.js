@@ -50,24 +50,24 @@ export default function DetailsScreen({ navigation }) {
         <View style={styles.containerProducto}>
           <View style={styles.containerFilaPro}>
             <View style={styles.containerImagen}>
-              <Image style={styles.imagen}source={require('./img/bebidas.png')}></Image>
+              <Image style={styles.imagen}source={require('./banana.png')}></Image>
                <View style={styles.containerInfo}>
                
-               <Text style={styles.textProducto}>Agua Goascoran</Text>
-                <Text style={styles.textPrecio}>L 50.00</Text>
+               <Text style={styles.textProducto}>Bananas</Text>
+                <Text style={styles.textPrecio}>L 35.00</Text>
               <View style={styles.containerCantidadElegida}>
-                <Pressable onPress={()=> navigation.navigate('Productos', {ProductoId: 2, ProductoNombre: "Bananas",PrecioProducto: 60})}>
+                <Pressable onPress={()=> navigation.navigate('Productos', {ProductoId: 1, ProductoNombre: "Bananas",PrecioProducto: 35})}>
                   <AntDesign name="pluscircleo" size={24} color="black" /></Pressable>
               </View>
               </View>
             </View>
             <View style={styles.containerImagen}>
-              <Image style={styles.imagen}source={require('./img/bebidas.png')}></Image>
+              <Image style={styles.imagen}source={require('./img/coca.png')}></Image>
                <View style={styles.containerInfo}>
-               <Text style={styles.textProducto}>Jugo Sula</Text>
-                <Text style={styles.textPrecio}>L 15.00</Text>
+               <Text style={styles.textProducto}>Coca-Cola</Text>
+                <Text style={styles.textPrecio}>L 20.00</Text>
               <View style={styles.containerCantidadElegida}>
-                <Pressable onPress={()=> imprimir()}>
+                <Pressable onPress={()=> navigation.navigate('Productos', {ProductoId: 2, ProductoNombre: "Coca Cola",PrecioProducto: 20})}>
                   <AntDesign name="pluscircleo" size={24} color="black" /></Pressable>
               </View>
               </View>
@@ -77,49 +77,12 @@ export default function DetailsScreen({ navigation }) {
         <View style={styles.containerProducto}>
           <View style={styles.containerFilaPro}>
             <View style={styles.containerImagen}>
-              <Image style={styles.imagen}source={require('./img/bebidas.png')}></Image>
+              <Image style={styles.imagen}source={require('./img/nutella.png')}></Image>
                <View style={styles.containerInfo}>
-               <Text style={styles.textProducto}>Jugo Leyde</Text>
+               <Text style={styles.textProducto}>Nutella</Text>
                 <Text style={styles.textPrecio}>L 50.00</Text>
               <View style={styles.containerCantidadElegida}>
-                <Pressable onPress={()=> imprimir()}>
-                  <AntDesign name="pluscircleo" size={24} color="black" /></Pressable>
-              </View>
-              </View>
-            </View>
-            <View style={styles.containerImagen}>
-              <Image style={styles.imagen}source={require('./img/bebidas.png')}></Image>
-               <View style={styles.containerInfo}>
-                <Text style={styles.textProducto}>Vino</Text>
-                <Text style={styles.textPrecio}>L 15.00</Text>
-              <View style={styles.containerCantidadElegida}>
-                <Pressable onPress={()=> imprimir()}>
-                  <AntDesign name="pluscircleo" size={20} color="black" /></Pressable>
-              </View>
-              </View>
-            </View>
-          </View>
-        </View>
-        <View style={styles.containerProducto}>
-          <View style={styles.containerFilaPro}>
-            <View style={styles.containerImagen}>
-              <Image style={styles.imagen}source={require('./img/bebidas.png')}></Image>
-               <View style={styles.containerInfo}>
-               <Text style={styles.textProducto}>Agua Dassani</Text>
-                <Text style={styles.textPrecio}>L 50.00</Text>
-              <View style={styles.containerCantidadElegida}>
-                <Pressable onPress={()=> imprimir()}>
-                  <AntDesign name="pluscircleo" size={24} color="black" /></Pressable>
-              </View>
-              </View>
-            </View>
-            <View style={styles.containerImagen}>
-              <Image style={styles.imagen}source={require('./img/bebidas.png')}></Image>
-               <View style={styles.containerInfo}>
-               <Text style={styles.textProducto}>Gatorade</Text>
-                <Text style={styles.textPrecio}>L 15.00</Text>
-              <View style={styles.containerCantidadElegida}>
-                <Pressable onPress={()=> imprimir()}>
+                <Pressable onPress={()=> navigation.navigate('Productos', {ProductoId: 3, ProductoNombre: "Nutella",PrecioProducto: 50})}>
                   <AntDesign name="pluscircleo" size={24} color="black" /></Pressable>
               </View>
               </View>
