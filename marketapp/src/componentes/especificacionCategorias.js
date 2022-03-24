@@ -65,7 +65,7 @@ export default function DetailsScreen({ navigation }) {
   const consultarCategoria= async ()=>{
       try {
         const solicitud= await fetch(
-          'http://192.168.0.100:6001/api/categorias/listar/',
+          'http://192.168.1.5:6001/api/categorias/listar/',
           {
             method: 'GET',
             headers: {

@@ -135,7 +135,7 @@ export default function App({route,navigation}) {
      {
        try {
          const solicitud= await fetch(
-           'http://192.168.0.8:6001/api/productos/listarProducto?id='+encondedValue,
+           'http://192.168.1.5:6001/api/productos/listarProducto?id='+encondedValue,
            {
              method: 'GET',
              headers: {
@@ -184,7 +184,7 @@ export default function App({route,navigation}) {
         
            <Image 
                     style={styles.containerImagen}
-                    source={{uri: 'http://192.168.0.100:6001/api/archivos/consultar?id='+encondedValue}}
+                    source={{uri: 'http://192.168.1.5.100:6001/api/archivos/consultar?id='+encondedValue}}
                  ></Image>
       </View>
       <View style= {styles.containerInformacion}>
