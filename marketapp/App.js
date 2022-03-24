@@ -34,10 +34,10 @@ export default function App() {
     _loadAssetsAsync();
   });
 
- return (
+  return(
     <NavigationContainer>
-      <NavigatorPrincipal/>
-    </NavigationContainer>
-  );
+    <NavigatorPrincipal/>
+  </NavigationContainer>
+  )
 
 }

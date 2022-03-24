@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState, useEffect} from 'react';
-import { Text, View, StyleSheet, Image, TextInput, ImageBackground, Dimensions, Alert } from 'react-native';
+import { ActivityIndicator ,Text, View, StyleSheet, Image, TextInput, ImageBackground, Dimensions, Alert, KeyboardAvoidingView,
+    TouchableWithoutFeedback, Keyboard, Pressable } from 'react-native';
 const {width, height} = Dimensions.get('window');
 
 import Button from '../componentes/Button';
@@ -60,6 +61,9 @@ export default function Usuario({navigation}) {
         }
     
     return (
+        <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.keyboardStyle}>
+  <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <View style={styles.container}>
         <ImageBackground source={require('../../assets/image/background8.png')} style={{width: width, height: height}}>
         <View style={styles.darkLayer}></View>
@@ -111,12 +115,24 @@ export default function Usuario({navigation}) {
             </View>
         </ImageBackground>
     </View>
+    </TouchableWithoutFeedback>
+    </KeyboardAvoidingView> 
     );
 }
 
 const styles = StyleSheet.create({
+    keyboardStyle: {
+        flex: 1
+    },
     container:{
         flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        width: width -60,
+        height: 45,
+        backgroundColor: '#FFFFFF',
+        borderRadius: 8,
     },
     darkLayer:{
         position: 'absolute',
@@ -128,14 +144,14 @@ const styles = StyleSheet.create({
         opacity: 0.4
     },
     logo:{
-        marginTop: 30,
+        marginTop: 20,
         justifyContent: 'center',
         alignItems: 'center',
         
     
     },
     title:{
-        marginTop: 10,
+        marginTop: 9,
         justifyContent: 'center',
         alignItems: 'center'
     },
