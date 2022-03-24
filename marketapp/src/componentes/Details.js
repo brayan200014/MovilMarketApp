@@ -95,7 +95,7 @@ const deleteProducto = async (id) => {
             return (
                 <View key={item.key} style= {styles.containerBotones} >
                 <View style={styles.containerBotonPagar}>
-                    <Pressable style={styles.botonPagar} onPress={()=> navigation.navigate("Factura", subtotal)}>
+                    <Pressable style={styles.botonPagar} onPress={()=> navigation.navigate("Factura", {subtotal})}>
                          <Text style={styles.textPagar}> Pagar</Text>
                      </Pressable>
                  </View>
@@ -132,7 +132,7 @@ const deleteProducto = async (id) => {
               <View style={styles.containerImagen}>
                    <Image 
                    style={styles.imagen}
-                   source={{uri: 'http://192.168.0.8:6001/api/archivos/consultar?id='+item.IdProducto}}
+                   source={{uri: 'http://192.168.0.12:6001/api/archivos/consultar?id='+item.IdProducto}}
                 ></Image>
               </View>
               <View style={styles.containerInfo}>
