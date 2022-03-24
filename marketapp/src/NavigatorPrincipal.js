@@ -8,7 +8,7 @@ import Root from "./componentes/Root";
 import Especificacion from "./componentes/especificacionProducto";
 import Prueba from "./componentes/prueba";
 import OnBoarding from "./screen/Onboarding";
-import Login from "./screen/LoginIn"
+import Login from "./screen/LoginIn";
 
 
 

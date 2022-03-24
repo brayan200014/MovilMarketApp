@@ -1,8 +1,8 @@
 import { Text, View, StyleSheet, Image, Dimensions, Alert} from 'react-native'
 import React, { Component } from 'react'
-
 import Swiper from 'react-native-swiper';
 import Button from '../componentes/Button';
+import * as Font from 'expo-font';
 
 const {width, height} = Dimensions.get('window');
 
@@ -46,10 +46,11 @@ _btnClick = () => {
             <Image source={require('../../assets/image/logoMarket.png')} style={styles.logo}/>
         </View>
         <View style={styles.textContainer}> 
-            <Text style={styles.text}>1801 El Mejor Supermercado del Mundo.</Text>
+            <Text style={styles.text}>¡1801-Market donde encuentras los mejores productos y al mejor precio!</Text>
         </View>
         <View style={styles.button}>
-            <Button text={'Inicio de Sesión'} onPress={ () => this.props.navigation.navigate('Login')}/>
+            <Button text={'Inicio de Sesión'} 
+            onPress={ () => this.props.navigation.navigate('Login')}/>
         </View>
       </View>
     );
@@ -93,10 +94,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     textContainer: {
-        width: 200,
+        width: 400,
         position: 'absolute',
         bottom: 200,
-        left: 30,
+        left: 10,
         alignItems: 'center',
         justifyContent: 'flex-start'
     },
