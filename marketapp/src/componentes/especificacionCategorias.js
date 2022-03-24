@@ -1,10 +1,62 @@
 import * as React from 'react';
-import { View, Text, StyleSheet, Pressable, Image, FlatList,  TextInput, SafeAreaView, StatusBar } from 'react-native';
+import { View, Text, StyleSheet, Pressable, Image, FlatList,  TextInput,StatusBar } from 'react-native';
 import { AntDesign } from '@expo/vector-icons'; 
 import { useState, useEffect } from 'react';
 
 export default function DetailsScreen({ navigation }) {
+
+  const Item = ({ NombreCategoria}) =>
+ {if(NombreCategoria=="Fefrescos")
+ {return(
+  <View style={styles.item}>
+    <Pressable onPress={()=>navigation.navigate('Subcategorias')}>
+      <Image 
+      style={styles.imagen}
+      source={require('./img/coca.png')}
+      ></Image>
+      <Text style={styles.NombreCategoria}>{NombreCategoria}</Text>
+      </Pressable>
+  </View>
+)}{if(NombreCategoria=="Lacteos")
+{return(
+ <View style={styles.item}>
+   <Pressable onPress={()=>navigation.navigate('Subcategorias')}>
+      <Image 
+      style={styles.imagen}
+      source={require('./img/lacteos.png')}
+      ></Image>
+      <Text style={styles.NombreCategoria}>{NombreCategoria}</Text>
+      </Pressable>
+ </View>
+)}} {if(NombreCategoria=="Frutas")
+{return(
+ <View style={styles.item}>
+   <Pressable onPress={()=>navigation.navigate('Subcategorias')}>
+      <Image 
+      style={styles.imagen}
+      source={require('./img/frutas.png')}
+      ></Image>
+      <Text style={styles.NombreCategoria}>{NombreCategoria}</Text>
+      </Pressable>
+ </View>
+)}}
+{if(NombreCategoria=="Dulces")
+{return(
+ <View style={styles.item}>
+   <Pressable onPress={()=>navigation.navigate('Subcategorias')}>
+      <Image 
+      style={styles.imagen}
+      source={require('./img/descarga.jpg')}
+      ></Image>
+      <Text style={styles.NombreCategoria}>{NombreCategoria}</Text>
+      </Pressable>
+ </View>
+)}}};
+
+
+
   const [categorias, setcategorias]= useState([]);
+  
 
   useEffect(async()=>{
     var a = await  consultarCategoria();
@@ -23,7 +75,9 @@ export default function DetailsScreen({ navigation }) {
           }
         );
         const json = await solicitud.json();
-        console.log(json)
+        const data=json.data;
+        setcategorias(data);
+
       } catch (error) {
        console.log(error);
       }
@@ -31,6 +85,11 @@ export default function DetailsScreen({ navigation }) {
  const imprimir= () => {
     console.log("Ho0pl");
  }
+
+ const renderItem = ({ item }) => (
+  <Item NombreCategoria={item.NombreCategoria}
+        IdCategoria={item.IdCategoria}/>
+);
 
     return (
         <View style={styles.containerPrincipal} >
@@ -53,46 +112,17 @@ export default function DetailsScreen({ navigation }) {
                 style={styles.entradas}>
               </TextInput>
             </View>
-            <View style={styles.containerProducto} >
-               <View style={styles.containerFilaPro}>
-               <View style={styles.containerImagen}>
-               <Pressable onPress={()=>navigation.navigate('Subcategorias')}>
-                    <Image 
-                    style={styles.imagen}
-                    source={require('./img/lacteos.png')}
-                 ></Image></Pressable>
-                 <Text style={styles.textProducto}>Lacteos</Text>
-               </View>
-               <View style={styles.containerImagen}>
-               <Pressable onPress={()=>navigation.navigate('Subcategorias')}>
-                    <Image 
-                    style={styles.imagen}
-                    source={require('./img/bebidas.png')}
-                 ></Image></Pressable>
-                 <Text style={styles.textProducto}>Fefrescos</Text>
-               </View>
-               </View>
-           </View>
-           <View style={styles.containerProducto} >
-               <View style={styles.containerFilaPro}>
-               <View style={styles.containerImagen}>
-                <Pressable onPress={()=>navigation.navigate('Subcategorias')}>
-                    <Image 
-                    style={styles.imagen}
-                    source={require('./img/frutas.png')}
-                 ></Image></Pressable>
-                 <Text style={styles.textProducto}>Frutas</Text>
-               </View>
-               <View style={styles.containerImagen}>
-                 <Pressable onPress={()=>navigation.navigate('Subcategorias')}>
-                 <Image 
-                    style={styles.imagen}
-                    source={require('./img/descarga.jpg')}
-                 ></Image></Pressable>
-                 <Text style={styles.textProducto}>Dulces</Text>
-               </View>
-               </View>
-           </View>
+
+            <View style={styles.lista}>
+              <FlatList
+                numColumns={2}
+                data={categorias}
+                renderItem={renderItem}
+                keyExtractor={item => item.IdCategorias}
+              />
+              </View>
+
+
         </View>
 
     );
@@ -188,12 +218,24 @@ imagenusuario: {
 },
 
 item: {
+  flex:1/2,
   backgroundColor: '#B3E5FC',
   padding: 20,
-  marginVertical: 8,
-  marginHorizontal: 16,
+  borderRadius: 30,
+  justifyContent: 'center',
+  flexDirection:'row',
+  margin:10
 },
-title: {
+lista:{
+  flex:1,
+  //backgroundColor: '#B3E5FC',
+  padding: 20,
+  borderRadius: 30,
+  justifyContent: 'center',
+  flexDirection:'row',
+
+},
+NombreCategoria: {
   fontSize: 20,
 },
 imagen: {
@@ -221,5 +263,6 @@ entradas:{
   borderColor: "#ced4da",
   borderRadius: 15,
   textAlign:'center'
-}
+},
+
 })
