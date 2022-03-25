@@ -21,9 +21,9 @@ import AsyncStorage  from '@react-native-async-storage/async-storage';
         { 
           try {
                 let respuesta= await fetch(
-                  'http://192.168.1.5:5001/api/cliente/modificarCorreo',
+                  'http://192.168.0.13:6001/api/cliente/modificarCorreo',
                   {
-                      method: 'PUT',
+                      method: 'POST',
                       headers: {
                           Accept: 'application/json',
                           'Content-Type': 'application/json'

@@ -160,7 +160,7 @@ const deleteProducto = async (id) => {
               <View style={styles.containerImagen}>
                    <Image 
                    style={styles.imagen}
-                   source={{uri: 'http://192.168.0.12:6001/api/archivos/consultar?id='+item.IdProducto}}
+                   source={{uri: 'http://192.168.0.13:6001/api/archivos/consultar?id='+item.IdProducto}}
                 ></Image>
               </View>
               <View style={styles.containerInfo}>

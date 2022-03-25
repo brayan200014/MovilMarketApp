@@ -14,7 +14,7 @@ export default function DetailsScreen({ navigation }) {
   const consultarproducto=async()=>{
     try {
       const solicitud= await fetch(
-        'http://192.168.0.100:6001/api/productos/listarproductos',
+        'http://192.168.0.13:6001/api/productos/listarproductos',
         {
           method: 'GET',
           headers: {

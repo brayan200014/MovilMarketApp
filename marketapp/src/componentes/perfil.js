@@ -41,7 +41,7 @@ export default function PerfilUsuario({ navigation }) {
      const consultarUsuarios= async ()=>{
       try {
         const solicitud= await fetch(
-          'http://192.168.1.5:5001/api/cliente/buscar',
+          'http://192.168.0.13:6001/api/cliente/buscarCorreo',
           {
             method: 'POST',
             headers: {

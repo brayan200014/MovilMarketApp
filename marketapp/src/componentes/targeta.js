@@ -15,12 +15,12 @@ const MyComponent = () => {
       </View>
     <RadioButton.Group onValueChange={newValue => setValue(newValue)} value={value}>
       <View style={{marginTop:30,marginLeft:10}}>
-        <Text style={{fontSize:20}}>Targeta de debito</Text>
+        <Text style={{fontSize:20}}>Tarjeta de debito</Text>
         <RadioButton value="first" />
         <LiteCreditCardInput />
       </View>
       <View style={{marginTop:30,marginLeft:10}}>
-        <Text style={{fontSize:20}}>Pagar al resibir</Text>
+        <Text style={{fontSize:20}}>Pagar al recibir</Text>
         <RadioButton value="second" />
       </View>
     </RadioButton.Group>

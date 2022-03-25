@@ -126,7 +126,7 @@ export default function App({route, navigation}) {
     
       try {
         const respuestaPeticion = await fetch(
-          'http://192.168.1.5:6001/api/ventas/guardar',
+          'http://192.168.0.13:6001/api/ventas/guardar',
           {
             method: 'POST',
             headers: {
@@ -165,7 +165,7 @@ export default function App({route, navigation}) {
                     console.log(Cantidad + ' ' +  Precio + ' ' + IdProducto);
 
                     const respuestaDetalle = await fetch(
-                    'http://192.168.1.5:6001/api/ventas/guardarDetalle',
+                    'http://192.168.0.13:6001/api/ventas/guardarDetalle',
                     {
                         method: 'POST',
                         headers: {
