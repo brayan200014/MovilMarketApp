@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import Pantalla from './src/componentes/especificacionProducto';
 import { NavigationContainer } from '@react-navigation/native';
 import Nav from './src/Nav'
@@ -15,4 +16,14 @@ export default function App() {
   );
 }
 
+  useEffect(() =>{
+    _loadAssetsAsync();
+  });
 
+  return(
+    <NavigationContainer>
+    <NavigatorPrincipal/>
+  </NavigationContainer>
+  )
+
+}

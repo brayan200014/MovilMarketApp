@@ -1,21 +1,19 @@
-import React from 'react';
-import { Text, View, StyleSheet, Image, ImageBackground, Dimensions } from 'react-native';
-import { RadioGroup,RadioButton} from 'react-native-flexi-radio-button';
-
+import { StatusBar } from 'expo-status-bar';
+import React, {useState, useEffect} from 'react';
+import { Text, View, StyleSheet, Image, TextInput, ImageBackground, Dimensions } from 'react-native';
 const {width, height} = Dimensions.get('window');
 
-import Input from '../componentes/Input';
 import Button from '../componentes/Button';
 
-const title = '¡Olvide mi contraseña!';
-const tip = 'Por favor ingrese una nueva contraseña y confirme.';
-const signup = 'Nuevo Usuario? Registrate';
+const title = '¡Paso 3- Recuperando Contraseña!';
+const tip = 'Por favor, ingresa tu nueva contraseña. Recuerda que debe contener una Mayúscula, números y caracteres especiales para ser valida';
 
-const Login = ({
+
+const Recuperar = ({
     params,
 }) => (
     <View style={styles.container}>
-        <ImageBackground source={require('../../assets/image/background3.png')} style={{width: width, height: height}}>
+        <ImageBackground source={require('../../assets/image/background5.png')} style={{width: width, height: height}}>
             <View style={styles.darkLayer}></View>
             <View style={styles.logo}>
                 <Image source={require('../../assets/image/logoMarket.png')}/>
@@ -27,12 +25,12 @@ const Login = ({
                 <Text style={styles.tipText}>{tip}</Text>
             </View>
             <View style={styles.input}>
-                <Input icon={require('../../assets/image/passport.png')} placeholder='Nueva Contraseña' password/>
-                <View style={{paddingTop: 18}}></View>
-                <Input icon={require('../../assets/image/passport.png')} placeholder='Confirmar Contraseña' password/>
+            <TextInput style={styles.inputContra} passwordRules=""
+              placeholder="Escriba su nueva contraseña">
+            </TextInput>      
             </View>
             <View style={{marginTop:37, justifyContent:'center', alignItems:'center'}}>
-                <Button text="Enviar"/>
+                <Button text="Confirmar"/>
             </View>
         </ImageBackground>
     </View>
@@ -67,21 +65,30 @@ const styles = StyleSheet.create({
         fontSize:22
     },
     tip:{
-        marginLeft: 70,
-        marginRight: 70,
+        marginLeft: 50,
+        marginRight: 50,
         justifyContent: 'center',
         alignItems: 'center'
     },
     tipText:{
         color: '#FFFFFF',
         fontFamily: 'Nunito-SemiBold',
-        fontSize: 17,
+        fontSize: 14,
         textAlign: 'center'
     },
     input: {
         marginTop: 24,
-        justifyContent: 'center',
-        alignSelf: 'center'
+        marginLeft: 30,
+        marginRight:30,
+        justifyContent: 'space-evenly',
+        alignSelf: 'center',
+        borderColor: '#FFFFFF',
+        color: '#727C8E',
+        fontFamily: 'Nunito-SemiBold',
+        fontWeight: '500',
+        fontSize: 12,
+        paddingLeft: 0,
+        height: 80
     },
     remember:{
         marginTop: 10,
@@ -110,7 +117,7 @@ const styles = StyleSheet.create({
     signupText: {
         color: '#2A67CA',
         fontFamily: 'Nunito-SemiBold',
-        fontSize: 12
+        fontSize: 10
     },
     terms:{
         marginTop: 52,
@@ -124,7 +131,15 @@ const styles = StyleSheet.create({
         fontFamily: 'Nunito-SemiBold',
         fontSize: 10,
         textAlign: 'center'
+    },
+    inputContra: {
+        backgroundColor: '#fff', 
+        height: 40, 
+        paddingLeft:60, 
+        paddingRight:60, 
+        marginTop: 7, 
+        borderRadius: 15
     }
 });
 
-export default Login;
+export default Recuperar;
