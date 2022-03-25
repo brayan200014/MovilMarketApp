@@ -17,7 +17,10 @@ const HomeStack= createNativeStackNavigator();
 const PayStack= createNativeStackNavigator();
 
 
-const Tabs= ()=>{
+
+
+
+const Tabs= () =>{
     return (
         <Tab.Navigator
         screenOptions={{
@@ -56,7 +59,13 @@ const Tabs= ()=>{
              options={
                 {
                    tabBarIcon: ({color, size}) => (
-                    <Ionicons name="cart-sharp" size={size} color={color} /> 
+                    
+                   <View>
+                        <Ionicons name="cart-sharp" size={30} color={color}></Ionicons>
+                        <Badge visible={true} style={styles.badgeStyle} size={15}>{0}</Badge>
+                   </View>
+                   
+                    
                    ),
                 }
             }
@@ -75,6 +84,14 @@ const Tabs= ()=>{
     );
 }
 
-
+const styles= StyleSheet.create({
+    badgeStyle: {
+            backgroundColor: '#FF3A3A',
+            position: 'absolute',
+            top: 0,
+            right: 0,
+            
+    }
+})
 
 export  default Tabs;

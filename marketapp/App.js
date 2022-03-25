@@ -10,7 +10,7 @@ export default function App() {
   return (
   
   <NavigationContainer>
-  <Nav/>
+  <NavigatorPrincipal/>
   </NavigationContainer>
   );
 }
