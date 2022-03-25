@@ -1,14 +1,48 @@
 import { StatusBar } from 'expo-status-bar';
-import { useState, useEffect } from 'react';
-import { ActivityIndicator, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import Pantalla from './src/componentes/especificacionProducto';
+import { NavigationContainer } from '@react-navigation/native';
+import Nav from './src/Nav'
+import NavigatorPrincipal from "./src/NavigatorPrincipal";
+import NavigatiorDetails from "./src/NavigatorDetails";
+import ForgetPass from "./src/screen/ForgetPassword";
+import Pin from "./src/screen/Otp";
+import Email from "./src/screen/Email";
+import Login from "./src/screen/LoginIn";
+import Inicio from './src/screen/Onboarding';
+import Registro from './src/screen/RegistroUsuario';
 
-import Factura from './src/Pantallas/Facturar';
+
+import * as Font from 'expo-font';
+
+
+//Para fuentes
+const customFonts = {
+  'CircularStdBold': require('./assets/fonts/CircularStdBold.ttf'),
+  'Nunito-Bold': require('./assets/fonts/Nunito-Bold.ttf'),
+  'Nunito-ExtraBold': require('./assets/fonts/Nunito-ExtraBold.ttf'),
+  'Nunito-SemiBold': require('./assets/fonts/Nunito-SemiBold.ttf'),
+};
 
 export default function App() {
   
-  
- 
-    
+  //Para cargar las fuentes
+  const [assetsLoaded, setAssetsLoaded] = useState(false);
+
+  const _loadAssetsAsync = async () => {
+    await Font.loadAsync(customFonts);
+    setAssetsLoaded(true);
+  }
+
+  useEffect(() =>{
+    _loadAssetsAsync();
+  });
+
+  return(
+    <NavigationContainer>
+    <NavigatorPrincipal/>
+  </NavigationContainer>
+  )
 
 }
-
