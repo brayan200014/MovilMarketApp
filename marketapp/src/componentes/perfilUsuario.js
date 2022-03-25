@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {View, SafeAreaView, StyleSheet} from 'react-native';
 import {
-  Avatar,
   Title,
   Caption,
   Text,
@@ -9,81 +8,137 @@ import {
 } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 //import Share from 'react-native-share';
+import AsyncStorage  from '@react-native-async-storage/async-storage';
+import { useState } from 'react';
+import { useEffect } from 'react';
+    
+export default function PerfilUsuario({ navigation }) {
 
-const PerfilUsuario = () => {
 
-  return (
-    <SafeAreaView style={styles.container}>
+    useEffect( async ()=>{
+      await getCorreo();
+      console.log(Correo)
+    });
 
-      <View style={styles.userInfoSection}>
-        <View style={{flexDirection: 'row', marginTop: 80}}>
-          <View style={{marginLeft: 20}}>
-            <Title style={[styles.title, {
-              marginTop:25,
-              marginBottom: 5,
-            }]}>Nombre Perfil</Title>
-            <Caption style={styles.caption}>nombre usuario</Caption>
+    const [nombreuser, setuser]= useState(null);
+    const [iduser, setid]= useState(null);
+    const [Correo, setCorreo]= useState(null);
+    const [fecha, setfecha]= useState(null);
+
+    const getCorreo = async ()=> {
+      const correo= await AsyncStorage.getItem("correo")
+      setCorreo(correo);
+
+    }
+
+    const[usuarios, setUsuarios]= useState([])
+     useEffect(async() =>{
+       var a = await consultarUsuarios();
+     })
+
+     const consultarUsuarios= async ()=>{
+      try {
+        const solicitud= await fetch(
+          'http://192.168.1.5:5001/api/cliente/buscarCorreo',
+          {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json', 
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              Correo: Correo
+              })
+
+          }
+        );
+        const json = await solicitud.json();
+
+        setuser(json.NombreUsuario);
+        console.log(nombreuser);
+        setid(json.IdUsuarioCliente);
+        console.log(iduser);
+        setfecha(json.FechaCreacion);
+        
+      } catch (error) {
+       console.log(error);
+      }
+ }
+
+    return (
+      <SafeAreaView style={styles.container}>
+         <View style={styles.containerBack}>
+              <Text style={styles.textCarrito}>Perfil</Text>
+            </View>
+
+        <View style={styles.userInfoSection}>
+          <View style={{ flexDirection: 'row', marginTop: 10 }}>
+            <View style={{ marginLeft: 20 }}>
+              <Title style={[styles.title, {
+                marginTop: 25,
+                marginBottom: 5,
+              }]}>{nombreuser}</Title>
+              <Caption style={styles.caption}>ID#{iduser}</Caption>
+            </View>
           </View>
         </View>
-      </View>
 
-      <View style={styles.userInfoSection}>
-        <View style={styles.row}>
-          <Icon name="phone" color="#3EA5DB" size={30}/>
-          <Text style={{color:"#0b0a09", marginLeft: 20,fontSize:15}}>telefono usuario</Text>
-        </View>
-        <View style={styles.row}>
-          <Icon name="email" color="#3EA5DB" size={30}/>
-          <Text style={{color:"#0b0a09", marginLeft: 20, fontSize:15}}>email usuario</Text>
-        </View>
-      </View>
-
-      <View style={styles.infoBoxWrapper}>
-      </View>
-
-      <View style={styles.menuWrapper}>
-      <TouchableRipple onPress={() => {}}>
-          <View style={styles.menuItem}>
-            <Icon name="account-edit" color="#3EA5DB" size={30}/>
-            <Text style={styles.menuItemText}>Editar Perfil</Text>
+        <View style={styles.userInfoSection}>
+          <View style={styles.row}>
+            <Icon name="email" color="#3EA5DB" size={30} />
+            <Text style={{ color: "#0b0a09", marginLeft: 20, fontSize: 15 }}>{Correo}</Text>
           </View>
-        </TouchableRipple>
-        <View style={styles.conteInfo}>
+          <View style={styles.row}>
+            <Icon name="cellphone-arrow-down" color="#3EA5DB" size={30} />
+            <Text style={{ color: "#0b0a09", marginLeft: 20, fontSize: 15 }}>Creado: {fecha}</Text>
+          </View>
+
+        </View>
+
+        <View style={styles.infoBoxWrapper}>
+        </View>
+
+        <View style={styles.menuWrapper}>
+          <TouchableRipple onPress={() =>navigation.navigate("Configuracion de cuenta")}>
+            <View style={styles.menuItem}>
+              <Icon name="account-edit" color="#3EA5DB" size={30} />
+              <Text style={styles.menuItemText}>Editar Perfil</Text>
+            </View>
+          </TouchableRipple>
+          <View style={styles.conteInfo}>
             <Text style={styles.info}>Edita tu perfil</Text>
           </View>
-        <TouchableRipple onPress={() => {}}>
-          <View style={styles.menuItem}>
-            <Icon name="information" color="#3EA5DB" size={30}/>
-            <Text style={styles.menuItemText}>Información</Text>
-          </View>
-        </TouchableRipple>
-        <View style={styles.conteInfo}>
+          <TouchableRipple onPress={() =>navigation.navigate("InfoAPP")}>
+            <View style={styles.menuItem}>
+              <Icon name="information" color="#3EA5DB" size={30} />
+              <Text style={styles.menuItemText}>Información</Text>
+            </View>
+          </TouchableRipple>
+          <View style={styles.conteInfo}>
             <Text style={styles.info}>Información sobre aplicación</Text>
           </View>
-        <TouchableRipple onPress={() => {}}>
-          <View style={styles.menuItem}>
-            <Icon name="credit-card" color="#3EA5DB" size={30}/>
-            <Text style={styles.menuItemText}>Métodos de pago</Text>
-          </View>
-        </TouchableRipple>
-        <View style={styles.conteInfo}>
+          <TouchableRipple onPress={()  =>navigation.navigate("Ingresar targeta")}>
+            <View style={styles.menuItem}>
+              <Icon name="credit-card" color="#3EA5DB" size={30} />
+              <Text style={styles.menuItemText}>Métodos de pago</Text>
+            </View>
+          </TouchableRipple>
+          <View style={styles.conteInfo}>
             <Text style={styles.info}>Gestiona metodos de pago</Text>
           </View>
-        <TouchableRipple onPress={() => {}}>
-          <View style={styles.menuItem}>
-            <Icon name="close-box" color="#3EA5DB" size={30}/>
-            <Text style={styles.menuItemText}>Cerrar sesión</Text>
-          </View>
-        </TouchableRipple>
-        <View style={styles.conteInfo}>
+          <TouchableRipple onPress={() =>navigation.navigate("Inicio")}>
+            <View style={styles.menuItem}>
+              <Icon name="close-box" color="#3EA5DB" size={30} />
+              <Text style={styles.menuItemText}>Cerrar sesión</Text>
+            </View>
+          </TouchableRipple>
+          <View style={styles.conteInfo}>
             <Text style={styles.info}>Salir de la APP</Text>
           </View>
-      </View>
-    </SafeAreaView>
-  );
-
-};
-  export default PerfilUsuario;
+        </View>
+      </SafeAreaView>
+    );
+  }
 
   const styles = StyleSheet.create({
     container: {
@@ -93,21 +148,37 @@ const PerfilUsuario = () => {
       paddingHorizontal: 30,
       marginBottom: 25,
     },
+    textCarrito:{
+      fontSize: 20,
+      color: '#fff',
+     marginTop:8,
+      paddingHorizontal: '1%',
+      
+  },
     title: {
       fontSize: 22,
       fontWeight: 'bold',
     },
     caption: {
-      fontSize: 14,
+      marginTop:10,
+      fontSize: 15,
       lineHeight: 14,
       fontWeight: '500',
+    },
+    containerBack: {
+      backgroundColor: '#3EA5DB', 
+      height: '7%',
+      alignItems: 'center',
+      marginTop:'10%',
+      borderWidth:2,
+      borderColor:'#828282'
     },
     row: {
       flexDirection: 'row',
       marginBottom: 10,
     },
     infoBoxWrapper: {
-      borderTopColor: '#3EA5DB',
+     borderTopColor: '#828282',
       borderTopWidth: 30,
       flexDirection: 'row',
       height: 10,
@@ -143,4 +214,3 @@ const PerfilUsuario = () => {
       justifyContent: 'center',
     }
   });
-  

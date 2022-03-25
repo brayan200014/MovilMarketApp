@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import DetailsScreen from "./componentes/Details";
-import SettingsScreen from "./componentes/Settings";
+//import SettingsScreen from "./componentes/settingScreen.js";
 import { StyleSheet, View, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -9,19 +9,15 @@ import Prueba from "./componentes/prueba";
 import EspecificaionCategorias from "./componentes/especificacionCategorias"
 import NavigatorDetails from "./NavigatorDetails";
 import NavigatorProductos from "./NavigatorProductos";
-import { Badge }from 'react-native-paper';
-import {AsyncStorage,  useAsyncStorage } from '@react-native-async-storage/async-storage';
-
+import { NavigationContainer } from "@react-navigation/native";
+import NavigatorSetting from "./NavigatorSetting";
 
 const Tab= createBottomTabNavigator();
 const HomeStack= createNativeStackNavigator();
 const PayStack= createNativeStackNavigator();
 
 
-
-
-
-const Tabs= () =>{
+const Tabs= ()=>{
     return (
         <Tab.Navigator
         screenOptions={{
@@ -60,19 +56,14 @@ const Tabs= () =>{
              options={
                 {
                    tabBarIcon: ({color, size}) => (
-                    
-                   <View>
-                        <Ionicons name="cart-sharp" size={30} color={color}></Ionicons>
-                        <Badge visible={true} style={styles.badgeStyle} size={15}>0</Badge>
-                   </View>
-                   
-                    
+                    <Ionicons name="cart-sharp" size={size} color={color} /> 
                    ),
                 }
             }
             > 
                 </Tab.Screen>
-            <Tab.Screen name="Settings" component={SettingsScreen}  options={
+            <Tab.Screen name="Settings" component={NavigatorSetting}
+             options={
                 {
                    tabBarIcon: ({color, size}) => (
                     <Ionicons name="settings" size={24} color={color} />
@@ -84,14 +75,6 @@ const Tabs= () =>{
     );
 }
 
-const styles= StyleSheet.create({
-    badgeStyle: {
-            backgroundColor: '#FF3A3A',
-            position: 'absolute',
-            top: 0,
-            right: 0,
-            
-    }
-})
+
 
 export  default Tabs;
