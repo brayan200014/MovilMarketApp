@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import DetailsScreen from "./componentes/Details";
-import SettingsScreen from "./componentes/Settings";
+import NavigatorSetting from "./NavigatorSetting";
 import { StyleSheet, View, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -73,7 +73,7 @@ const Tabs= () =>{
             }
             > 
                 </Tab.Screen>
-            <Tab.Screen name="Settings" component={SettingsScreen}  options={
+            <Tab.Screen name="Settings" component={NavigatorSetting}  options={
                 {
                    tabBarIcon: ({color, size}) => (
                     <Ionicons name="settings" size={24} color={color} />
