@@ -1,34 +1,58 @@
-import React, { Component } from 'react';
+/*import React, { Component } from 'react';
 import { StyleSheet, Text, View, TextInput, Alert, Pressable, TouchableWithoutFeedback} from 'react-native';
 import { AntDesign } from '@expo/vector-icons'; 
 import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'react-native-simple-radio-button';
 import { Keyboard } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
+import {AsyncStorage,  useAsyncStorage } from '@react-native-async-storage/async-storage';
+const {getItem, setItem} = useAsyncStorage('ProductosArray');
+import { useState, useEffect } from 'react';
+
+
+
 
 var formasEntrega = [
-    {label: "Delivery       ", value:"Delivery"},
-    {label: "Pick-Up", value:"Pick-Up"}
+    {label: "Delivery       ", value:50},
+    {label: "Pick-Up", value:0}
 ];
+
+let valorFormaEntrega;
+
+const cargarSubtotal = async ()=>{
+    const arregloProductos = await getItem();
+    const getarray = JSON.parse(arregloProductos);
+
+    if(getarray)
+    {
+        subtotal = 0;
+        for(var i = 0; i < getarray.length; i++)
+        {
+            subtotal += getarray[i]['Precio'] * getarray[i]['Cantidad'];
+        }
+    }
+    console.log(getarray);
+    console.log(subtotal);
+}
 
 class Facturar extends Component {
     constructor(props){
         super(props);
+        cargarSubtotal();
+        console.log(subtotal)
         this.state = {
-
+            
         };
     }
-    
 
     render(){
 
         return (
-            
+
             <View style={styles.container}>
-            
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
                     <View  style={styles.encabezado}> 
                         <View style={styles.elementosEncabezado}>  
-                            <Pressable onPress={()=>Alert.alert("Regresando", "Regresando al Carrito de Productos...")}>
+                            <Pressable onPress={()=> this.props.navigation.navigate('')}>
                                 <AntDesign name="arrowleft" size={24} color="white" />
                             </Pressable>             
                             <Text style = {styles.textoEncabezado}> 
@@ -43,10 +67,13 @@ class Facturar extends Component {
                         <View style={styles.elementoRadioButton}>
                             <RadioForm
                                 radio_props = {formasEntrega}
-                                onPress={(value)=>{}}
+                                onPress={(value)=>{
+                                    valorFormaEntrega = value;
+                                    console.log(valorFormaEntrega);
+                                }}
                                 animation={true}
                                 labelHorizontal={true}
-                                initial={-1}
+                                initial={0}
                                 formHorizontal={true}
                                 style = {styles.radioButtons}
                             />
@@ -58,16 +85,16 @@ class Facturar extends Component {
                     <View style={styles.contenedorResumenPagar}>
                         <View>
                             <Text style={styles.textoResumenPagar}>
-                                Subtotal ................. L.  80.50
+                                {"Subtotal ................. L. " + subtotal}
                             </Text>
                             <Text style={styles.textoResumenPagar}>
-                                Delivery ................. L.   50.00
+                                {"Delivery ................. L. " + valorFormaEntrega}
                             </Text>
                             <Text style={styles.textoResumenPagar}>
-                                ISV ......................... L.   27.50
+                                {"ISV ......................... L. " + (subtotal + valorFormaEntrega)*0.15}
                             </Text>
                             <Text style={styles.textoResumenPagar}>
-                                Total ....................... L. 158.50
+                                {"Total ....................... L. " + (subtotal + valorFormaEntrega + ((subtotal + valorFormaEntrega)*0.15))}
                             </Text>
                         </View>
                     </View>
@@ -121,7 +148,7 @@ class Facturar extends Component {
                             }} 
                         />
                         <Text style={styles.textoCombo} >
-                            L. 158.50
+                            {"L. " + (subtotal + valorFormaEntrega + ((subtotal + valorFormaEntrega)*0.15))}
                         </Text>
                     </View>
                 </View>
@@ -291,4 +318,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default Facturar;
+export default Facturar;*/

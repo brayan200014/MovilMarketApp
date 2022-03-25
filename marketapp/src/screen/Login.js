@@ -28,9 +28,16 @@ const Login = ({
                 <Text style={styles.tipText}>{tip}</Text>
             </View>
             <View style={styles.input}>
-                <Input icon={require('../../assets/image/iconoEmail.png')} placeholder='Email address'/>
-                <View style={{paddingTop: 18}}></View>
-                <Input icon={require('../../assets/image/passport.png')} placeholder='Contraseña' password/>
+            <TextInput style={styles.inputCorreo}
+                onChangeText={newText => setCorreo(newText)}
+              placeholder="Escriba su correo electrónico">
+            </TextInput>
+
+            <TextInput style={styles.inputContra} passwordRules=""
+              secureTextEntry={true}
+                onChangeText={newText => setContrasena(newText)}
+              placeholder="Escriba su contraseña">
+            </TextInput>
             </View>
             <View style={styles.remember}>
             <View style={{}}>
